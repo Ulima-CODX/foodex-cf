@@ -1,1 +1,5 @@
-# Foodex Cloud Functions
+# Foodex FireBase App
+
+## Cloud Functions
+
+## Hosting
