@@ -1,17 +1,13 @@
 <template>
   <div id="app">
-    <EmployeeRegister />
+    <router-view />
   </div>
 </template>
 
 <script>
-import EmployeeRegister from "./components/Employee/Register";
 
 export default {
-  name: "app",
-  components: {
-    EmployeeRegister
-  }
+  name: "app"
 };
 </script>
 
