@@ -1,10 +1,9 @@
 import Vue from "vue";
 import { firestorePlugin } from "vuefire";
-
 Vue.use(firestorePlugin);
 
-import firebase from "firebase/app";
-firebase.initializeApp({
+import Firebase from "firebase/app";
+Firebase.initializeApp({
   apiKey: "AIzaSyCps14xHhcXnJ49vGL7oOTn6LZZMDZ1lQI",
   authDomain: "foodex-backend.firebaseapp.com",
   databaseURL: "https://foodex-backend.firebaseio.com",
@@ -15,10 +14,10 @@ firebase.initializeApp({
 });
 
 import "firebase/auth";
-export const auth = firebase.auth();
+export const auth = Firebase.auth();
 
 import "firebase/firestore";
-export const db = firebase.firestore();
+export const db = Firebase.firestore();
 
-const { TimeStamp, GeoPoint } = firebase.firestore;
+const { TimeStamp, GeoPoint } = Firebase.firestore;
 export { TimeStamp, GeoPoint };

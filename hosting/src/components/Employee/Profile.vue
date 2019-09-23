@@ -1,6 +1,10 @@
 <template>
-  <div>
-    <p>{{ id }}</p>
+  <div id="employee-profile">
+    <p>{{ employee.last_name }}, {{ employee.first_name }}</p>
+    <p>{{ employee.email }}</p>
+    <p>{{ employee.phone }}</p>
+    <p>{{ employee.country.name }}</p>
+    <p></p>
   </div>
 </template>
 
@@ -25,4 +29,4 @@ export default {
 };
 </script>
 
-<style></style>
+<style lang="sass" scoped></style>
