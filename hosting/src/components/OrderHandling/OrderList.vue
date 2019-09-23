@@ -4,9 +4,9 @@
 
 <script>
 export default {
-  name: "OrderList",
+  name: "order-list",
   data: () => ({})
 };
 </script>
 
-<style lang="sass" scoped></style>
+<style lang="scss" scoped></style>

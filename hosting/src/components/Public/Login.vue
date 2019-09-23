@@ -1,20 +1,20 @@
 <template>
   <div id="login">
     <form @submit.prevent="login(email, password)">
-      <p>{{ form_prompt }}</p>
+      <p>{{ $t("forms.names.login") }}</p>
       <div>
-        <label for="email">{{ email_prompt }}</label>
+        <label for="email">{{ $t("forms.prompts.email") }} :</label>
         <input type="email" v-model="email" id="email" />
       </div>
       <div>
-        <label for="password">{{ password_prompt }}</label>
+        <label for="password">{{ $t("forms.prompts.password") }} :</label>
         <input type="password" v-model="password" id="password" />
       </div>
       <div>
-        <button type="submit">{{ login_prompt }}</button>
+        <button type="submit">{{ $t("forms.prompts.login") }}</button>
       </div>
     </form>
-    <router-link to="/register">{{ register_prompt }}</router-link>
+    <router-link to="/register">{{ $t("pages.register") }}</router-link>
   </div>
 </template>
 
@@ -22,15 +22,10 @@
 import { auth } from "../../firestore";
 
 export default {
-  name: "Login",
+  name: "login",
   data: () => ({
-    form_prompt: "Logearse",
-    email_prompt: "Correo",
     email: "",
-    password_prompt: "Contraseña",
-    password: "",
-    login_prompt: "Ingresar",
-    register_prompt: "Registrese"
+    password: ""
   }),
   methods: {
     login(email, password) {
@@ -47,4 +42,4 @@ export default {
 };
 </script>
 
-<style lang="sass" scoped></style>
+<style lang="scss" scoped></style>

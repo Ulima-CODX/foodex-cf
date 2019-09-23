@@ -1,5 +1,5 @@
 <template>
-  <div id="employee-profile">
+  <div id="profile">
     <p>{{ employee.last_name }}, {{ employee.first_name }}</p>
     <p>{{ employee.email }}</p>
     <p>{{ employee.phone }}</p>
@@ -11,7 +11,7 @@
 <script>
 import { db } from "../../firestore";
 export default {
-  name: "EmployeeProfile",
+  name: "profile",
   props: {
     id: String
   },
@@ -29,4 +29,4 @@ export default {
 };
 </script>
 
-<style lang="sass" scoped></style>
+<style lang="scss" scoped></style>

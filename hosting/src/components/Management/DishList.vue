@@ -4,9 +4,9 @@
 
 <script>
 export default {
-  name: "DishList",
+  name: "dish-list",
   data: () => ({})
 };
 </script>
 
-<style lang="sass" scoped></style>
+<style lang="scss" scoped></style>
