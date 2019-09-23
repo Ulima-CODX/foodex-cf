@@ -1,0 +1,30 @@
+{
+  "forms": {
+    "names": {
+      "login": "Ingreso",
+      "register": "Registro"
+    },
+    "prompts": {
+      "email": "Correo",
+      "password": "Contraseña",
+      "first_name": "Nombres",
+      "last_name": "Apellidos",
+      "phone": "Teléfono",
+      "country": "País",
+      "login": "Ingresar",
+      "register": "Registrar"
+    },
+    "options": {
+      "reject": "No Acepto",
+      "accept": "Acepto",
+      "cancel": "Cancelar",
+      "yes": "Sí",
+      "no": "No"
+    }
+  },
+  "pages": {
+    "login": "Ingreso",
+    "register": "Registro",
+    "about": "Acerca"
+  }
+}

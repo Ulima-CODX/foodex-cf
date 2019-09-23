@@ -6,10 +6,10 @@ import Login from "./components/Public/Login.vue";
 import Register from "./components/Public/Register.vue";
 import About from "./components/Public/About.vue";
 
-export default new VueRouter({
-  routes: [
-    { path: "/register", component: Register },
-    { path: "/about", component: About },
-    { path: "*", component: Login }
-  ]
-});
+const routes = [
+  { path: "/register", component: Register },
+  { path: "/about", component: About },
+  { path: "/", component: Login }
+];
+
+export default new VueRouter({ routes, mode: "history" });

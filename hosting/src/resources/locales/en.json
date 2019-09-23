@@ -1,0 +1,30 @@
+{
+  "forms": {
+    "names": {
+      "login": "Login",
+      "register": "Register"
+    },
+    "prompts": {
+      "email": "Email",
+      "password": "Password",
+      "first_name": "Name",
+      "last_name": "Surname",
+      "phone": "Phone",
+      "country": "Country",
+      "login": "Login",
+      "register": "Register"
+    },
+    "options": {
+      "reject": "Reject",
+      "accept": "Accept",
+      "cancel": "Cancel",
+      "yes": "Yes",
+      "no": "No"
+    }
+  },
+  "pages": {
+    "login": "Login",
+    "register": "Register",
+    "about": "About"
+  }
+}
