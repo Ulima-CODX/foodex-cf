@@ -11,6 +11,7 @@
       "last_name": "Apellidos",
       "phone": "Teléfono",
       "country": "País",
+      "establishment": "Local",
       "login": "Ingresar",
       "register": "Registrar"
     },
@@ -23,8 +24,15 @@
     }
   },
   "pages": {
-    "login": "Ingreso",
-    "register": "Registro",
-    "about": "Acerca"
+    "login": {
+      "name": "Ingreso"
+    },
+    "register": {
+      "name": "Registro"
+    },
+    "about": {
+      "name": "Acerca",
+      "description": "Este sitio web fue desarrollado para un curso de Ingeniería de Software en 2019-II por:"
+    }
   }
 }

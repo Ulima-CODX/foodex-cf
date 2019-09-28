@@ -38,7 +38,7 @@
         <button type="submit">{{ $t("forms.prompts.register") }}</button>
       </div>
     </form>
-    <router-link to="/">{{ $t("pages.login") }}</router-link>
+    <router-link to="/">{{ $t("pages.login.name") }}</router-link>
   </div>
 </template>
 
@@ -70,13 +70,17 @@ export default {
               first_name: first_name,
               last_name: last_name,
               email: email,
-              password: password,
               phone: phone,
               country: db.collection("countries").doc(country)
             });
         })
+        .then(res => {
+          this.$store.commit("setEmployee", { employee_id: res.user.uid });
+          this.$router.push("/dashboard");
+        })
         .catch(error => {
           alert(error.message);
+          this.$store.commit("unsetEmployee");
         });
     }
   }

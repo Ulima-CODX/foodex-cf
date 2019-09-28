@@ -1,7 +1,9 @@
 <template>
   <div id="navbar">
     <div v-for="(link, i) in links" :key="i">
-      <router-link :to="link.url">{{ $t(`pages.${link.name}`) }}</router-link>
+      <router-link :to="link.url">{{
+        $t(`pages.${link.name}.name`)
+      }}</router-link>
     </div>
     <locale-changer />
   </div>

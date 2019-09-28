@@ -14,7 +14,7 @@
         <button type="submit">{{ $t("forms.prompts.login") }}</button>
       </div>
     </form>
-    <router-link to="/register">{{ $t("pages.register") }}</router-link>
+    <router-link to="/register">{{ $t("pages.register.name") }}</router-link>
   </div>
 </template>
 
@@ -32,10 +32,12 @@ export default {
       auth
         .signInWithEmailAndPassword(email, password)
         .then(res => {
-          console.log(res.user.uid);
+          this.$store.commit("setEmployee", { employee_id: res.user.uid });
+          this.$router.push("/dashboard");
         })
         .catch(error => {
           alert(error.message);
+          this.$store.commit("unsetEmployee");
         });
     }
   }

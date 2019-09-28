@@ -11,6 +11,7 @@
       "last_name": "Surname",
       "phone": "Phone",
       "country": "Country",
+      "establishment": "Establishment",
       "login": "Login",
       "register": "Register"
     },
@@ -23,8 +24,15 @@
     }
   },
   "pages": {
-    "login": "Login",
-    "register": "Register",
-    "about": "About"
+    "login": {
+      "name": "Login"
+    },
+    "register": {
+      "name": "Register"
+    },
+    "about": {
+      "name": "About",
+      "description": "This website was developed as part of a 2019-II Software Engineering course by:"
+    }
   }
 }
