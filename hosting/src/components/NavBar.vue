@@ -51,14 +51,13 @@ export default {
 <style lang="scss" scoped>
 @import "../resources/style/theme";
 #navbar {
-  padding: 10px;
-  border-bottom: 1px solid $accent-color;
   background-color: $primary-color;
   color: $light-color;
+  padding: 10px;
+  border-bottom: 1px solid $accent-color;
   display: flex;
 }
 .link {
-  text-decoration: none;
   color: $light-color;
   border-radius: 2px;
   padding: 5px;
@@ -66,12 +65,11 @@ export default {
 }
 .link:hover,
 .a-link {
+  background-color: $accent-color;
   color: $light-color;
-  background: $accent-color;
   border-radius: 2px;
   padding: 5px;
 }
-
 .locale-changer {
   float: right;
 }

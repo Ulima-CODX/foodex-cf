@@ -35,4 +35,14 @@ body {
   color: $dark-color;
   background-color: $light-color;
 }
+a {
+  text-decoration: none;
+}
+button {
+  background-color: $primary-color;
+  color: $light-color;
+  border: 1px solid $primary-color;
+  border-radius: 5px;
+  font-family: $font;
+}
 </style>
