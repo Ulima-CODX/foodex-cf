@@ -3,26 +3,39 @@ import Vuex from "vuex";
 
 Vue.use(Vuex);
 
-export default new Vuex.Store({
+const store = new Vuex.Store({
   state: {
-    employee_id: "",
-    links: {
-      
+    user: {
+      id: null,
+      roles: {
+        admin: false,
+        manager: false,
+        orderHandler: false
+      }
     }
   },
   mutations: {
-    setEmployee(state, payload) {
-      state.employee_id = payload.employee_id;
+    setUser(state, { user_id, isAdmin, isManager, isOrderHandler }) {
+      state.user.id = user_id;
+      state.user.roles.admin = isAdmin;
+      state.user.roles.manager = isManager;
+      state.user.roles.orderHandler = isOrderHandler;
     },
-    unsetEmployee(state) {
-      state.employee_id = "";
-    },
-    addLink(state, payload){
-      state.links[payload.name] = payload.url
-    },
-    removeLink(state, payload){
-      delete state.links[payload.name]
+    unsetUser(state) {
+      state.user.id = null;
+      state.user.roles.admin = false;
+      state.user.roles.manager = false;
+      state.user.roles.orderHandler = false;
     }
   },
-  actions: {}
+  actions: {
+    login({ commit }, user) {
+      commit("setUser", user);
+    },
+    logout({ commit }) {
+      commit("unsetUser");
+    }
+  }
 });
+
+export default store;

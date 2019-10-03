@@ -1,7 +1,7 @@
 <template>
   <div id="navbar">
     <div v-for="(link, i) in links" :key="i">
-      <router-link :to="link.url">{{
+      <router-link :to="link.url" class="link" active-class="a-link">{{
         $t(`pages.${link.name}.name`)
       }}</router-link>
     </div>
@@ -14,9 +14,34 @@ import LocaleChanger from "./LocaleChanger";
 
 export default {
   name: "navbar",
-  data: () => ({
-    links: [{ name: "about", url: "/about" }]
-  }),
+  computed: {
+    links() {
+      let links = [];
+      if (this.$store.state.user.roles.admin) {
+        links.push({
+          name: "establishments",
+          url: "/dashboard/establishments"
+        });
+      }
+      if (this.$store.state.user.roles.manager) {
+        console.log("Is Manager");
+      }
+      if (this.$store.state.user.roles.orderHandler) {
+        console.log("Is Order Handler");
+      }
+      if (
+        this.$store.state.user.roles.admin ||
+        this.$store.state.user.roles.manager ||
+        this.$store.state.user.roles.orderHandler
+      ) {
+        links.push({ name: "profile", url: "/dashboard/profile" });
+      } else {
+        links.push({ name: "login", url: "/login" });
+      }
+      links.push({ name: "about", url: "/about" });
+      return links;
+    }
+  },
   components: {
     LocaleChanger
   }
@@ -24,7 +49,7 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-@import "../resources/style/colors";
+@import "../resources/style/theme";
 #navbar {
   padding: 10px;
   border-bottom: 1px solid $accent-color;
@@ -32,10 +57,21 @@ export default {
   color: $light-color;
   display: flex;
 }
-a {
+.link {
   text-decoration: none;
   color: $light-color;
+  border-radius: 2px;
+  padding: 5px;
+  margin: 2px;
 }
+.link:hover,
+.a-link {
+  color: $light-color;
+  background: $accent-color;
+  border-radius: 2px;
+  padding: 5px;
+}
+
 .locale-changer {
   float: right;
 }

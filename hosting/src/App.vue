@@ -7,6 +7,13 @@
 
 <script>
 import Navbar from "./components/NavBar.vue";
+import store from "./store";
+import router from "./routes";
+
+if (!(store.state.employee | store.state.admin)) {
+  router.push("/");
+}
+
 export default {
   name: "app",
   components: {
@@ -16,12 +23,12 @@ export default {
 </script>
 
 <style lang="scss">
-@import "./resources/style/colors";
+@import "./resources/style/theme";
 body {
   margin: 0px;
 }
 #app {
-  font-family: "Avenir", Helvetica, Arial, sans-serif;
+  font-family: $font;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   text-align: center;

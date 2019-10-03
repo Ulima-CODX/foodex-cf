@@ -64,7 +64,7 @@ export default {
       auth
         .createUserWithEmailAndPassword(email, password)
         .then(res => {
-          db.collection("employees")
+          db.collection("users")
             .doc(res.user.uid)
             .set({
               first_name: first_name,
@@ -75,12 +75,12 @@ export default {
             });
         })
         .then(res => {
-          this.$store.commit("setEmployee", { employee_id: res.user.uid });
-          this.$router.push("/dashboard");
+          this.$store.dispatch("login", { user_id: res.user.uid });
+          this.$router.push("/dashboard/await");
         })
         .catch(error => {
           alert(error.message);
-          this.$store.commit("unsetEmployee");
+          this.$store.dispatch("logout");
         });
     }
   }

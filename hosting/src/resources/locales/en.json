@@ -33,6 +33,16 @@
     "about": {
       "name": "About",
       "description": "This website was developed as part of a 2019-II Software Engineering course by:"
+    },
+    "profile": {
+      "name": "Profile"
+    },
+    "await": {
+      "name": "Await",
+      "description": "Your access is being processed!"
+    },
+    "establishments":{
+      "name": "Establishments"
     }
   }
 }

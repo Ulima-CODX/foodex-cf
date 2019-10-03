@@ -33,6 +33,16 @@
     "about": {
       "name": "Acerca",
       "description": "Este sitio web fue desarrollado para un curso de Ingeniería de Software en 2019-II por:"
+    },
+    "profile": {
+      "name": "Perfil"
+    },
+    "await": {
+      "name": "Espera",
+      "description": "Tu acceso está siendo procesado!"
+    },
+    "establishments":{
+      "name": "Locales"
     }
   }
 }

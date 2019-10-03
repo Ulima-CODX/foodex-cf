@@ -19,7 +19,7 @@
 </template>
 
 <script>
-import { auth } from "../../firestore";
+import { db, auth } from "../../firestore";
 
 export default {
   name: "login",
@@ -31,13 +31,53 @@ export default {
     login(email, password) {
       auth
         .signInWithEmailAndPassword(email, password)
-        .then(res => {
-          this.$store.commit("setEmployee", { employee_id: res.user.uid });
-          this.$router.push("/dashboard");
+        .then(async res => {
+          const user_id = res.user.uid;
+          const isAdmin = await db
+            .collection("admins")
+            .doc(user_id)
+            .get()
+            .then(() => true)
+            .catch(() => false);
+          console.log(`isAdmin: ${isAdmin}`);
+          const { isManager, isOrderHandler } = await db
+            .collection("employees")
+            .doc(user_id)
+            .get()
+            .then(async res => {
+              const employees = await res
+                .data()
+                .establishment.get()
+                .then(res => res.data().employees);
+              console.log(employees);
+              const manager = await employees.managers.filter(
+                employee => employee.id == user_id
+              )[0];
+              const orderHandler = await employees.order_handlers.filter(
+                employee => employee.id == user_id
+              )[0];
+              return {
+                isManager: manager != null,
+                isOrderHandler: orderHandler != null
+              };
+            })
+            .catch(() => (false, false));
+          if (isAdmin || isManager || isOrderHandler) {
+            this.$store.dispatch("login", {
+              user_id: res.user.uid,
+              isAdmin,
+              isManager,
+              isOrderHandler
+            });
+            this.$router.push("/dashboard");
+          } else {
+            this.$router.push("/dashboard/await");
+          }
         })
         .catch(error => {
           alert(error.message);
-          this.$store.commit("unsetEmployee");
+          console.error(error);
+          this.$store.dispatch("logout");
         });
     }
   }
