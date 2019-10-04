@@ -17,24 +17,27 @@ export default {
   computed: {
     links() {
       let links = [];
-      if (this.$store.state.user.roles.admin) {
-        links.push({
-          name: "establishments",
-          url: "/dashboard/establishments"
-        });
-      }
-      if (this.$store.state.user.roles.manager) {
-        console.log("Is Manager");
-      }
-      if (this.$store.state.user.roles.orderHandler) {
-        console.log("Is Order Handler");
-      }
-      if (
-        this.$store.state.user.roles.admin ||
-        this.$store.state.user.roles.manager ||
-        this.$store.state.user.roles.orderHandler
-      ) {
-        links.push({ name: "profile", url: "/dashboard/profile" });
+      if (this.$store.state.user.id!=null) {
+        if (this.$store.state.user.roles.admin == true) {
+          console.log("Is Admin");
+          links.push({
+            name: "establishments",
+            url: "/dashboard/establishments"
+          });
+        }
+        if (this.$store.state.user.roles.manager == true) {
+          console.log("Is Manager");
+        }
+        if (this.$store.state.user.roles.orderHandler == true) {
+          console.log("Is Order Handler");
+        }
+        if (
+          this.$store.state.user.roles.admin ||
+          this.$store.state.user.roles.manager ||
+          this.$store.state.user.roles.orderHandler
+        ) {
+          links.push({ name: "profile", url: "/dashboard/profile" });
+        }
       } else {
         links.push({ name: "login", url: "/login" });
       }

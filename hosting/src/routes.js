@@ -7,6 +7,7 @@ import Register from "./components/Public/Register.vue";
 import About from "./components/Public/About.vue";
 import Dashboard from "./components/User/Dashboard.vue";
 import Profile from "./components/User/Profile.vue";
+import Await from "./components/User/Await.vue";
 import EstablishmentList from "./components/Admin/EstablishmentList.vue";
 
 const routes = [
@@ -22,7 +23,8 @@ const routes = [
       { path: "profile", component: Profile },
       { path: "establishments", component: EstablishmentList },
       { path: "management", component: Profile },
-      { path: "orders", component: Profile }
+      { path: "orders", component: Profile },
+      { path: "await", component: Await }
     ]
   }
 ];

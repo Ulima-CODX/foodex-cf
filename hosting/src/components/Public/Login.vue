@@ -37,38 +37,42 @@ export default {
             .collection("admins")
             .doc(user_id)
             .get()
-            .then(() => true)
+            .then(res => res.exists)
             .catch(() => false);
-          console.log(`isAdmin: ${isAdmin}`);
           const { isManager, isOrderHandler } = await db
             .collection("employees")
             .doc(user_id)
             .get()
             .then(async res => {
+              if (!res.data().establishment) {
+                return { isManager: false, isOrderHandler: false };
+              }
               const employees = await res
                 .data()
                 .establishment.get()
-                .then(res => res.data().employees);
-              console.log(employees);
-              const manager = await employees.managers.filter(
-                employee => employee.id == user_id
-              )[0];
-              const orderHandler = await employees.order_handlers.filter(
-                employee => employee.id == user_id
-              )[0];
-              return {
-                isManager: manager != null,
-                isOrderHandler: orderHandler != null
-              };
+                .then(res => res.data().employees)
+                .catch(() => null);
+              const isManager =
+                (await employees.managers.filter(
+                  employee => employee.id == user_id
+                )[0]) != null;
+              const isOrderHandler =
+                (await employees.order_handlers.filter(
+                  employee => employee.id == user_id
+                )[0]) != null;
+              return { isManager, isOrderHandler };
             })
-            .catch(() => (false, false));
-          if (isAdmin || isManager || isOrderHandler) {
-            this.$store.dispatch("login", {
-              user_id: res.user.uid,
+            .catch(() => ({
+              isManager: false,
+              isOrderHandler: false
+            }));
+          this.$store.dispatch("login", {
+              user_id,
               isAdmin,
               isManager,
               isOrderHandler
             });
+          if (isAdmin || isManager || isOrderHandler) {
             this.$router.push("/dashboard");
           } else {
             this.$router.push("/dashboard/await");

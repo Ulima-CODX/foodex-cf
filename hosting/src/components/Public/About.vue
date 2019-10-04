@@ -1,9 +1,10 @@
 <template>
-  <div id="about">
-    <p>{{ $t("pages.about.name") }}</p>
-    <p>{{ $t("pages.about.description") }}</p>
-    <div v-for="(member, index) in members" :key="index">
-      <p>{{ member.code }}: {{ member.name }}</p>
+  <div id="about" class="card">
+    <div class="footer">
+      <p>{{ $t("pages.about.description") }}</p>
+      <div v-for="(member, index) in members" :key="index">
+        <p class="member">{{ member.name }} ({{ member.code }})</p>
+      </div>
     </div>
   </div>
 </template>
@@ -23,4 +24,8 @@ export default {
 };
 </script>
 
-<style lang="scss" scoped></style>
+<style lang="scss" scoped>
+.member {
+  padding: 5px 20px 5px;
+}
+</style>

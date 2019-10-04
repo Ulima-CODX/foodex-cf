@@ -8,7 +8,7 @@
       <p>{{ $t("forms.names.register") }}</p>
       <div>
         <label for="first_name">{{ $t("forms.prompts.first_name") }} :</label>
-        <input type="text" v_model="first_name" id="first_name" />
+        <input type="text" v-model="first_name" id="first_name" />
       </div>
       <div>
         <label for="last_name">{{ $t("forms.prompts.last_name") }} :</label>
@@ -63,20 +63,32 @@ export default {
     register(first_name, last_name, email, password, phone, country) {
       auth
         .createUserWithEmailAndPassword(email, password)
-        .then(res => {
-          db.collection("users")
-            .doc(res.user.uid)
+        .then(async res => {
+          const user_id = await res.user.uid;
+          const user = await db
+            .collection("users")
+            .doc(user_id)
             .set({
               first_name: first_name,
               last_name: last_name,
               email: email,
               phone: phone,
               country: db.collection("countries").doc(country)
-            });
-        })
-        .then(res => {
-          this.$store.dispatch("login", { user_id: res.user.uid });
-          this.$router.push("/dashboard/await");
+            })
+            .then(() => true)
+            .catch(() => false);
+          const employee = await db
+            .collection("employees")
+            .doc(user_id)
+            .set({ user: db.collection("users").doc(user_id) })
+            .then(() => true)
+            .catch(() => false);
+          if (user && employee) {
+            this.$store.dispatch("login", { user_id });
+            this.$router.push("/dashboard/await");
+          } else {
+            auth.deleteUser(user_id).catch(err => console.error(err));
+          }
         })
         .catch(error => {
           alert(error.message);
