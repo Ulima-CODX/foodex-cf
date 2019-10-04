@@ -42,7 +42,25 @@
       "description": "Your access is being processed!"
     },
     "establishments":{
-      "name": "Establishments"
+      "name": "Establishments",
+      "open_on": "Open on",
+      "employees": "Employees",
+      "managers": "Managers",
+      "orderHandlers": "Order Handlers",
+      "receptionists": "Receptionists",
+      "missing_employees": "No employees",
+      "missing_managers": "No managers",
+      "missing_orderHandlers": "No order handlers",
+      "missing_receptionists": "No managers"
     }
+  },
+  "days": {
+    "monday": "Monday",
+    "tuesday": "Tuesday",
+    "wednesday": "Wednesday",
+    "thursday": "Thursday",
+    "friday": "Friday",
+    "saturday": "Saturday",
+    "sunday": "Sunday"
   }
 }

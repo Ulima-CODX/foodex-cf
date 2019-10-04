@@ -42,7 +42,25 @@
       "description": "Tu acceso está siendo procesado!"
     },
     "establishments":{
-      "name": "Locales"
+      "name": "Locales",
+      "open_on": "Abierto en",
+      "employees": "Empleados",
+      "managers": "Gestores",
+      "orderHandlers": "Encargados de pedidos",
+      "receptionists": "Recepcionistas",
+      "missing_employees": "No hay empleados",
+      "missing_managers": "No hay gestores",
+      "missing_orderHandlers": "No hay encargados de pedidos",
+      "missing_receptionists": "No hay recepcionistas"
     }
+  },
+  "days": {
+    "monday": "Lunes",
+    "tuesday": "Martes",
+    "wednesday": "Miércoles",
+    "thursday": "Jueves",
+    "friday": "Viernes",
+    "saturday": "Sábados",
+    "sunday": "Domingos"
   }
 }

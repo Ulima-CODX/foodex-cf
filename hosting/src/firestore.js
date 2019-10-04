@@ -19,5 +19,5 @@ export const auth = Firebase.auth();
 import "firebase/firestore";
 export const db = Firebase.firestore();
 
-const { TimeStamp, GeoPoint } = Firebase.firestore;
-export { TimeStamp, GeoPoint };
+const { TimeStamp, GeoPoint, FieldValue } = Firebase.firestore;
+export { TimeStamp, GeoPoint, FieldValue };
