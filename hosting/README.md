@@ -1,4 +1,4 @@
-# Foodex Web
+# foodex
 
 ## Project setup
 ```
