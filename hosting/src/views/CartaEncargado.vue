@@ -29,7 +29,7 @@
                   v-text="item.subtitle"
                 ></v-list-item-subtitle>
               </v-list-item-content>
-                <v-switch v-model="switch1"></v-switch>
+                <v-switch ></v-switch>
               
             </template>
           </v-list-item>
@@ -49,33 +49,18 @@ export default {
     selected: [],
     items: [
       {
-        action: "15 min",
-        headline: "Lasagna",
-        title: "Sergio Calcina",
-        subtitle: "Sin Mesa"
+        title: "Lasagna",
       },
       {
-        action: "2 hr",
-        headline: "Tallarines Rojos",
-        title: "Andre Cabrera",
-        subtitle: "Mesa para 2"
+        title: "Tallarines Rojos",
       },
       {
-        action: "6 hr",
-        headline: "Aji de Gallina",
-        title: "Daniel Vasquez",
-        subtitle: "Mesa para 5"
+        title: "Aji de Gallina",
       },
       {
-        action: "12 hr",
-        headline: "Lomo Saltado",
-        title: "Eduardo",
-        subtitle: "Mesa para 1"
+        title: "Lomo Saltado",
       }
     ],
-    switch1: true,
-    switch2: false,
-    
   })
 };
 </script>
