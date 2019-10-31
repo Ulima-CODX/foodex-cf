@@ -1,6 +1,15 @@
 <template>
   <nav>
+    <!--Navigation Drawer-->
+    <v-navigation-drawer v-model="sidebar" app />
+    <!--App Toolbar-->
     <v-app-bar color="#E41E2B" flat>
+      <!--Navigation Drawer Toogle-->
+      <v-app-bar-nav-icon
+        class="hidden-sm-and-up"
+        @click="sidebar = !sidebar"
+      />
+      <!--Logo-->
       <v-img
         class="mx-2"
         src="@/resources/assets/foodex1.png"
@@ -10,6 +19,7 @@
         alt="logo"
       >
       </v-img>
+      <!--App Name-->
       <v-toolbar-title class="text-uppercase">
         <span class="font-weight-black">Foodex</span>
       </v-toolbar-title>
@@ -21,7 +31,7 @@
 <script>
 export default {
   data: () => ({
-      
+    sidebar: false
   })
 };
 </script>

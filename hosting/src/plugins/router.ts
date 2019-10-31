@@ -1,41 +1,34 @@
 import Vue from "vue";
 import VueRouter from "vue-router";
-import Home from "../views/Home.vue";
+import Login from "@/views/components/Login.vue";
 
 Vue.use(VueRouter);
 
 const routes = [
   {
     path: "/",
-    name: "home",
-    component: Home
+    name: "login",
+    component: Login
   },
   {
     path: "/carta_encargado",
     name: "carta_encargado",
-    // route level code-splitting
-    // this generates a separate chunk (about.[hash].js) for this route
-    // which is lazy-loaded when the route is visited.
-    component: () =>
-      import(/* webpackChunkName: "about" */ "../views/CartaEncargado.vue")
+    component: () => import("../views/CartaEncargado.vue")
   },
   {
     path: "/recepcionista",
     name: "recepcionista",
-    component: () =>
-      import(/* webpackChunkName: "about" */ "../views/Recepcionista.vue")
+    component: () => import("../views/Recepcionista.vue")
   },
   {
     path: "/gestor",
     name: "gestor",
-    component: () =>
-      import(/* webpackChunkName: "about" */ "../views/Gestor.vue")
+    component: () => import("../views/Gestor.vue")
   },
   {
     path: "/pedidos_encargado",
     name: "pedidos_encargado",
-    component: () =>
-      import(/* webpackChunkName: "about" */ "../views/PedidosEncargado.vue")
+    component: () => import("../views/PedidosEncargado.vue")
   }
 ];
 

@@ -1,24 +1,21 @@
 <template>
   <v-app class="grey lighten-4">
-    <Navbar />
-
-    <v-content class="my-4">
-      <router-view></router-view>
-    </v-content>
+    <!--Navigation-->
+    <navigation />
+    <!--Page Content-->
+    <router-view></router-view>
   </v-app>
 </template>
 
 <script lang="ts">
 import Vue from "vue";
-import Navbar from "@/views/components/Navbar.vue";
+import Navigation from "@/views/components/Navigation.vue";
 
 export default Vue.extend({
   name: "App",
   components: {
-    Navbar
+    Navigation
   },
-  data: () => ({
-    //
-  })
+  data: () => ({})
 });
 </script>
