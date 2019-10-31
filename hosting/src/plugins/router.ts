@@ -26,16 +26,34 @@ const routes = [
       import(/* webpackChunkName: "about" */ "../views/Recepcionista.vue")
   },
   {
-    path: "/gestor",
-    name: "gestor",
+    path: "/carta_gestor",
+    name: "carta_gestor",
     component: () =>
-      import(/* webpackChunkName: "about" */ "../views/Gestor.vue")
+      import(/* webpackChunkName: "about" */ "../views/CartaGestor.vue")
   },
   {
     path: "/pedidos_encargado",
     name: "pedidos_encargado",
     component: () =>
       import(/* webpackChunkName: "about" */ "../views/PedidosEncargado.vue")
+  },
+  {
+    path: "/mesa_gestor",
+    name: "mesa_gestor",
+    component: () =>
+      import(/* webpackChunkName: "about" */ "../views/MesaGestor.vue")
+  },
+  {
+    path: "/admin",
+    name: "admin",
+    component: () =>
+      import(/* webpackChunkName: "about" */ "../views/Administrador.vue")
+  },
+  {
+    path: "/restaurante",
+    name: "restaurante",
+    component: () =>
+      import(/* webpackChunkName: "about" */ "../views/Restaurante.vue")
   }
 ];
 

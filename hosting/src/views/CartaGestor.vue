@@ -6,11 +6,15 @@
       <v-spacer></v-spacer>
 
       <v-btn icon>
-        <v-icon>mdi-magnify</v-icon>
+        <v-icon>mdi-plus-box</v-icon>
       </v-btn>
 
       <v-btn icon>
-        <v-icon>mdi-checkbox-marked-circle</v-icon>
+        <v-icon>mdi-border-color</v-icon>
+      </v-btn>
+
+      <v-btn icon>
+        <v-icon>mdi-close-box</v-icon>
       </v-btn>
     </v-toolbar>
 
@@ -29,7 +33,6 @@
                   v-text="item.subtitle"
                 ></v-list-item-subtitle>
               </v-list-item-content>
-                <v-switch input-value="true"></v-switch>
               
             </template>
           </v-list-item>
@@ -64,3 +67,4 @@ export default {
   })
 };
 </script>
+

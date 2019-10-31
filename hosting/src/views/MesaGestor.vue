@@ -29,7 +29,10 @@
                   v-text="item.subtitle"
                 ></v-list-item-subtitle>
               </v-list-item-content>
-                <v-switch input-value="true"></v-switch>
+                <input  v-model="defaultSelected" item-value="10" type="number" step="1" min="0" max="10" >
+                
+                
+
               
             </template>
           </v-list-item>
@@ -49,18 +52,19 @@ export default {
     selected: [],
     items: [
       {
-        title: "Lasagna",
+        title: "Mesa para 2",
       },
       {
-        title: "Tallarines Rojos",
+        title: "Mesa para 4",
       },
       {
-        title: "Aji de Gallina",
+        title: "Mesa para 6",
       },
       {
-        title: "Lomo Saltado",
+        title: "Mesa para 8",
       }
     ],
+    
   })
 };
 </script>

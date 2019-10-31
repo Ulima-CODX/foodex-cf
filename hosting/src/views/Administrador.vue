@@ -1,16 +1,16 @@
 <template>
   <v-card max-width="800" class="mx-auto">
     <v-toolbar color="#E41E2B" dark>
-      <v-toolbar-title>Carta</v-toolbar-title>
+      <v-toolbar-title>Locales</v-toolbar-title>
 
       <v-spacer></v-spacer>
 
       <v-btn icon>
-        <v-icon>mdi-magnify</v-icon>
+        <v-icon>mdi-plus-box</v-icon>
       </v-btn>
 
       <v-btn icon>
-        <v-icon>mdi-checkbox-marked-circle</v-icon>
+        <v-icon>mdi-close-box</v-icon>
       </v-btn>
     </v-toolbar>
 
@@ -29,7 +29,6 @@
                   v-text="item.subtitle"
                 ></v-list-item-subtitle>
               </v-list-item-content>
-                <v-switch input-value="true"></v-switch>
               
             </template>
           </v-list-item>
@@ -49,18 +48,19 @@ export default {
     selected: [],
     items: [
       {
-        title: "Lasagna",
+        title: "Embarcadero 41",
       },
       {
-        title: "Tallarines Rojos",
+        title: "Aji 555",
       },
       {
-        title: "Aji de Gallina",
+        title: "El Riconcito Arequipeño",
       },
       {
-        title: "Lomo Saltado",
+        title: "500 Grados",
       }
     ],
   })
 };
 </script>
+
