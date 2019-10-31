@@ -6,29 +6,38 @@ Vue.use(VueRouter);
 
 const routes = [
   {
-    path: "/",
+    path: "",
+    redirect: "/login"
+  },
+  {
+    path: "/login",
     name: "login",
     component: Login
   },
   {
+    path: "/profile",
+    name: "profile",
+    component: () => import("@/views/Profile.vue")
+  },
+  {
     path: "/carta_encargado",
     name: "carta_encargado",
-    component: () => import("../views/CartaEncargado.vue")
+    component: () => import("@/views/CartaEncargado.vue")
   },
   {
     path: "/recepcionista",
     name: "recepcionista",
-    component: () => import("../views/Recepcionista.vue")
+    component: () => import("@/views/Recepcionista.vue")
   },
   {
     path: "/gestor",
     name: "gestor",
-    component: () => import("../views/Gestor.vue")
+    component: () => import("@/views/Gestor.vue")
   },
   {
     path: "/pedidos_encargado",
     name: "pedidos_encargado",
-    component: () => import("../views/PedidosEncargado.vue")
+    component: () => import("@/views/PedidosEncargado.vue")
   }
 ];
 

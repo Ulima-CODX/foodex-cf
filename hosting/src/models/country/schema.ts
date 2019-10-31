@@ -7,7 +7,7 @@ import {
 } from "@/plugins/firebase";
 
 //Data Import
-import { CountryData } from "./data";
+import { CountryData, CountryFS_Data } from "./data";
 
 //Document Class
 export class CountryDocument {
@@ -21,7 +21,14 @@ export class CountryDocument {
   }
   //Read methods
   public read = (): Promise<CountryData> =>
-    this.ref.get().then((res: FS_DocumentData) => <CountryData>res.data());
+    this.ref.get().then((res: FS_DocumentData) => {
+      const temp: CountryFS_Data = <CountryFS_Data>res.data();
+      const countrydata: CountryData = {
+        ...temp,
+        flag_url: `https://www.countryflags.io/${temp.iso}/flat/32.png`
+      };
+      return countrydata;
+    });
   //Update methods
   public setCode = async (code: number) => this.ref.update({ code });
   public setIso = async (iso: string) => this.ref.update({ iso });
@@ -41,7 +48,7 @@ export abstract class CountryCollection {
     iso: string,
     name: string
   ): Promise<CountryDocument> => {
-    const countrydata: CountryData = {
+    const countrydata: CountryFS_Data = {
       code,
       iso,
       name
