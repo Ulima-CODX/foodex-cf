@@ -1,7 +1,7 @@
 <template>
   <v-card max-width="800" class="mx-auto">
     <v-toolbar color="#E41E2B" dark>
-      <v-toolbar-title>Pedidos</v-toolbar-title>
+      <v-toolbar-title>Carta</v-toolbar-title>
 
       <v-spacer></v-spacer>
 
@@ -15,10 +15,10 @@
     </v-toolbar>
 
     <v-list two-line>
-      <v-list-item-group v-model="selected" multiple active-class="pink--text">
+      <v-list-item-group >
         <template v-for="(item, index) in items">
           <v-list-item :key="item.title">
-            <template v-slot:default="{ active, toggle }">
+            <template >
               <v-list-item-content>
                 <v-list-item-title v-text="item.title"></v-list-item-title>
                 <v-list-item-subtitle
@@ -29,19 +29,8 @@
                   v-text="item.subtitle"
                 ></v-list-item-subtitle>
               </v-list-item-content>
-
-              <v-list-item-action>
-                <v-list-item-action-text
-                  v-text="item.action"
-                ></v-list-item-action-text>
-                <v-icon v-if="!active" color="grey lighten-1">
-                  mdi-star_border
-                </v-icon>
-
-                <v-btn icon v-else color="red">
-                  <v-icon>mdi-checkbox-marked-circle</v-icon>
-                </v-btn>
-              </v-list-item-action>
+                <v-switch v-model="switch1"></v-switch>
+              
             </template>
           </v-list-item>
 
@@ -53,6 +42,8 @@
 </template>
 
 <script>
+import item from "../views/components/Item"
+
 export default {
   data: () => ({
     selected: [],
@@ -80,14 +71,11 @@ export default {
         headline: "Lomo Saltado",
         title: "Eduardo",
         subtitle: "Mesa para 1"
-      },
-      {
-        action: "12 hr",
-        headline: "Ceviche",
-        title: "Carlos",
-        subtitle: "Mesa para 4"
       }
-    ]
+    ],
+    switch1: true,
+    switch2: false,
+    
   })
 };
 </script>
