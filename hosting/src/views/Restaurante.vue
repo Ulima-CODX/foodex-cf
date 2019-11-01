@@ -6,6 +6,40 @@
           <span class="headline white--text">Embarcadero 41 (Miraflores)</span>
 
         </v-card-title>
+        <v-tabs
+      v-model="tab"
+      background-color="deep-purple accent-4"
+      class="elevation-2"
+      dark
+      :centered="centered"
+      :grow="grow"
+      :vertical="vertical"
+      :right="right"
+      :prev-icon="prevIcon ? 'mdi-arrow-left-bold-box-outline' : undefined"
+      :next-icon="nextIcon ? 'mdi-arrow-right-bold-box-outline' : undefined"
+      :icons-and-text="icons"
+    >
+      <v-tabs-slider></v-tabs-slider>
+
+      <v-tab
+        v-for="i in tabs"
+        :key="i"
+        :href="`#tab-${i}`"
+      >
+        Tab {{ i }}
+        <v-icon v-if="icons">mdi-phone</v-icon>
+      </v-tab>
+
+      <v-tab-item
+        v-for="i in tabs"
+        :key="i"
+        :value="'tab-' + i"
+      >
+        <v-card
+          flat
+          tile
+        >
+          
         
 
         <v-list>
@@ -62,14 +96,39 @@
 
           <v-divider inset></v-divider>
 
+        
 
         </v-list>
-
-        <v-img
+</v-card>
+      </v-tab-item>
+    </v-tabs>
+    <v-img
           src="@/resources/assets/embarcadero.jpg"
           height="500px"
-        ></v-img>
-      </v-card>
+    ></v-img>
+        
+    </v-card>
+
+       
     </v-col>
   </v-row>
 </template>
+
+<script>
+  export default {
+    data () {
+      return {
+        tab: null,
+        text: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.',
+        icons: false,
+        centered: false,
+        grow: false,
+        vertical: true,
+        prevIcon: false,
+        nextIcon: false,
+        right: false,
+        tabs: 2,
+      }
+    },
+  }
+</script>

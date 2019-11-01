@@ -9,9 +9,7 @@
         <v-icon>mdi-magnify</v-icon>
       </v-btn>
 
-      <v-btn icon>
-        <v-icon>mdi-checkbox-marked-circle</v-icon>
-      </v-btn>
+
     </v-toolbar>
 
     <v-list two-line>
