@@ -51,10 +51,11 @@
       </v-list-item-group>
     </v-list>
   </v-card>
-  <v-navigation-drawer
+    <v-navigation-drawer
       absolute
       permanent
       left
+      style="margin-top:65px"
     >
       <template v-slot:prepend>
         <v-list-item two-line>
@@ -63,7 +64,7 @@
           </v-list-item-avatar>
 
           <v-list-item-content>
-            <v-list-item-title>RecpecionistName</v-list-item-title>
+            <v-list-item-title>RecepcionistName</v-list-item-title>
             <v-list-item-subtitle>Logged In</v-list-item-subtitle>
           </v-list-item-content>
         </v-list-item>
@@ -76,9 +77,9 @@
           v-for="item in tasks"
           :key="item.title"
         >
-          <!--v-list-item-icon>
+          <v-list-item-icon>
             <v-icon>{{ item.icon }}</v-icon>
-          </v-list-item-icon-->
+          </v-list-item-icon>
 
           <v-list-item-content>
             <v-list-item-title>{{ item.title }}</v-list-item-title>
@@ -117,23 +118,20 @@ export default {
         headline: "Lomo Saltado",
         title: "Eduardo",
         subtitle: "Mesa para 1"
-      },
-      {
-        action: "12 hr",
-        headline: "Ceviche",
-        title: "Carlos",
-        subtitle: "Mesa para 4"
       }
     ],
   tasks: [
     {
-      title: "Lista de Pedidos"
+      title: "Lista de Pedidos",
+      icon: "mdi-view-list"
     },
     {
-      title: "Perfil"
+      title: "Perfil",
+      icon: "mdi-account"
     },
     {
-      title: "Logout"
+      title: "Logout",
+      icon: "mdi-logout"
     }
   ]
   })
