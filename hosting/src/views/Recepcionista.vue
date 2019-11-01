@@ -1,5 +1,6 @@
 <template>
-  <v-card max-width="800" class="mx-auto">
+<v-container>
+  <v-card min-width="800" max-width="900" class="mx-auto my-4">
     <v-toolbar color="#E41E2B" dark>
       <v-toolbar-title>Pedidos</v-toolbar-title>
 
@@ -50,6 +51,42 @@
       </v-list-item-group>
     </v-list>
   </v-card>
+  <v-navigation-drawer
+      absolute
+      permanent
+      left
+    >
+      <template v-slot:prepend>
+        <v-list-item two-line>
+          <v-list-item-avatar>
+            <img src="@/resources/assets/foodex1.png">
+          </v-list-item-avatar>
+
+          <v-list-item-content>
+            <v-list-item-title>RecpecionistName</v-list-item-title>
+            <v-list-item-subtitle>Logged In</v-list-item-subtitle>
+          </v-list-item-content>
+        </v-list-item>
+      </template>
+
+      <v-divider></v-divider>
+
+      <v-list dense>
+        <v-list-item
+          v-for="item in tasks"
+          :key="item.title"
+        >
+          <!--v-list-item-icon>
+            <v-icon>{{ item.icon }}</v-icon>
+          </v-list-item-icon-->
+
+          <v-list-item-content>
+            <v-list-item-title>{{ item.title }}</v-list-item-title>
+          </v-list-item-content>
+        </v-list-item>
+      </v-list>
+    </v-navigation-drawer>
+</v-container>
 </template>
 
 <script>
@@ -87,7 +124,18 @@ export default {
         title: "Carlos",
         subtitle: "Mesa para 4"
       }
-    ]
+    ],
+  tasks: [
+    {
+      title: "Lista de Pedidos"
+    },
+    {
+      title: "Perfil"
+    },
+    {
+      title: "Logout"
+    }
+  ]
   })
 };
 </script>

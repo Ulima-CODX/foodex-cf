@@ -1,5 +1,5 @@
 <template>
-  <v-card max-width="800" class="mx-auto">
+  <v-card min-width="800" class="mx-auto my-4">
     <v-toolbar color="#E41E2B" dark>
       <v-toolbar-title>Carta</v-toolbar-title>
 
@@ -9,9 +9,7 @@
         <v-icon>mdi-magnify</v-icon>
       </v-btn>
 
-      <v-btn icon>
-        <v-icon>mdi-checkbox-marked-circle</v-icon>
-      </v-btn>
+
     </v-toolbar>
 
     <v-list two-line>
