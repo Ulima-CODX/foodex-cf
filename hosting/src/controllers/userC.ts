@@ -28,44 +28,25 @@ export type ProfileData = null | {
   };
 };
 
+export type NavigationLink = {
+  label: string;
+  url: string;
+};
+
 //Controller
-export default abstract class UserController {
-  //Login
-  public static login = (email: string, password: string): void => {
-    auth
-      .signInWithEmailAndPassword(email, password)
-      .then(async res => {
-        if (!res.user) throw "auth/wrong-email";
-        else {
-          const isAdmin: boolean = await new AdminDocument(
-            res.user.uid
-          ).exists();
-          const employeeRoles: EmployeeRoles = await new EmployeeDocument(
-            res.user.uid
-          ).getRoles();
-          const isClient: boolean = await new ClientDocument(
-            res.user.uid
-          ).exists();
-          UserController.onLoginSuccess(res.user.uid, {
-            isAdmin,
-            ...employeeRoles,
-            isClient
-          });
-        }
-      })
-      .catch(err => {
-        UserController.onLoginFail(err.code);
-      });
+export abstract class UserController {
+  //Navigation
+  public static getLinks = async (): Promise<NavigationLink[]> => {
+    let links: NavigationLink[] = [];
+    const userRoles: UserRoles = Store.state.user.roles;
+    if (userRoles.isAdmin) links.push({ label: "Admin", url: "" });
+    if (userRoles.isManager) links.push({ label: "Manager", url: "" });
+    if (userRoles.isOrderHandler)
+      links.push({ label: "OrderHandler", url: "" });
+    if (userRoles.isReceptionist)
+      links.push({ label: "Receptionist", url: "" });
+    return links;
   };
-  private static onLoginSuccess(id: string, roles: UserRoles) {
-    Store.dispatch("login", { id, roles });
-    Router.push("/profile");
-  }
-  private static onLoginFail(errCode: string) {
-    alert("Could not login!");
-    console.error(errCode);
-    Store.dispatch("logout");
-  }
 
   //Profile
   public static getData = async (): Promise<ProfileData> => {

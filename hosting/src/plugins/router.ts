@@ -15,6 +15,11 @@ const routes = [
     component: Login
   },
   {
+    path: "/register",
+    name: "register",
+    component: () => import("@/views/components/Register.vue")
+  },
+  {
     path: "/profile",
     name: "profile",
     component: () => import("@/views/Profile.vue")
@@ -37,26 +42,22 @@ const routes = [
   {
     path: "/pedidos_encargado",
     name: "pedidos_encargado",
-    component: () =>
-      import("../views/PedidosEncargado.vue")
+    component: () => import("../views/PedidosEncargado.vue")
   },
   {
     path: "/mesa_gestor",
     name: "mesa_gestor",
-    component: () =>
-      import("../views/MesaGestor.vue")
+    component: () => import("../views/MesaGestor.vue")
   },
   {
     path: "/admin",
     name: "admin",
-    component: () =>
-      import("../views/Administrador.vue")
+    component: () => import("../views/Administrador.vue")
   },
   {
     path: "/restaurante",
     name: "restaurante",
-    component: () =>
-      import("../views/Restaurante.vue")
+    component: () => import("../views/Restaurante.vue")
   }
 ];
 

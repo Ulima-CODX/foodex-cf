@@ -10,8 +10,7 @@
 </template>
 
 <script>
-import Store from "@/plugins/vuex";
-import UC from "@/controllers/user";
+import { UserController as UC } from "@/controllers/userC";
 
 export default {
   data() {

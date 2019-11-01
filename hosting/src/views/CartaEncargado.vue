@@ -29,8 +29,7 @@
                   v-text="item.subtitle"
                 ></v-list-item-subtitle>
               </v-list-item-content>
-                <v-switch input-value="true"></v-switch>
-              
+              <v-switch input-value="true"></v-switch>
             </template>
           </v-list-item>
 
@@ -49,18 +48,18 @@ export default {
     selected: [],
     items: [
       {
-        title: "Lasagna",
+        title: "Lasagna"
       },
       {
-        title: "Tallarines Rojos",
+        title: "Tallarines Rojos"
       },
       {
-        title: "Aji de Gallina",
+        title: "Aji de Gallina"
       },
       {
-        title: "Lomo Saltado",
+        title: "Lomo Saltado"
       }
-    ],
+    ]
   })
 };
 </script>

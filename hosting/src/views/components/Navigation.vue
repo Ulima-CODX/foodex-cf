@@ -1,14 +1,7 @@
 <template>
   <nav>
-    <!--Navigation Drawer-->
-    <v-navigation-drawer v-model="sidebar" app />
     <!--App Toolbar-->
-    <v-app-bar color="#E41E2B" flat>
-      <!--Navigation Drawer Toogle-->
-      <v-app-bar-nav-icon
-        class="hidden-sm-and-up"
-        @click="sidebar = !sidebar"
-      />
+    <v-app-bar color="#E41E2B" flat dense>
       <!--Logo-->
       <v-img
         class="mx-2"
@@ -23,15 +16,37 @@
       <v-toolbar-title class="text-uppercase">
         <span class="font-weight-black">Foodex</span>
       </v-toolbar-title>
-      <v-spacer></v-spacer>
+      <!--Tab links-->
+      <v-toolbar-items>
+        <v-btn v-if="!logged" to="/register">Register</v-btn>
+        <v-btn v-else @click="logout()">Logout</v-btn>
+      </v-toolbar-items>
     </v-app-bar>
   </nav>
 </template>
 
 <script>
+import Store from "@/plugins/vuex";
+import { logout as UC_logout } from "@/controllers/user/auth";
+import { UserController as UC } from "@/controllers/userC";
+
 export default {
-  data: () => ({
-    sidebar: false
-  })
+  data() {
+    return {
+      activeTab: 0,
+      logged: Store.state.user.id != "",
+      links: [{ label: "Admin", url: "/" }, { label: "Manager", url: "/" }]
+    };
+  },
+  computed: {
+    linksComputed() {
+      return this.links;
+    }
+  },
+  methods: {
+    logout() {
+      UC_logout();
+    }
+  }
 };
 </script>

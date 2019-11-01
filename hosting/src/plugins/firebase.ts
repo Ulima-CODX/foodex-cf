@@ -13,11 +13,10 @@ export default Firebase.initializeApp({
 import "firebase/auth";
 export const auth = Firebase.auth();
 
+export type FS_User = firebase.User;
+
 import "firebase/firestore";
 export const db = Firebase.firestore();
-
-import "firebase/storage";
-export const storage = Firebase.storage();
 
 export const { Timestamp, GeoPoint, FieldValue } = Firebase.firestore;
 
@@ -28,3 +27,6 @@ export type GeoPoint = firebase.firestore.GeoPoint;
 export type FS_Collection = firebase.firestore.CollectionReference;
 export type FS_Document = firebase.firestore.DocumentReference;
 export type FS_DocumentData = firebase.firestore.DocumentSnapshot;
+
+import "firebase/storage";
+export const storage = Firebase.storage();

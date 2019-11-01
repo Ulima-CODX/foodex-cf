@@ -19,10 +19,10 @@
     </v-toolbar>
 
     <v-list two-line>
-      <v-list-item-group >
+      <v-list-item-group>
         <template v-for="(item, index) in items">
           <v-list-item :key="item.title">
-            <template >
+            <template>
               <v-list-item-content>
                 <v-list-item-title v-text="item.title"></v-list-item-title>
                 <v-list-item-subtitle
@@ -33,7 +33,6 @@
                   v-text="item.subtitle"
                 ></v-list-item-subtitle>
               </v-list-item-content>
-              
             </template>
           </v-list-item>
 
@@ -45,26 +44,25 @@
 </template>
 
 <script>
-import item from "../views/components/Item"
+import item from "../views/components/Item";
 
 export default {
   data: () => ({
     selected: [],
     items: [
       {
-        title: "Lasagna",
+        title: "Lasagna"
       },
       {
-        title: "Tallarines Rojos",
+        title: "Tallarines Rojos"
       },
       {
-        title: "Aji de Gallina",
+        title: "Aji de Gallina"
       },
       {
-        title: "Lomo Saltado",
+        title: "Lomo Saltado"
       }
-    ],
+    ]
   })
 };
 </script>
-

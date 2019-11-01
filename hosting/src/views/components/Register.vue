@@ -1,7 +1,7 @@
 <template>
   <v-card width="400" class="mx-auto my-auto">
     <v-card-title>
-      <h1 class="display-1">Login</h1>
+      <h1 class="display-1">Register</h1>
     </v-card-title>
     <v-card-text>
       <v-form>
@@ -22,14 +22,12 @@
     </v-card-text>
     <v-divider></v-divider>
     <v-card-actions>
-      <v-btn color="info" @click="login(email, password)">Login</v-btn>
+      <v-btn color="info" @click="console.log('Register')">Register</v-btn>
     </v-card-actions>
   </v-card>
 </template>
 
 <script>
-import { login as UC_Login } from "@/controllers/user/auth";
-
 export default {
   data() {
     return {
@@ -37,11 +35,8 @@ export default {
       password: "",
       showPassword: false
     };
-  },
-  methods: {
-    login(email, password) {
-      UC_Login(email, password);
-    }
   }
 };
 </script>
+
+<style></style>
