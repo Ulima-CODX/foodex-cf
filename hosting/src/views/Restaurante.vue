@@ -2,7 +2,7 @@
   <v-row justify="center">
     <v-col cols="12" sm="8">
       <v-card>
-        <v-card-title class="cyan darken-1">
+        <v-card-title class="red darken-1">
           <span class="headline white--text">Embarcadero 41 (Miraflores)</span>
 
         </v-card-title>

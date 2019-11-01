@@ -1,5 +1,5 @@
 <template>
-  <v-card max-width="800" class="mx-auto">
+  <v-card min-width="800" class="mx-auto my-4">
     <v-toolbar color="#E41E2B" dark>
       <v-toolbar-title>Locales</v-toolbar-title>
 
