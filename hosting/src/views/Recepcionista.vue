@@ -55,7 +55,7 @@
       absolute
       permanent
       left
-      style="margin-top:65px"
+      style="margin-top:50px"
     >
       <template v-slot:prepend>
         <v-list-item two-line>
