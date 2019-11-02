@@ -15,6 +15,7 @@ const initRoles: UserRoles = {
 export default new Vuex.Store({
   state: {
     user: {
+      authStatus: "waiting",
       id: "",
       roles: initRoles
     }
@@ -31,6 +32,11 @@ export default new Vuex.Store({
     },
     unsetRoles(state) {
       state.user.roles = initRoles;
+    },
+    setAuthStatus(state, status: "waiting" |
+      "login_start" | "login_ok" | "login_fail" |
+      "logout_start" |"logout_ok"|"logout_fail") {
+     state.user.authStatus = status;
     }
   },
   actions: {
@@ -49,6 +55,9 @@ export default new Vuex.Store({
     },
     getUserRoles(state) {
       return state.user.roles;
+    },
+    getAuthStatus(state){
+      return state.user.authStatus;
     }
   }
 });

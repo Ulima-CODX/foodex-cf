@@ -24,10 +24,15 @@
     <v-card-actions>
       <v-btn color="info" @click="login(email, password)">Login</v-btn>
     </v-card-actions>
+      <v-overlay v-if="authStatus='login_start'">
+      <v-progress-circular indeterminate size="64"></v-progress-circular>
+    </v-overlay>
   </v-card>
 </template>
 
 <script>
+import { mapGetters } from "vuex";
+
 import { login as UC_Login } from "@/controllers/user/auth";
 
 export default {
@@ -38,10 +43,20 @@ export default {
       showPassword: false
     };
   },
+  computed: {
+    ...mapGetters({ authStatus: "getAuthStatus" })
+  },
   methods: {
     login(email, password) {
       UC_Login(email, password);
     }
+  },
+  watch: {
+    overlay (val) {
+      val && setTimeout(() => {
+        this.overlay = false
+      }, 3000)
+    }  
   }
-};
+}
 </script>
