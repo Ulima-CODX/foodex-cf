@@ -1,7 +1,7 @@
 <template>
   <v-app class="grey lighten-4">
     <!--Navigation-->
-    <navigation />
+    <nav-bar/>
     <!--Page Content-->
     <router-view></router-view>
   </v-app>
@@ -9,13 +9,12 @@
 
 <script lang="ts">
 import Vue from "vue";
-import Navigation from "@/views/components/Navigation.vue";
+import NavBar from "@/views/components/NavBar.vue";
 
 export default Vue.extend({
   name: "App",
   components: {
-    Navigation
-  },
-  data: () => ({})
+    NavBar
+  }
 });
 </script>

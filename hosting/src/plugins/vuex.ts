@@ -43,5 +43,12 @@ export default new Vuex.Store({
       commit("unsetRoles");
     }
   },
-  modules: {}
+  getters: {
+    getUserID(state) {
+      return state.user.id;
+    },
+    getUserRoles(state) {
+      return state.user.roles;
+    }
+  }
 });

@@ -1,0 +1,54 @@
+<template>
+  <nav>
+    <!--App Toolbar-->
+    <v-app-bar color="#E41E2B" flat dense>
+      <!--Logo-->
+      <v-img
+        class="mx-2"
+        src="@/resources/assets/foodex1.png"
+        max-height="65"
+        max-width="65"
+        contain
+        alt="logo"
+      >
+      </v-img>
+      <!--App Name-->
+      <v-toolbar-title class="text-uppercase">
+        <span class="font-weight-black">Foodex</span>
+      </v-toolbar-title>
+      <v-spacer />
+      <!--Tab links-->
+      <v-toolbar-items>
+        <v-btn text v-if="showLogin" to="/login">Login</v-btn>
+        <v-btn text v-if="showRegister" to="/register">Register</v-btn>
+        <v-btn text v-if="user_id" @click="logout">Logout</v-btn>
+      </v-toolbar-items>
+    </v-app-bar>
+  </nav>
+</template>
+
+<script>
+import { mapGetters } from "vuex";
+
+import { logout } from "@/controllers/user/auth";
+import { route } from "@/controllers/user/navigation";
+
+export default {
+  data() {
+    return {
+      logout,
+      showLogin: route() != "login" && !this.user_id,
+      showRegister: route() != "register" && !this.user_id
+    };
+  },
+  computed: {
+    ...mapGetters({ user_id: "getUserID" })
+  },
+  watch: {
+    $route(to, from) {
+      this.showLogin = to.name != "login" && !this.user_id;
+      this.showRegister = to.name != "register" && !this.user_id;
+    }
+  }
+};
+</script>
