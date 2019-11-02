@@ -24,7 +24,7 @@
     <v-card-actions>
       <v-btn color="info" @click="login(email, password)">Login</v-btn>
     </v-card-actions>
-      <v-overlay v-if="authStatus='login_start'">
+      <v-overlay v-if="authStatus=='login_start'">
       <v-progress-circular indeterminate size="64"></v-progress-circular>
     </v-overlay>
   </v-card>

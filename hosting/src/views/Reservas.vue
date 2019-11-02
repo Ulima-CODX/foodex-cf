@@ -2,7 +2,7 @@
   <v-container>
     <v-card min-width="800" max-width="900" class="mx-auto my-4">
       <v-toolbar color="#E41E2B" dark>
-        <v-toolbar-title>Pedidos</v-toolbar-title>
+        <v-toolbar-title>Reservas</v-toolbar-title>
 
         <v-spacer></v-spacer>
 
