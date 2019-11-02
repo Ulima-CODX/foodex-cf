@@ -21,7 +21,6 @@
       <v-toolbar-items>
         <v-btn text v-if="showLogin" to="/login">Login</v-btn>
         <v-btn text v-if="showRegister" to="/register">Register</v-btn>
-        <v-btn text v-if="user_id" @click="logout">Logout</v-btn>
       </v-toolbar-items>
     </v-app-bar>
   </nav>
@@ -30,13 +29,11 @@
 <script>
 import { mapGetters } from "vuex";
 
-import { logout } from "@/controllers/user/auth";
 import { route } from "@/controllers/user/navigation";
 
 export default {
   data() {
     return {
-      logout,
       showLogin: route() != "login" && !this.user_id,
       showRegister: route() != "register" && !this.user_id
     };

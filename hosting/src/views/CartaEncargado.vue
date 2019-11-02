@@ -8,8 +8,6 @@
       <v-btn icon>
         <v-icon>mdi-magnify</v-icon>
       </v-btn>
-
-
     </v-toolbar>
 
     <v-list two-line>
