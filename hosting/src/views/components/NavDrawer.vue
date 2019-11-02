@@ -82,7 +82,7 @@
         </v-list-item-content>
       </v-list-item>
     </v-list>
-    <v-divider v-if="roles.isOrderHandler"/>
+    <v-divider v-if="roles.isReceptionist"/>
     <v-list dense>
       <v-list-item @click="logout">
         <!--Icon-->
