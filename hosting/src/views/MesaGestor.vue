@@ -29,14 +29,22 @@
                   v-text="item.subtitle"
                 ></v-list-item-subtitle>
               </v-list-item-content>
-              <input
+              <v-btn small color="blue">
+                <v-icon>mdi-minus</v-icon>
+              </v-btn>
+              <!--input
                 v-model="defaultSelected"
                 item-value="10"
                 type="number"
                 step="1"
                 min="0"
-                max="10"
-              />
+                max="10"/-->
+              <v-text-field type="number" value=10 min=0 max=10>
+                
+              </v-text-field>
+              <v-btn small color="blue">
+                <v-icon>mdi-plus</v-icon>
+              </v-btn>
             </template>
           </v-list-item>
 
