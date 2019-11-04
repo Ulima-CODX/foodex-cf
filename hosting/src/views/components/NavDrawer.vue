@@ -119,7 +119,7 @@ export default {
       orderHandlerLinks: [
         {
           label: "Menu",
-          url: "/carta_gestor",
+          url: "/carta_encargado",
           icon: "mdi-silverware-fork-knife"
         },
         { label: "Pedidos", url: "/pedidos_encargado", icon: "mdi-view-list" }

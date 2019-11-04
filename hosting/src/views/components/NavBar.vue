@@ -1,11 +1,11 @@
 <template>
   <nav>
     <!--App Toolbar-->
-    <v-app-bar color="#E41E2B" flat dense>
+    <v-app-bar color="#E41E2B" flat dense dark  >
       <!--Logo-->
       <v-img
         class="mx-2"
-        src="@/resources/assets/foodex1.png"
+        src="@/resources/assets/logoBlancoIMG.png"
         max-height="65"
         max-width="65"
         contain
