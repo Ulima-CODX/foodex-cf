@@ -16,12 +16,10 @@ import { EmployeeRoles } from "@/models/employee/data";
 //Login function
 export function login(email: string, password: string): void {
   Store.commit("setAuthStatus", "login_start");
-  auth
-    .signInWithEmailAndPassword(email, password)
-    .catch(err => {
-      Store.commit("setAuthStatus", "login_fail");
-      console.log(err);
-    });
+  auth.signInWithEmailAndPassword(email, password).catch(err => {
+    Store.commit("setAuthStatus", "login_fail");
+    console.log(err);
+  });
 }
 //Login callback
 async function onLogin(user_id: string): Promise<void> {
@@ -43,7 +41,7 @@ export function logout(): void {
   Store.commit("setAuthStatus", "logout_start");
   auth.signOut().catch(err => {
     Store.commit("setAuthStatus", "logout_fail");
-    console.log(err)
+    console.log(err);
   });
 }
 //Logout callback
@@ -56,7 +54,7 @@ async function onLogout(): Promise<void> {
 //Auth Listener
 auth.onAuthStateChanged(
   async (user: FS_User | null): Promise<void> => {
-    /*if (!user) await onLogout();
-    else await onLogin(user.uid);*/
+    if (!user) await onLogout();
+    else await onLogin(user.uid);
   }
 );

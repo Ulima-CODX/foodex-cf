@@ -10,7 +10,7 @@
 </template>
 
 <script>
-import { UserController as UC } from "@/controllers/userC";
+import { getData } from "@/controllers/user/profile";
 
 export default {
   data() {
@@ -24,7 +24,7 @@ export default {
     }
   },
   async created() {
-    this.user = await UC.getData();
+    this.user = await getData();
   }
 };
 </script>
