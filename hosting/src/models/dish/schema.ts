@@ -11,7 +11,7 @@ import {
 import { MenuDocument } from "../menu/schema";
 
 //Data Imports
-import { DishData, DishFS_Data } from "./data";
+import { DishData } from "./data";
 
 //Document Class
 export class DishDocument {
@@ -25,21 +25,10 @@ export class DishDocument {
   }
   //Read methods
   public read = (): Promise<DishData> =>
-    this.ref.get().then(async (res: FS_DocumentData) => {
-      const temp: DishFS_Data = <DishFS_Data>res.data();
-      const dishData: DishData = {
-        menu_id: temp.menu ? temp.menu.id : "",
-        name: temp.name,
-        description: temp.description,
-        price: temp.price,
-        available: temp.available,
-        ingredients: temp.ingredients
-      };
-      return dishData;
-    });
+    this.ref.get().then(async (res: FS_DocumentData) => <DishData>res.data());
   //Update methods
   public setMenu = async (menu: MenuDocument): Promise<void> =>
-    this.ref.update({ menu: menu.ref });
+    this.ref.update({ menu_id: menu.id });
   public setName = async (name: string): Promise<void> =>
     this.ref.update({ name });
   public setDescription = async (description: string): Promise<void> =>
@@ -67,7 +56,7 @@ export abstract class DishCollection {
     description: string,
     price: number
   ): Promise<DishDocument> => {
-    const dishData: DishFS_Data = {
+    const dishData: DishData = {
       name,
       description,
       price,

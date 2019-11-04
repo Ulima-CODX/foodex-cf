@@ -10,7 +10,7 @@ import {
 import { EstablishmentDocument } from "../establishment/schema";
 
 //Data Imports
-import { EmployeeData, EmployeeRoles, EmployeeDataFS_Data } from "./data";
+import { EmployeeData, EmployeeRoles } from "./data";
 import { EstablishmentData } from "../establishment/data";
 
 //Document Class
@@ -25,13 +25,9 @@ export class EmployeeDocument {
   }
   //Read methods
   public read = (): Promise<EmployeeData> =>
-    this.ref.get().then(async (res: FS_DocumentData) => {
-      const temp: EmployeeDataFS_Data = <EmployeeDataFS_Data>res.data();
-      const employeeData: EmployeeData = {
-        establishment_id: temp.establishment ? temp.establishment.id : undefined
-      };
-      return employeeData;
-    });
+    this.ref
+      .get()
+      .then(async (res: FS_DocumentData) => <EmployeeData>res.data());
   public getRoles = (): Promise<EmployeeRoles> =>
     this.ref.get().then(async (res: FS_DocumentData) => {
       let roles: EmployeeRoles = {
@@ -39,10 +35,10 @@ export class EmployeeDocument {
         isOrderHandler: false,
         isReceptionist: false
       };
-      const temp: EmployeeDataFS_Data = <EmployeeDataFS_Data>res.data();
-      if (!temp.establishment) return roles;
+      const temp: EmployeeData = <EmployeeData>res.data();
+      if (!temp.establishment_id) return roles;
       const establishmentData: EstablishmentData = await new EstablishmentDocument(
-        temp.establishment.id
+        temp.establishment_id
       ).read();
       roles.isManager = establishmentData.employees.manager_ids.includes(
         this.id
@@ -58,7 +54,7 @@ export class EmployeeDocument {
   //Update methods
   public setEstablishment = async (
     establishment: EstablishmentDocument
-  ): Promise<void> => this.ref.update({ establishment: establishment.ref });
+  ): Promise<void> => this.ref.update({ establishment_id: establishment.id });
   public unsetEstablishment = async (): Promise<void> =>
     this.ref.update({ establishment: null });
   //Delete method
@@ -73,9 +69,7 @@ export abstract class EmployeeCollection {
   //Create method
   public static create = async (id: string): Promise<EmployeeDocument> => {
     const employee: EmployeeDocument = new EmployeeDocument(id);
-    const employeeData: EmployeeDataFS_Data = {
-      establishment: undefined
-    };
+    const employeeData: EmployeeData = { establishment_id: undefined };
     return employee.ref.set(employeeData).then(() => employee);
   };
 }

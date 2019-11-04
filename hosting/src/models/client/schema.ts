@@ -12,7 +12,7 @@ import { OrderDocument } from "../order/schema";
 import { ReservationDocument } from "../reservation/schema";
 
 //Data Imports
-import { ClientData, ClientFS_Data } from "./data";
+import { ClientData } from "./data";
 import { DishDocument } from "../dish/schema";
 import { EstablishmentDocument } from "../establishment/schema";
 
@@ -28,53 +28,44 @@ export class ClientDocument {
   }
   //Read methods
   public read = (): Promise<ClientData> =>
-    this.ref.get().then(async (res: FS_DocumentData) => {
-      const temp: ClientFS_Data = <ClientFS_Data>res.data();
-      const clientData: ClientData = {
-        favorites: {
-          dish_ids: temp.favorites.dishes.map(dish => dish.id),
-          establishment_ids: temp.favorites.establishments.map(
-            establishment => establishment.id
-          )
-        },
-        reservation_ids: temp.reservations.map(reservation => reservation.id),
-        standalone_order_ids: temp.standalone_orders.map(order => order.id)
-      };
-      return clientData;
-    });
+    this.ref.get().then(async (res: FS_DocumentData) => <ClientData>res.data());
   public exists = (): Promise<boolean> =>
     this.ref.get().then(async (res: FS_DocumentData) => res.exists);
   //Update methods
   public addFavoriteDish = async (dish: DishDocument): Promise<void> =>
-    this.ref.update({ favorites: { dishes: FieldValue.arrayUnion(dish.ref) } });
+    this.ref.update({
+      favorites: { dish_ids: FieldValue.arrayUnion(dish.id) }
+    });
   public removeFavoriteDish = async (dish: DishDocument): Promise<void> =>
     this.ref.update({
-      favorites: { dishes: FieldValue.arrayRemove(dish.ref) }
+      favorites: { dish_ids: FieldValue.arrayRemove(dish.id) }
     });
   public addFavoriteEstablishment = async (
     establishment: EstablishmentDocument
   ): Promise<void> =>
     this.ref.update({
-      favorites: { establishments: FieldValue.arrayUnion(establishment.ref) }
+      favorites: { establishment_ids: FieldValue.arrayUnion(establishment.id) }
     });
   public removeFavoriteEstablishment = async (
     establishment: EstablishmentDocument
   ): Promise<void> =>
     this.ref.update({
-      favorites: { establishments: FieldValue.arrayRemove(establishment.ref) }
+      favorites: { establishment_ids: FieldValue.arrayRemove(establishment.id) }
     });
   public addOrder = async (order: OrderDocument): Promise<void> =>
-    this.ref.update({ standalone_orders: FieldValue.arrayUnion(order.ref) });
+    this.ref.update({ standalone_order_ids: FieldValue.arrayUnion(order.id) });
   public removeOrder = async (order: OrderDocument): Promise<void> =>
-    this.ref.update({ standalone_orders: FieldValue.arrayRemove(order.ref) });
+    this.ref.update({ standalone_order_ids: FieldValue.arrayRemove(order.id) });
   public addReservation = async (
     reservation: ReservationDocument
   ): Promise<void> =>
-    this.ref.update({ reservations: FieldValue.arrayUnion(reservation.ref) });
+    this.ref.update({ reservation_ids: FieldValue.arrayUnion(reservation.id) });
   public removeReservation = async (
     reservation: ReservationDocument
   ): Promise<void> =>
-    this.ref.update({ reservations: FieldValue.arrayRemove(reservation.ref) });
+    this.ref.update({
+      reservation_ids: FieldValue.arrayRemove(reservation.id)
+    });
   //Delete method
   public delete = async (): Promise<void> => this.ref.delete();
 }
@@ -87,10 +78,10 @@ export abstract class ClientCollection {
   //Create method
   public static create = async (id: string): Promise<ClientDocument> => {
     const client: ClientDocument = new ClientDocument(id);
-    const clientData: ClientFS_Data = {
-      favorites: { dishes: [], establishments: [] },
-      reservations: [],
-      standalone_orders: []
+    const clientData: ClientData = {
+      favorites: { dish_ids: [], establishment_ids: [] },
+      reservation_ids: [],
+      standalone_order_ids: []
     };
     return client.ref.set(clientData).then(() => client);
   };

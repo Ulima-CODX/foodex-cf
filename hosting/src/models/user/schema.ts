@@ -10,7 +10,7 @@ import {
 import { CountryDocument } from "../country/schema";
 
 //Data Imports
-import { UserData, UserFS_Data } from "./data";
+import { UserData } from "./data";
 
 //Document Class
 export class UserDocument {
@@ -24,17 +24,7 @@ export class UserDocument {
   }
   //Read methods
   public read = (): Promise<UserData> =>
-    this.ref.get().then(async (res: FS_DocumentData) => {
-      const temp = <UserFS_Data>res.data();
-      const userData: UserData = {
-        first_name: temp.first_name,
-        last_name: temp.last_name,
-        email: temp.email,
-        phone: temp.phone,
-        country_id: temp.country.id
-      };
-      return userData;
-    });
+    this.ref.get().then(async (res: FS_DocumentData) => <UserData>res.data());
 
   //Update methods
   public setFirstName = async (first_name: number): Promise<void> =>
@@ -46,7 +36,7 @@ export class UserDocument {
   public setPhone = async (phone: string): Promise<void> =>
     this.ref.update({ phone });
   public setCountry = async (country: CountryDocument): Promise<void> =>
-    this.ref.update({ country: country.ref });
+    this.ref.update({ country_id: country.id });
   //Delete method
   public delete = async (): Promise<void> => this.ref.delete();
 }
@@ -66,12 +56,12 @@ export abstract class UserCollection {
     country: CountryDocument
   ): Promise<UserDocument> => {
     const user: UserDocument = new UserDocument(id);
-    const userData: UserFS_Data = {
+    const userData: UserData = {
       first_name,
       last_name,
       email,
       phone,
-      country: country.ref
+      country_id: country.id
     };
     return user.ref.set(userData).then(() => user);
   };

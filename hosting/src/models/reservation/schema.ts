@@ -14,7 +14,7 @@ import { EstablishmentDocument } from "../establishment/schema";
 import { OrderDocument } from "../order/schema";
 
 //Data Imports
-import { ReservationData, ReservationFS_Data } from "./data";
+import { ReservationData } from "./data";
 
 //Document Class
 export class ReservationDocument {
@@ -28,19 +28,9 @@ export class ReservationDocument {
   }
   //Read methods
   public read = (): Promise<ReservationData> =>
-    this.ref.get().then(async (res: FS_DocumentData) => {
-      const temp: ReservationFS_Data = <ReservationFS_Data>res.data();
-      const reservationData: ReservationData = {
-        status: temp.status,
-        establishment_id: temp.establishment.id,
-        client_id: temp.client.id,
-        attendees: temp.attendees,
-        comment: temp.comment,
-        order_ids: temp.orders.map(order => order.id),
-        time: temp.time.toDate()
-      };
-      return reservationData;
-    });
+    this.ref
+      .get()
+      .then(async (res: FS_DocumentData) => <ReservationData>res.data());
   //Update methods
   public setStatus = (status: string): Promise<void> =>
     this.ref.update({ status });
@@ -49,9 +39,9 @@ export class ReservationDocument {
   public setComment = (comment: string): Promise<void> =>
     this.ref.update({ comment });
   public addOrder = (order: OrderDocument): Promise<void> =>
-    this.ref.update({ orders: FieldValue.arrayUnion(order.ref) });
+    this.ref.update({ order_ids: FieldValue.arrayUnion(order.id) });
   public removeOrder = (order: OrderDocument): Promise<void> =>
-    this.ref.update({ orders: FieldValue.arrayRemove(order.ref) });
+    this.ref.update({ orders_id: FieldValue.arrayRemove(order.id) });
   //Delete method
   public delete = async (): Promise<void> => this.ref.delete();
 }
@@ -67,14 +57,14 @@ export abstract class ReservationCollection {
     client: ClientDocument,
     attendees: number
   ): Promise<ReservationDocument> => {
-    const reservationData: ReservationFS_Data = {
+    const reservationData: ReservationData = {
       status: "pending",
-      client: client.ref,
-      establishment: establishment.ref,
+      client_id: client.id,
+      establishment_id: establishment.id,
       attendees,
       comment: "",
-      orders: [],
-      time: Timestamp.fromMillis(Date.now())
+      order_ids: [],
+      timestamp: Timestamp.now()
     };
     return ReservationCollection.ref
       .add(reservationData)

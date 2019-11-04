@@ -12,7 +12,7 @@ import { EstablishmentDocument } from "../establishment/schema";
 import { DishDocument } from "../dish/schema";
 
 //Data Imports
-import { MenuData, MenuFS_Data } from "./data";
+import { MenuData } from "./data";
 
 //Document Class
 export class MenuDocument {
@@ -26,25 +26,18 @@ export class MenuDocument {
   }
   //Read methods
   public read = (): Promise<MenuData> =>
-    this.ref.get().then(async (res: FS_DocumentData) => {
-      const temp: MenuFS_Data = <MenuFS_Data>res.data();
-      const menuData: MenuData = {
-        establishment_id: temp.establishment.id,
-        dish_ids: temp.dishes.map(dish => dish.id)
-      };
-      return menuData;
-    });
+    this.ref.get().then(async (res: FS_DocumentData) => <MenuData>res.data());
   //Update methods
   public setEstablishment = async (
     establishment: EstablishmentDocument
-  ): Promise<void> => this.ref.update({ establishment: establishment.ref });
+  ): Promise<void> => this.ref.update({ establishment_id: establishment.id });
   public addDish = async (dish: DishDocument): Promise<void> =>
     this.ref
-      .update({ dishes: FieldValue.arrayUnion(dish.ref) })
+      .update({ dish_ids: FieldValue.arrayUnion(dish.id) })
       .then(() => dish.setMenu(this));
   public removeDish = async (dish: DishDocument): Promise<void> =>
     this.ref
-      .update({ dishes: FieldValue.arrayUnion(dish.ref) })
+      .update({ dish_ids: FieldValue.arrayUnion(dish.id) })
       .then(() => dish.delete());
   //Delete method
   public delete = (): Promise<void> => this.ref.delete();
@@ -61,8 +54,8 @@ export abstract class MenuCollection {
   ): Promise<MenuDocument> =>
     MenuCollection.ref
       .add({
-        establishment: establishment.ref,
-        dishes: []
+        establishment_id: establishment.id,
+        dish_ids: []
       })
       .then(res => new MenuDocument(res.id));
 }

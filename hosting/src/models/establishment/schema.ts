@@ -16,7 +16,7 @@ import { ReservationDocument } from "../reservation/schema";
 
 //Data Imports
 import { EmployeeData, EmployeeRoles } from "../employee/data";
-import { EstablishmentData, EstablishmentFS_Data } from "./data";
+import { EstablishmentData } from "./data";
 
 //Document Class
 export class EstablishmentDocument {
@@ -30,37 +30,9 @@ export class EstablishmentDocument {
   }
   //Read methods
   public read = (): Promise<EstablishmentData> =>
-    this.ref.get().then(async (res: FS_DocumentData) => {
-      const temp: EstablishmentFS_Data = <EstablishmentFS_Data>res.data();
-      const establishmentData: EstablishmentData = {
-        name: temp.name,
-        description: temp.description,
-        phone: temp.phone,
-        address: temp.address,
-        country_id: temp.country.id,
-        menu_id: temp.menu ? temp.menu.id : "",
-        employees: {
-          manager_ids: temp.employees.managers
-            ? temp.employees.managers.map(manager => manager.id)
-            : [],
-          order_handler_ids: temp.employees.order_handlers
-            ? temp.employees.order_handlers.map(
-                order_handler => order_handler.id
-              )
-            : [],
-          receptionist_ids: temp.employees.receptionists
-            ? temp.employees.receptionists.map(
-                receptionists => receptionists.id
-              )
-            : []
-        },
-        working_hours: temp.working_hours,
-        order_ids: temp.orders.map(order => order.id),
-        reservation_limit: temp.reservation_limit,
-        reservation_ids: temp.reservations.map(reservation => reservation.id)
-      };
-      return establishmentData;
-    });
+    this.ref
+      .get()
+      .then(async (res: FS_DocumentData) => <EstablishmentData>res.data());
   //Update methods
   public setName = async (name: string): Promise<void> =>
     this.ref.update({ name });
@@ -69,32 +41,36 @@ export class EstablishmentDocument {
   public setPhone = async (phone: string): Promise<void> =>
     this.ref.update({ phone });
   public setCountry = async (country: CountryDocument): Promise<void> =>
-    this.ref.update({ country: country.ref });
+    this.ref.update({ country_id: country.id });
   public setMenu = async (menu: MenuDocument): Promise<void> =>
-    this.ref.update({ menu: menu.ref });
+    this.ref.update({ menu_id: menu.id });
   public setReservationLimit = async (
     reservation_limit: number
   ): Promise<void> => this.ref.update({ reservation_limit });
   public assignEmployee = async (
     employee: EmployeeDocument,
-    employee_group: "managers" | "order_handlers" | "receptionists"
+    employee_type: "manager" | "order_handler" | "receptionist"
   ): Promise<void> => {
     const employeeData: EmployeeData = await employee.read();
     if (!employeeData.establishment_id) employee.setEstablishment(this);
     if (employeeData.establishment_id != this.id) return;
     return this.ref.update({
-      employees: { [employee_group]: FieldValue.arrayUnion(employee.ref) }
+      employees: {
+        [`${employee_type}_ids`]: FieldValue.arrayUnion(employee.id)
+      }
     });
   };
   public dismissEmployee = async (
     employee: EmployeeDocument,
-    employee_group: "managers" | "order_handlers" | "receptionists"
+    employee_type: "manager" | "order_handler" | "receptionist"
   ): Promise<void> => {
     const employeeData: EmployeeData = await employee.read();
     if (employeeData.establishment_id != this.id) return;
     return this.ref
       .update({
-        employees: { [employee_group]: FieldValue.arrayRemove(employee.ref) }
+        employees: {
+          [`${employee_type}_ids`]: FieldValue.arrayRemove(employee.id)
+        }
       })
       .then(async () => {
         const roles: EmployeeRoles = await employee.getRoles();
@@ -122,17 +98,19 @@ export class EstablishmentDocument {
       { merge: true }
     );
   public addOrder = (order: OrderDocument): Promise<void> =>
-    this.ref.update({ orders: FieldValue.arrayUnion(order.ref) });
+    this.ref.update({ order_ids: FieldValue.arrayUnion(order.id) });
   public removeOrder = (order: OrderDocument): Promise<void> =>
-    this.ref.update({ orders: FieldValue.arrayRemove(order.ref) });
+    this.ref.update({ order_ids: FieldValue.arrayRemove(order.id) });
   public addReservation = async (
     reservation: ReservationDocument
   ): Promise<void> =>
-    this.ref.update({ reservations: FieldValue.arrayUnion(reservation.ref) });
+    this.ref.update({ reservation_ids: FieldValue.arrayUnion(reservation.id) });
   public removeReservation = async (
     reservation: ReservationDocument
   ): Promise<void> =>
-    this.ref.update({ reservations: FieldValue.arrayRemove(reservation.ref) });
+    this.ref.update({
+      reservation_ids: FieldValue.arrayRemove(reservation.id)
+    });
   //Delete method
   public delete = async (): Promise<void> => this.ref.delete();
 }
@@ -150,16 +128,16 @@ export abstract class EstablishmentCollection {
     address: string,
     country: CountryDocument
   ): Promise<EstablishmentDocument> => {
-    const establishmentData: EstablishmentFS_Data = {
+    const establishmentData: EstablishmentData = {
       name,
       description,
       phone,
       address,
-      country: country.ref,
+      country_id: country.id,
       employees: {
-        managers: [],
-        order_handlers: [],
-        receptionists: []
+        manager_ids: [],
+        order_handler_ids: [],
+        receptionist_ids: []
       },
       working_hours: {
         monday: { open: "", close: "" },
@@ -170,9 +148,9 @@ export abstract class EstablishmentCollection {
         saturday: { open: "", close: "" },
         sunday: { open: "", close: "" }
       },
-      orders: [],
+      order_ids: [],
       reservation_limit: 0,
-      reservations: []
+      reservation_ids: []
     };
     const establishment: EstablishmentDocument = await EstablishmentCollection.ref
       .add(establishmentData)

@@ -1,3 +1,2 @@
-//Data Type recieved from Firestore
-//Data Type used as output
+//Data Type
 export type AdminData = {};

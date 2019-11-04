@@ -13,7 +13,7 @@ import { ClientDocument } from "../client/schema";
 import { DishDocument } from "../dish/schema";
 
 //Data Import
-import { OrderData, OrderFS_Data } from "./data";
+import { OrderData } from "./data";
 import { DishData } from "../dish/data";
 
 //Document Class
@@ -28,23 +28,7 @@ export class OrderDocument {
   }
   //Read methods
   public read = (): Promise<OrderData> =>
-    this.ref.get().then(async (res: FS_DocumentData) => {
-      const temp: OrderFS_Data = <OrderFS_Data>res.data();
-      const orderData: OrderData = {
-        client_id: temp.client.id,
-        status: temp.status,
-        dishes: temp.dishes.map(dish => ({
-          dish_id: dish.dish.id,
-          quantity: dish.quantity
-        })),
-        comment: temp.comment,
-        total: temp.total,
-        discount: temp.discount,
-        total_to_pay: temp.total_to_pay,
-        time: temp.time.toDate()
-      };
-      return orderData;
-    });
+    this.ref.get().then(async (res: FS_DocumentData) => <OrderData>res.data());
   //Update methods
   public setStatus = async (status: string): Promise<void> =>
     this.ref.update({ status });
@@ -68,28 +52,31 @@ export class OrderDocument {
     const total = orderData.total + dishData.price;
     const total_to_pay = total - orderData.discount;
     if (orderData.status == "pending") {
-      return this.ref.update({
-        dishes: FieldValue.arrayUnion({ dish: dish.ref, quantity }),
-        total,
-        total_to_pay: total_to_pay > 0 ? total_to_pay : 0
-      });
+      return this.ref.set(
+        {
+          dish_ids: { [dish.id]: quantity },
+          total,
+          total_to_pay: total_to_pay > 0 ? total_to_pay : 0
+        },
+        { merge: true }
+      );
     }
   };
-  public removeDish = async (
-    dish: DishDocument,
-    quantity: number
-  ): Promise<void> => {
+  public removeDish = async (dish: DishDocument): Promise<void> => {
     const dishData: DishData = await dish.read();
     if (!dishData.available) return;
     const orderData: OrderData = await this.read();
     const total = orderData.total - dishData.price;
     const total_to_pay = total - orderData.discount;
     if (orderData.status == "pending") {
-      return this.ref.update({
-        dishes: FieldValue.arrayRemove({ dish: dish.ref, quantity }),
-        total,
-        total_to_pay: total_to_pay > 0 ? total_to_pay : 0
-      });
+      return this.ref.set(
+        {
+          dish_ids: { [dish.id]: FieldValue.delete() },
+          total,
+          total_to_pay: total_to_pay > 0 ? total_to_pay : 0
+        },
+        { merge: true }
+      );
     }
   };
   //Delete method
@@ -102,16 +89,16 @@ export abstract class OrderCollection {
   public static readonly ref: FS_Collection = db.collection("orders");
   public static readonly id: string = OrderCollection.ref.id;
   //Create method
-  public create = (client: ClientDocument): Promise<OrderDocument> => {
-    const orderData: OrderFS_Data = {
+  public create = async (client: ClientDocument): Promise<OrderDocument> => {
+    const orderData: OrderData = {
       status: "pending",
-      client: client.ref,
-      dishes: [],
+      client_id: client.id,
+      dish_ids: [],
       comment: "",
       total: 0,
       discount: 0,
       total_to_pay: 0,
-      time: Timestamp.fromMillis(Date.now())
+      timestamp: Timestamp.now()
     };
     return OrderCollection.ref
       .add(orderData)
