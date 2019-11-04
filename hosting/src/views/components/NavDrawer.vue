@@ -5,7 +5,7 @@
       <v-list-item to="/profile">
         <!--Avatar-->
         <v-list-item-avatar>
-          <img src="@/resources/assets/foodex1.png" />
+          <img src="@/resources/assets/logoNegro.png" />
         </v-list-item-avatar>
         <!--Profile Description-->
         <v-list-item-content>
