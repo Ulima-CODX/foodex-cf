@@ -17,7 +17,11 @@
     <v-divider />
     <!--Admin Links-->
     <v-list dense v-if="roles.isAdmin">
-      <v-list-item v-for="(link, id) in adminLinks" :key="id" :to="link.url">
+      <v-list-item
+        v-for="(link, id) in adminLinks"
+        :key="id"
+        :to="{ name: link.name }"
+      >
         <!--Icon-->
         <v-list-item-icon>
           <v-icon>{{ link.icon }}</v-icon>
@@ -31,7 +35,11 @@
     <v-divider v-if="roles.isAdmin" />
     <!--Manager Links-->
     <v-list dense v-if="roles.isManager">
-      <v-list-item v-for="(link, id) in managerLinks" :key="id" :to="link.url">
+      <v-list-item
+        v-for="(link, id) in managerLinks"
+        :key="id"
+        :to="{ name: link.name }"
+      >
         <!--Icon-->
         <v-list-item-icon>
           <v-icon>{{ link.icon }}</v-icon>
@@ -48,7 +56,7 @@
       <v-list-item
         v-for="(link, id) in orderHandlerLinks"
         :key="id"
-        :to="link.url"
+        :to="{ name: link.name }"
       >
         <!--Icon-->
         <v-list-item-icon>
@@ -66,7 +74,7 @@
       <v-list-item
         v-for="(link, id) in receptionistLinks"
         :key="id"
-        :to="link.url"
+        :to="{ name: link.name }"
       >
         <!--Icon-->
         <v-list-item-icon>
@@ -106,35 +114,55 @@ export default {
       adminLinks: [
         {
           label: "Lista de Locales",
-          url: "/admin/establishment_list",
+          name: "admin_establishment_list",
           icon: "mdi-view-list"
         },
         {
           label: "Lista de Empleados",
-          url: "/admin/employee_list",
+          name: "admin_employee_list",
           icon: "mdi-view-list"
         }
       ],
       managerLinks: [
-        { label: "Local", url: "/restaurante", icon: "mdi-information" },
+        {
+          label: "Local",
+          name: "manager_establishment",
+          icon: "mdi-information"
+        },
         {
           label: "Menu",
-          url: "/carta_gestor",
+          name: "manager_menu",
           icon: "mdi-silverware-fork-knife"
         },
-        { label: "Mesas", url: "/mesa_gestor", icon: "mdi-table-chair" }
+        {
+          label: "Mesas",
+          name: "manager_tables",
+          icon: "mdi-table-chair"
+        }
       ],
       orderHandlerLinks: [
         {
           label: "Menu",
-          url: "/carta_encargado",
+          name: "order_handler_menu",
           icon: "mdi-silverware-fork-knife"
         },
-        { label: "Pedidos", url: "/pedidos_encargado", icon: "mdi-view-list" }
+        {
+          label: "Pedidos",
+          name: "order_handler_orders",
+          icon: "mdi-view-list"
+        }
       ],
       receptionistLinks: [
-        { label: "Reservas", url: "", icon: "mdi-view-list" },
-        { label: "Pedidos", url: "/recepcionista", icon: "mdi-view-list" }
+        {
+          label: "Reservas",
+          name: "receptionist_reservations",
+          icon: "mdi-view-list"
+        },
+        {
+          label: "Pedidos",
+          name: "receptionist_orders",
+          icon: "mdi-view-list"
+        }
       ]
     };
   },

@@ -1,12 +1,20 @@
 <template>
-  <v-card min-width="800" class="mx-auto my-4">
+  <v-card class="ma-4">
     <v-toolbar color="#E41E2B" dark>
       <v-toolbar-title>Carta</v-toolbar-title>
 
       <v-spacer></v-spacer>
 
       <v-btn icon>
-        <v-icon>mdi-magnify</v-icon>
+        <v-icon>mdi-plus-box</v-icon>
+      </v-btn>
+
+      <v-btn icon>
+        <v-icon>mdi-border-color</v-icon>
+      </v-btn>
+
+      <v-btn icon>
+        <v-icon>mdi-close-box</v-icon>
       </v-btn>
     </v-toolbar>
 
@@ -25,7 +33,6 @@
                   v-text="item.subtitle"
                 ></v-list-item-subtitle>
               </v-list-item-content>
-              <v-switch input-value="true"></v-switch>
             </template>
           </v-list-item>
 
@@ -37,8 +44,6 @@
 </template>
 
 <script>
-import item from "../views/components/Item";
-
 export default {
   data: () => ({
     selected: [],

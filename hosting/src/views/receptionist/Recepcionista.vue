@@ -1,5 +1,5 @@
 <template>
-  <v-card min-width="800" class="mx-auto my-4">
+  <v-card class="ma-4">
     <v-toolbar color="#E41E2B" dark>
       <v-toolbar-title>Pedidos</v-toolbar-title>
 
@@ -55,6 +55,7 @@
 <script>
 export default {
   data: () => ({
+    selected: [],
     items: [
       {
         action: "15 min",
@@ -79,6 +80,20 @@ export default {
         headline: "Lomo Saltado",
         title: "Eduardo",
         subtitle: "Mesa para 1"
+      }
+    ],
+    tasks: [
+      {
+        title: "Lista de Pedidos",
+        icon: "mdi-view-list"
+      },
+      {
+        title: "Perfil",
+        icon: "mdi-account"
+      },
+      {
+        title: "Logout",
+        icon: "mdi-logout"
       }
     ]
   })

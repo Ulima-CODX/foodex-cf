@@ -1,5 +1,5 @@
 <template>
-  <v-card class="mx-auto my-auto">
+  <v-card class="ma-4">
     <v-card-text v-if="user != null">
       <p>{{ user.first_name }} {{ user.last_name }}</p>
       <p>{{ user.email }}</p>

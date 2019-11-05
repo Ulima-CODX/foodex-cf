@@ -1,7 +1,7 @@
 <template>
-  <v-card min-width="800" class="mx-auto my-4">
+  <v-card class="ma-4">
     <v-toolbar color="#E41E2B" dark>
-      <v-toolbar-title>Carta</v-toolbar-title>
+      <v-toolbar-title>Pedidos</v-toolbar-title>
 
       <v-spacer></v-spacer>
 
@@ -15,10 +15,10 @@
     </v-toolbar>
 
     <v-list two-line>
-      <v-list-item-group>
+      <v-list-item-group v-model="selected" multiple active-class="pink--text">
         <template v-for="(item, index) in items">
           <v-list-item :key="item.title">
-            <template>
+            <template v-slot:default="{ active, toggle }">
               <v-list-item-content>
                 <v-list-item-title v-text="item.title"></v-list-item-title>
                 <v-list-item-subtitle
@@ -29,24 +29,22 @@
                   v-text="item.subtitle"
                 ></v-list-item-subtitle>
               </v-list-item-content>
-              <v-btn small color="blue" v-on:click="item.nroMesas-=1" v-if="item.nroMesas>0">
-                <v-icon>mdi-minus</v-icon>
-              </v-btn>
-              <!--input
-                v-model="defaultSelected"
-                item-value="10"
-                type="number"
-                step="1"
-                min="0"
-                max="10"/-->
-              <v-text-field v-model="item.nroMesas" v-if="item.nroMesas>-1 && item.nroMesas<11" disabled 
-              style="font-weight:bold;">
-              </v-text-field>
-              <v-btn small color="blue" v-on:click="item.nroMesas+=1" v-if="item.nroMesas<10">
-                <v-icon>mdi-plus</v-icon>
-              </v-btn>
+
+              <v-list-item-action>
+                <v-list-item-action-text
+                  v-text="item.action"
+                ></v-list-item-action-text>
+                <v-icon v-if="!active" color="grey lighten-1">
+                  mdi-star_border
+                </v-icon>
+
+                <v-btn icon v-else color="red">
+                  <v-icon>mdi-checkbox-marked-circle</v-icon>
+                </v-btn>
+              </v-list-item-action>
             </template>
           </v-list-item>
+
           <v-divider v-if="index + 1 < items.length" :key="index"></v-divider>
         </template>
       </v-list-item-group>
@@ -55,27 +53,32 @@
 </template>
 
 <script>
-import item from "../views/components/Item";
-
 export default {
   data: () => ({
-    selected: [],
     items: [
       {
-        title: "Mesa para 2",
-        nroMesas:10
+        action: "15 min",
+        headline: "Lasagna",
+        title: "Sergio Calcina",
+        subtitle: "Sin Mesa"
       },
       {
-        title: "Mesa para 4",
-        nroMesas:10
+        action: "2 hr",
+        headline: "Tallarines Rojos",
+        title: "Andre Cabrera",
+        subtitle: "Mesa para 2"
       },
       {
-        title: "Mesa para 6",
-        nroMesas:10
+        action: "6 hr",
+        headline: "Aji de Gallina",
+        title: "Daniel Vasquez",
+        subtitle: "Mesa para 5"
       },
       {
-        title: "Mesa para 8",
-        nroMesas:10
+        action: "12 hr",
+        headline: "Lomo Saltado",
+        title: "Eduardo",
+        subtitle: "Mesa para 1"
       }
     ]
   })

@@ -1,6 +1,6 @@
 import Vue from "vue";
 import VueRouter from "vue-router";
-import Login from "@/views/components/Login.vue";
+import Login from "@/views/user/Login.vue";
 
 Vue.use(VueRouter);
 
@@ -17,37 +17,12 @@ const routes = [
   {
     path: "/register",
     name: "register",
-    component: () => import("@/views/components/Register.vue")
+    component: () => import("@/views/user/Register.vue")
   },
   {
     path: "/profile",
     name: "profile",
-    component: () => import("@/views/Profile.vue")
-  },
-  {
-    path: "/carta_encargado",
-    name: "carta_encargado",
-    component: () => import("@/views/CartaEncargado.vue")
-  },
-  {
-    path: "/recepcionista",
-    name: "recepcionista",
-    component: () => import("@/views/Recepcionista.vue")
-  },
-  {
-    path: "/carta_gestor",
-    name: "carta_gestor",
-    component: () => import("@/views/CartaGestor.vue")
-  },
-  {
-    path: "/pedidos_encargado",
-    name: "pedidos_encargado",
-    component: () => import("@/views/PedidosEncargado.vue")
-  },
-  {
-    path: "/mesa_gestor",
-    name: "mesa_gestor",
-    component: () => import("@/views/MesaGestor.vue")
+    component: () => import("@/views/user/Profile.vue")
   },
   {
     path: "/admin/establishment_list",
@@ -60,14 +35,39 @@ const routes = [
     component: () => import("@/views/admin/EmployeeList.vue")
   },
   {
-    path: "/restaurante",
-    name: "restaurante",
-    component: () => import("@/views/Restaurante.vue")
+    path: "/manager/establishment",
+    name: "manager_establishment",
+    component: () => import("@/views/manager/Restaurante.vue")
   },
   {
-    path: "/reserva",
-    name: "reserva",
-    component: () => import("@/views/Reservas.vue")
+    path: "/manager/menu",
+    name: "manager_menu",
+    component: () => import("@/views/manager/CartaGestor.vue")
+  },
+  {
+    path: "/manager/tables",
+    name: "manager_tables",
+    component: () => import("@/views/manager/MesaGestor.vue")
+  },
+  {
+    path: "/order_handler/menu",
+    name: "order_handler_menu",
+    component: () => import("@/views/order_handler/CartaEncargado.vue")
+  },
+  {
+    path: "/order_handler/orders",
+    name: "order_handler_orders",
+    component: () => import("@/views/order_handler/PedidosEncargado.vue")
+  },
+  {
+    path: "/receptionist/reservations",
+    name: "receptionist_reservations",
+    component: () => import("@/views/receptionist/Reservas.vue")
+  },
+  {
+    path: "/receptionist/orders",
+    name: "receptionist_orders",
+    component: () => import("@/views/receptionist/Recepcionista.vue")
   }
 ];
 
