@@ -104,8 +104,16 @@ export default {
     return {
       logout,
       adminLinks: [
-        { label: "Lista de Locales", url: "", icon: "mdi-view-list" },
-        { label: "Lista de Empleados", url: "", icon: "mdi-view-list" }
+        {
+          label: "Lista de Locales",
+          url: "/admin/establishment_list",
+          icon: "mdi-view-list"
+        },
+        {
+          label: "Lista de Empleados",
+          url: "/admin/employee_list",
+          icon: "mdi-view-list"
+        }
       ],
       managerLinks: [
         { label: "Local", url: "/restaurante", icon: "mdi-information" },

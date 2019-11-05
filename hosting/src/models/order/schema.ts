@@ -93,7 +93,7 @@ export abstract class OrderCollection {
     const orderData: OrderData = {
       status: "pending",
       client_id: client.id,
-      dish_ids: [],
+      dish_ids: {},
       comment: "",
       total: 0,
       discount: 0,

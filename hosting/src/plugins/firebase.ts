@@ -28,5 +28,8 @@ export type FS_Collection = firebase.firestore.CollectionReference;
 export type FS_Document = firebase.firestore.DocumentReference;
 export type FS_DocumentData = firebase.firestore.DocumentSnapshot;
 
+export type FS_Query = firebase.firestore.Query;
+export type FS_QueryData = firebase.firestore.QuerySnapshot;
+
 import "firebase/storage";
 export const storage = Firebase.storage();

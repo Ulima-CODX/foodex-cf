@@ -1,15 +1,18 @@
 <template>
   <v-card width="400" class="mx-auto my-auto">
+    <!--Title-->
     <v-card-title>
       <h1 class="display-1">Login</h1>
     </v-card-title>
     <v-card-text>
       <v-form>
+        <!--Email-->
         <v-text-field
           prepend-icon="mdi-account-circle"
           label="Email"
           v-model="email"
         />
+        <!--Password-->
         <v-text-field
           prepend-icon="mdi-lock"
           label="Password"
@@ -20,10 +23,12 @@
         />
       </v-form>
     </v-card-text>
-    <v-divider></v-divider>
+    <v-divider />
+    <!--Login-->
     <v-card-actions>
       <v-btn color="info" @click="login(email, password)">Login</v-btn>
     </v-card-actions>
+    <!--Loading Animation-->
     <v-overlay v-if="authStatus == 'login_start'">
       <v-progress-circular indeterminate size="64"></v-progress-circular>
     </v-overlay>

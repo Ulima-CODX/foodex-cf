@@ -7,7 +7,9 @@
       <!--Navigation Drawer-->
       <nav-drawer v-if="user_id" :width="user_id ? '300px' : ''" />
       <!--Page Content-->
-      <router-view width="auto" />
+      <v-layout child-flex>
+        <router-view width="auto" />
+      </v-layout>
     </v-row>
   </v-app>
 </template>

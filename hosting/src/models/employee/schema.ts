@@ -3,15 +3,18 @@ import {
   db,
   FS_Collection,
   FS_Document,
-  FS_DocumentData
+  FS_DocumentData,
+  FS_Query
 } from "@/plugins/firebase";
 
 //Schema Imports
 import { EstablishmentDocument } from "../establishment/schema";
 
 //Data Imports
-import { EmployeeData, EmployeeRoles } from "./data";
+import { EmployeeData, EmployeeRoles, EmployeeProfile } from "./data";
 import { EstablishmentData } from "../establishment/data";
+import { UserData } from "../user/data";
+import { UserDocument } from "../user/schema";
 
 //Document Class
 export class EmployeeDocument {
@@ -71,5 +74,34 @@ export abstract class EmployeeCollection {
     const employee: EmployeeDocument = new EmployeeDocument(id);
     const employeeData: EmployeeData = { establishment_id: undefined };
     return employee.ref.set(employeeData).then(() => employee);
+  };
+  //Read method
+  public static read = async (
+    establishment_name: string
+  ): Promise<{ id: string; data: EmployeeProfile }[]> => {
+    let ref: FS_Collection = EmployeeCollection.ref;
+    return ref.get().then(group => {
+      let employeeList: { id: string; data: EmployeeProfile }[] = [];
+      group.forEach(async res => {
+        const employeeData: EmployeeData = <EmployeeData>res.data();
+        let establishment_name = "";
+        if (employeeData.establishment_id) {
+          const establishmentData: EstablishmentData = await new EstablishmentDocument(
+            employeeData.establishment_id
+          ).read();
+          establishment_name = establishmentData.name;
+        }
+        const userData: UserData = await new UserDocument(res.id).read();
+        employeeList.push({
+          id: res.id,
+          data: {
+            establishment_name,
+            first_name: userData.first_name,
+            last_name: userData.last_name
+          }
+        });
+      });
+      return employeeList;
+    });
   };
 }

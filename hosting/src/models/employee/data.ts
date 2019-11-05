@@ -7,3 +7,8 @@ export type EmployeeRoles = {
   isOrderHandler: boolean;
   isReceptionist: boolean;
 };
+export type EmployeeProfile = {
+  establishment_name?: string;
+  first_name: string;
+  last_name: string;
+};

@@ -42,27 +42,32 @@ const routes = [
   {
     path: "/pedidos_encargado",
     name: "pedidos_encargado",
-    component: () => import("../views/PedidosEncargado.vue")
+    component: () => import("@/views/PedidosEncargado.vue")
   },
   {
     path: "/mesa_gestor",
     name: "mesa_gestor",
-    component: () => import("../views/MesaGestor.vue")
+    component: () => import("@/views/MesaGestor.vue")
   },
   {
-    path: "/admin",
-    name: "admin",
-    component: () => import("../views/Administrador.vue")
+    path: "/admin/establishment_list",
+    name: "admin_establishment_list",
+    component: () => import("@/views/admin/EstablishmentList.vue")
+  },
+  {
+    path: "/admin/employee_list",
+    name: "admin_employee_list",
+    component: () => import("@/views/admin/EmployeeList.vue")
   },
   {
     path: "/restaurante",
     name: "restaurante",
-    component: () => import("../views/Restaurante.vue")
+    component: () => import("@/views/Restaurante.vue")
   },
   {
     path: "/reserva",
     name: "reserva",
-    component: () => import("../views/Reservas.vue")
+    component: () => import("@/views/Reservas.vue")
   }
 ];
 

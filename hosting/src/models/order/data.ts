@@ -5,7 +5,7 @@ import { Timestamp } from "@/plugins/firebase";
 export type OrderData = {
   status: string;
   client_id: string;
-  dish_ids: {};
+  dish_ids: Record<string, number>;
   comment: string;
   total: number;
   discount: number;

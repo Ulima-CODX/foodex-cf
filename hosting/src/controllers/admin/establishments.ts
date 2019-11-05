@@ -1,11 +1,8 @@
-//Plugin Imports
-import Store from "@/plugins/vuex";
-
 //Schema Imports
-import {
-  EstablishmentCollection,
-  EstablishmentDocument
-} from "@/models/establishment/schema";
+import { EstablishmentCollection } from "@/models/establishment/schema";
 
-//Data Imports
-import { EstablishmentData } from "@/models/establishment/data";
+//create: create establishment in firestore
+export const create = EstablishmentCollection.create;
+
+//read: read establishment data from collection
+export const read = EstablishmentCollection.read;

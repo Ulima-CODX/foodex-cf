@@ -4,7 +4,8 @@ import {
   FS_Collection,
   FS_Document,
   FS_DocumentData,
-  FieldValue
+  FieldValue,
+  FS_Query
 } from "@/plugins/firebase";
 
 //Schema Imports
@@ -157,5 +158,22 @@ export abstract class EstablishmentCollection {
       .then(res => new EstablishmentDocument(res.id));
     const menu: MenuDocument = await MenuCollection.create(establishment);
     return establishment.setMenu(menu).then(() => establishment);
+  };
+  //Read method
+  public static read = async (
+    name?: string
+  ): Promise<{ id: string; data: EstablishmentData }[]> => {
+    let ref: FS_Collection | FS_Query = EstablishmentCollection.ref;
+    if (name && name != "") ref = ref.where("name", "==", name);
+    return ref.get().then(group => {
+      let establishmentList: { id: string; data: EstablishmentData }[] = [];
+      group.forEach(res => {
+        establishmentList.push({
+          id: res.id,
+          data: <EstablishmentData>res.data()
+        });
+      });
+      return establishmentList;
+    });
   };
 }

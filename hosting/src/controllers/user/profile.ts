@@ -19,7 +19,7 @@ export type ProfileData = null | {
     code: number;
     iso: string;
     name: string;
-    flag_url: string;
+    flag_url?: string;
   };
 };
 
