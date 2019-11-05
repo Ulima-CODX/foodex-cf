@@ -7,9 +7,10 @@
       <!--Navigation Drawer-->
       <nav-drawer v-if="user_id" :width="user_id ? '300px' : ''" />
       <!--Page Content-->
-      <v-layout child-flex>
+      <v-layout child-flex v-if="user_id">
         <router-view width="auto" />
       </v-layout>
+      <router-view width="auto" v-else />
     </v-row>
   </v-app>
 </template>
@@ -20,8 +21,8 @@ import Vue from "vue";
 import { mapGetters } from "vuex";
 
 //Component Imports
-import NavBar from "@/views/components/NavBar.vue";
-import NavDrawer from "@/views/components/NavDrawer.vue";
+import NavBar from "@/views/user/NavBar.vue";
+import NavDrawer from "@/views/user/NavDrawer.vue";
 
 export default Vue.extend({
   name: "App",

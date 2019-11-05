@@ -1,5 +1,5 @@
 <template>
-  <v-card min-width="800" class="mx-auto my-4">
+  <v-card class="ma-4">
     <v-toolbar color="#E41E2B" dark>
       <v-toolbar-title>Carta</v-toolbar-title>
 
@@ -44,8 +44,6 @@
 </template>
 
 <script>
-import item from "../views/components/Item";
-
 export default {
   data: () => ({
     selected: [],

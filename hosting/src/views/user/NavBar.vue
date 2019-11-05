@@ -1,7 +1,7 @@
 <template>
   <nav>
     <!--App Toolbar-->
-    <v-app-bar color="#E41E2B" flat dense dark  >
+    <v-app-bar color="#E41E2B" flat dense dark>
       <!--Logo-->
       <v-img
         class="mx-2"

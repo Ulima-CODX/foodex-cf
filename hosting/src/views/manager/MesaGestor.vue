@@ -8,6 +8,10 @@
       <v-btn icon>
         <v-icon>mdi-magnify</v-icon>
       </v-btn>
+
+      <v-btn icon>
+        <v-icon>mdi-checkbox-marked-circle</v-icon>
+      </v-btn>
     </v-toolbar>
 
     <v-list two-line>
@@ -25,10 +29,37 @@
                   v-text="item.subtitle"
                 ></v-list-item-subtitle>
               </v-list-item-content>
-              <v-switch input-value="true"></v-switch>
+              <v-btn
+                small
+                color="blue"
+                v-on:click="item.nroMesas -= 1"
+                v-if="item.nroMesas > 0"
+              >
+                <v-icon>mdi-minus</v-icon>
+              </v-btn>
+              <!--input
+                v-model="defaultSelected"
+                item-value="10"
+                type="number"
+                step="1"
+                min="0"
+                max="10"/-->
+              <v-text-field
+                v-model="item.nroMesas"
+                v-if="item.nroMesas > -1 && item.nroMesas < 11"
+                disabled
+              >
+              </v-text-field>
+              <v-btn
+                small
+                color="blue"
+                v-on:click="item.nroMesas += 1"
+                v-if="item.nroMesas < 10"
+              >
+                <v-icon>mdi-plus</v-icon>
+              </v-btn>
             </template>
           </v-list-item>
-
           <v-divider v-if="index + 1 < items.length" :key="index"></v-divider>
         </template>
       </v-list-item-group>
@@ -37,23 +68,25 @@
 </template>
 
 <script>
-import item from "../views/components/Item";
-
 export default {
   data: () => ({
     selected: [],
     items: [
       {
-        title: "Lasagna"
+        title: "Mesa para 2",
+        nroMesas: 10
       },
       {
-        title: "Tallarines Rojos"
+        title: "Mesa para 4",
+        nroMesas: 10
       },
       {
-        title: "Aji de Gallina"
+        title: "Mesa para 6",
+        nroMesas: 10
       },
       {
-        title: "Lomo Saltado"
+        title: "Mesa para 8",
+        nroMesas: 10
       }
     ]
   })

@@ -38,6 +38,7 @@
       </v-list-item-group>
     </v-list>
     <!--Loading Animation-->
+    <v-skeleton-loader v-else type="list-item" class="mx-auto" />
   </v-card>
 </template>
 
