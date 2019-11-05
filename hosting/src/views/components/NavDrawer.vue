@@ -5,7 +5,7 @@
       <v-list-item to="/profile">
         <!--Avatar-->
         <v-list-item-avatar>
-          <img src="@/resources/assets/foodex1.png" />
+          <img src="@/resources/assets/logoNegro.png" />
         </v-list-item-avatar>
         <!--Profile Description-->
         <v-list-item-content>
@@ -127,7 +127,7 @@ export default {
       orderHandlerLinks: [
         {
           label: "Menu",
-          url: "/carta_gestor",
+          url: "/carta_encargado",
           icon: "mdi-silverware-fork-knife"
         },
         { label: "Pedidos", url: "/pedidos_encargado", icon: "mdi-view-list" }
