@@ -39,7 +39,8 @@
                 step="1"
                 min="0"
                 max="10"/-->
-              <v-text-field v-model="item.nroMesas" v-if="item.nroMesas>-1 && item.nroMesas<11" disabled>
+              <v-text-field v-model="item.nroMesas" v-if="item.nroMesas>-1 && item.nroMesas<11" disabled 
+              style="font-weight:bold;">
               </v-text-field>
               <v-btn small color="blue" v-on:click="item.nroMesas+=1" v-if="item.nroMesas<10">
                 <v-icon>mdi-plus</v-icon>
