@@ -3,8 +3,7 @@ import {
   db,
   FS_Collection,
   FS_Document,
-  FS_DocumentData,
-  FS_Query
+  FS_DocumentData
 } from "@/plugins/firebase";
 
 //Schema Imports
@@ -72,7 +71,7 @@ export abstract class EmployeeCollection {
   //Create method
   public static create = async (id: string): Promise<EmployeeDocument> => {
     const employee: EmployeeDocument = new EmployeeDocument(id);
-    const employeeData: EmployeeData = { establishment_id: undefined };
+    const employeeData: EmployeeData = { establishment_id: "" };
     return employee.ref.set(employeeData).then(() => employee);
   };
   //Read method

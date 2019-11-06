@@ -24,7 +24,7 @@ export function register(data: {
   confirm_password: string;
   first_name: string;
   last_name: string;
-  phone: number;
+  phone: string;
   country_id: string;
 }): void {
   if (data.password != data.confirm_password) {
@@ -42,7 +42,7 @@ export function register(data: {
           data.first_name,
           data.last_name,
           data.email,
-          data.phone,
+          parseInt(data.phone),
           country
         );
         EmployeeCollection.create(user_id);
