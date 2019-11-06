@@ -1,5 +1,5 @@
 <template>
-  <v-card class="ma-4">
+  <v-card class="ma-4 flex">
     <v-toolbar color="#E41E2B" dark>
       <v-toolbar-title>Reservas</v-toolbar-title>
 

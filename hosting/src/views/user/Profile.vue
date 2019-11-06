@@ -1,5 +1,5 @@
 <template>
-  <v-card class="ma-4">
+  <v-card class="ma-4 flex">
     <v-card-text v-if="user != null">
       <p>{{ user.first_name }} {{ user.last_name }}</p>
       <p>{{ user.email }}</p>
@@ -18,12 +18,7 @@ export default {
       user: null
     };
   },
-  computed: {
-    userComputed() {
-      return this.user;
-    }
-  },
-  async created() {
+  async mounted() {
     this.user = await getData();
   }
 };

@@ -57,4 +57,19 @@ export abstract class CountryCollection {
       .add(countrydata)
       .then(res => new CountryDocument(res.id));
   };
+  //Read method
+  public static read = async (): Promise<
+    { id: string; data: CountryData }[]
+  > => {
+    return CountryCollection.ref.get().then(group => {
+      let countryList: { id: string; data: CountryData }[] = [];
+      group.forEach(res => {
+        countryList.push({
+          id: res.id,
+          data: <CountryData>res.data()
+        });
+      });
+      return countryList;
+    });
+  };
 }

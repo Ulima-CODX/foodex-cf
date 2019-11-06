@@ -1,5 +1,5 @@
 <template>
-  <v-card min-width="800" class="mx-auto my-4">
+  <v-card class="ma-4 flex">
     <v-toolbar color="#E41E2B" dark>
       <v-toolbar-title>Carta</v-toolbar-title>
 
@@ -46,9 +46,10 @@
                 max="10"/-->
               <v-text-field
                 v-model="item.nroMesas"
-                v-if="item.nroMesas>-1 && item.nroMesas<11"
-                disabled 
-                style="font-weight:bold;" />
+                v-if="item.nroMesas > -1 && item.nroMesas < 11"
+                disabled
+                style="font-weight:bold;"
+              />
               <v-btn
                 small
                 color="blue"

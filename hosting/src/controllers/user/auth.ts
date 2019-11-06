@@ -2,7 +2,7 @@
 import { auth, FS_User } from "@/plugins/firebase";
 import Store from "@/plugins/vuex";
 
-//Controller Imports
+//Controller Import
 import { safePush } from "./navigation";
 
 //Schema Imports

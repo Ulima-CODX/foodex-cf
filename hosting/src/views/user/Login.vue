@@ -27,7 +27,7 @@
     <v-divider />
     <!--Login Button-->
     <v-card-actions>
-      <v-btn color="info" @click="login(email, password)">Login</v-btn>
+      <v-btn color="info" @click="login()">Login</v-btn>
     </v-card-actions>
     <!--Loading Animation-->
     <v-overlay v-if="authStatus == 'login_start'">
@@ -53,16 +53,8 @@ export default {
     ...mapGetters({ authStatus: "getAuthStatus" })
   },
   methods: {
-    login(email, password) {
-      UC_Login(email, password);
-    }
-  },
-  watch: {
-    overlay(val) {
-      val &&
-        setTimeout(() => {
-          this.overlay = false;
-        }, 3000);
+    login() {
+      UC_Login(this.email, this.password);
     }
   }
 };

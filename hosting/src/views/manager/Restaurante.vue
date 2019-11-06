@@ -1,5 +1,5 @@
 <template>
-  <v-card class="ma-4">
+  <v-card class="ma-4 flex">
     <v-card-title class="red darken-1">
       <span class="headline white--text">Embarcadero 41 (Miraflores)</span>
     </v-card-title>
