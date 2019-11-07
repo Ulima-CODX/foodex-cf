@@ -25,12 +25,17 @@ const routes = [
     component: () => import("@/views/user/Profile.vue")
   },
   {
-    path: "/admin/establishment_list",
+    path: "/admin/establishments",
     name: "admin_establishment_list",
     component: () => import("@/views/admin/EstablishmentList.vue")
   },
   {
-    path: "/admin/employee_list",
+    path: "/admin/establishment/:id",
+    name: "admin_establishment_detail",
+    component: () => import("@/views/admin/EstablishmentDetail.vue")
+  },
+  {
+    path: "/admin/employees",
     name: "admin_employee_list",
     component: () => import("@/views/admin/EmployeeList.vue")
   },

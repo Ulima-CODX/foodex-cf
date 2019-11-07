@@ -1,8 +1,9 @@
-//Schema Imports
-import { EstablishmentCollection } from "@/models/establishment/schema";
+//Controller Import
+import { safePush } from "@/controllers/user/navigation";
 
-//create: create establishment in firestore
-export const create = EstablishmentCollection.create;
-
-//read: read establishment data from collection
-export const read = EstablishmentCollection.read;
+//goToDetails
+export const goToDetails = (establishment_id: string) => {
+  safePush("admin_establishment_detail", {
+    id: establishment_id
+  });
+};

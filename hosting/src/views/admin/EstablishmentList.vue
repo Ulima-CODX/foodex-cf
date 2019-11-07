@@ -10,7 +10,7 @@
         single-line
         hide-details
         placeholder="Nombre de Local"
-        v-model="searchedEstablishmentName"
+        v-model="searchedName"
       >
         <v-icon slot="append" @click="search()">mdi-magnify</v-icon>
       </v-text-field>
@@ -25,7 +25,7 @@
         v-for="(establishment, n) in establishments"
         :key="establishment.id"
       >
-        <v-list-item>
+        <v-list-item @click="goToDetails(establishment.id)">
           <!--Establishment Name-->
           <v-list-item-title>{{ establishment.data.name }}</v-list-item-title>
           <!--Establishment Description-->
@@ -43,23 +43,29 @@
 </template>
 
 <script>
-import { create, read } from "@/controllers/admin/establishments";
+//Controller Import
+import { goToDetails } from "@/controllers/admin/establishments";
+
+//Schema Import
+import { EstablishmentCollection } from "@/models/establishment/schema";
 
 export default {
   data() {
     return {
-      searchedEstablishmentName: "",
+      goToDetails,
+      searchedName: "",
       establishments: {}
     };
   },
   methods: {
-    create,
     async search() {
-      this.establishments = await read(this.searchedEstablishmentName);
+      this.establishments = await EstablishmentCollection.read(
+        this.searchedName
+      );
     }
   },
   async created() {
-    this.establishments = await read();
+    this.establishments = await EstablishmentCollection.read();
   }
 };
 </script>

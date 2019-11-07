@@ -8,8 +8,10 @@
           <img src="@/resources/assets/logoNegro.png" />
         </v-list-item-avatar>
         <!--Profile Description-->
-        <v-list-item-content>
-          <v-list-item-title>Name</v-list-item-title>
+        <v-list-item-content v-if="user">
+          <v-list-item-title
+            >{{ user.first_name }} {{ user.last_name }}</v-list-item-title
+          >
           <v-list-item-subtitle>Logged In</v-list-item-subtitle>
         </v-list-item-content>
       </v-list-item>
@@ -106,10 +108,12 @@
 import { mapGetters } from "vuex";
 
 import { logout } from "@/controllers/user/auth";
+import { getData } from "@/controllers/user/profile";
 
 export default {
   data() {
     return {
+      user: null,
       logout,
       adminLinks: [
         {
@@ -167,7 +171,12 @@ export default {
     };
   },
   computed: {
-    ...mapGetters({ roles: "getUserRoles" })
+    ...mapGetters({
+      roles: "getUserRoles"
+    })
+  },
+  async mounted() {
+    this.user = await getData();
   }
 };
 </script>

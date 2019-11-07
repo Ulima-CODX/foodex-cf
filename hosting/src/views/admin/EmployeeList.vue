@@ -37,7 +37,8 @@
 </template>
 
 <script>
-import { read } from "@/controllers/admin/employee";
+//Schema Import
+import { EmployeeCollection } from "@/models/employee/schema";
 
 export default {
   data() {
@@ -46,7 +47,7 @@ export default {
     };
   },
   async created() {
-    this.employees = await read();
+    this.employees = await EmployeeCollection.read();
   }
 };
 </script>
