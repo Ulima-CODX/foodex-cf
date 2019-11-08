@@ -1,23 +1,42 @@
 <template>
   <v-list-item v-if="value != ''">
-    <v-text-field v-model="value" v-if="editing" />
-    <template v-else>{{ value }}</template>
-    <v-spacer />
-    <v-icon v-if="editing" @click="action(value)">mdi-checkbox-marked</v-icon>
-    <v-icon @click="editing != editing">{{
-      editing ? "mdi-close-box" : "mdi-pencil"
-    }}</v-icon>
+    <v-text-field
+      single-line
+      dense
+      :value="(editing)? newValue: value"
+      :readonly="!editing"
+    >
+      <template slot="append" v-if="editing">
+        <v-icon @click="save()">mdi-checkbox-marked</v-icon>
+        <v-icon @click="discard()">mdi-close-box</v-icon>
+      </template>
+      <v-icon v-else @click="edit()">mdi-pencil</v-icon>
+    </v-text-field>
   </v-list-item>
 </template>
 
 <script>
 export default {
   name: "editable-field",
-  props: ['value', 'action'],
+  props: ["value", "action"],
   data() {
     return {
+      newValue: this.value,
       editing: false
     };
+  },
+  methods: {
+    edit() {
+      this.newValue = this.value;
+      this.editing = true;
+    },
+    discard() {
+      this.newValue = this.value;
+      this.editing = false;
+    },
+    save() {
+      this.action(this.value);
+    }
   }
 };
 </script>

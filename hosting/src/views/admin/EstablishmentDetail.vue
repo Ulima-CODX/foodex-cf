@@ -5,13 +5,11 @@
       <v-toolbar-title>{{ data.name }}</v-toolbar-title>
     </v-toolbar>
     <!--Establishment Details-->
-    <v-card-text>
-      <v-list three-line dense v-if="data">
-        <editable-field :value="data.name" :action="show" />
-        <editable-field :value="data.address" :action="show" />
-        <editable-field :value="data.phone" :action="show" />
-      </v-list>
-    </v-card-text>
+    <v-list v-if="data">
+      <editable-field :value="data.name" :action="show" />
+      <editable-field :value="data.address" :action="show" />
+      <editable-field :value="data.phone" :action="show" />
+    </v-list>
   </v-card>
 </template>
 
