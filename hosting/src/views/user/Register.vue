@@ -57,23 +57,25 @@
         </v-row>
       </v-form>
     </v-card-text>
-    <v-divider></v-divider>
+    <v-divider />
     <!--Register Button-->
     <v-card-actions>
-      <v-btn color="info" @click="register()">Register</v-btn>
+      <v-btn color="info" @click="register(form)">Register</v-btn>
     </v-card-actions>
   </v-card>
 </template>
 
 <script>
-import {
-  getCountries,
-  register as UC_register
-} from "@/controllers/user/register";
+//Controller Import
+import { register as UC_register } from "@/controllers/user/register";
+
+//Schema Import
+import { CountryCollection } from "@/models/country/schema";
 
 export default {
   data() {
     return {
+      register,
       form: {
         email: "",
         password: "",
@@ -88,13 +90,8 @@ export default {
       countries: []
     };
   },
-  methods: {
-    register() {
-      UC_register(this.form);
-    }
-  },
   async mounted() {
-    this.countries = await getCountries();
+    this.countries = await CountryCollection.read();
   }
 };
 </script>

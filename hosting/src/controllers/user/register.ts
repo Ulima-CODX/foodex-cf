@@ -1,5 +1,5 @@
 //Plugin Imports
-import { auth, FS_User } from "@/plugins/firebase";
+import { auth } from "@/plugins/firebase";
 import Store from "@/plugins/vuex";
 
 //Schema Import

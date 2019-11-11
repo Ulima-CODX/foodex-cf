@@ -3,7 +3,10 @@ import { safePush } from "@/controllers/user/navigation";
 
 //Schema Imports
 import { CountryDocument } from "@/models/country/schema";
-import { EstablishmentDocument } from "@/models/establishment/schema";
+import {
+  EstablishmentDocument,
+  EstablishmentCollection
+} from "@/models/establishment/schema";
 import { UserDocument } from "@/models/user/schema";
 
 //Data Imports
@@ -126,4 +129,22 @@ export async function getData(
     },
     working_hours: Object.values(working_hours)
   };
+}
+
+//Create: creates a establishment
+export function create(data: {
+  name: string;
+  description: string;
+  phone: string;
+  address: string;
+  country_id: string;
+}): void {
+  const country: CountryDocument = new CountryDocument(data.country_id);
+  EstablishmentCollection.create(
+    data.name,
+    data.description,
+    parseInt(data.phone),
+    data.address,
+    country
+  );
 }

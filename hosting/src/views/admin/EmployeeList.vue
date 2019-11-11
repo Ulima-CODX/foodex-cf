@@ -38,6 +38,7 @@
 import { EmployeeCollection } from "@/models/employee/schema";
 
 export default {
+  name: "employee-list",
   data() {
     return {
       employees: {}

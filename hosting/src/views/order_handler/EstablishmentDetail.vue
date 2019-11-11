@@ -50,27 +50,18 @@
         <v-card-text class="pa-0">
           <v-list dense>
             <v-list-item
-              >Managers:<v-spacer />
-              <v-btn text icon @click="showDialog('manager')">
-                <v-icon>mdi-pencil</v-icon>
-              </v-btn>
+              >Managers:
             </v-list-item>
             <v-list-item>
               <v-list dense class="pa-0">
                 <v-list-item v-for="m in data.employees.managers" :key="m.id">
-                  {{ m.first_name }} {{ m.last_name }}<v-spacer />
-                  <v-btn text icon @click="deleteEmployee('manager', m.id)">
-                    <v-icon>mdi-close</v-icon>
-                  </v-btn>
+                  {{ m.first_name }} {{ m.last_name }}
                 </v-list-item>
               </v-list>
             </v-list-item>
             <v-divider />
             <v-list-item
-              >Order Handlers:<v-spacer />
-              <v-btn text icon @click="showDialog('order_handler')">
-                <v-icon>mdi-pencil</v-icon>
-              </v-btn></v-list-item
+              >Order Handlers:</v-list-item
             >
             <v-list-item>
               <v-list dense class="pa-0">
@@ -78,23 +69,13 @@
                   v-for="o in data.employees.order_handlers"
                   :key="o.id"
                 >
-                  {{ o.first_name }} {{ o.last_name }}<v-spacer />
-                  <v-btn
-                    text
-                    icon
-                    @click="deleteEmployee('order_handler', o.id)"
-                  >
-                    <v-icon>mdi-close</v-icon>
-                  </v-btn>
+                  {{ o.first_name }} {{ o.last_name }}
                 </v-list-item>
               </v-list>
             </v-list-item>
             <v-divider />
             <v-list-item
-              >Receptionists:<v-spacer />
-              <v-btn text icon @click="showDialog('receptionist')">
-                <v-icon>mdi-pencil</v-icon>
-              </v-btn></v-list-item
+              >Receptionists:</v-list-item
             >
             <v-list-item>
               <v-list dense class="pa-0">
@@ -102,14 +83,7 @@
                   v-for="r in data.employees.receptionists"
                   :key="r.id"
                 >
-                  {{ r.first_name }} {{ r.last_name }}<v-spacer />
-                  <v-btn
-                    text
-                    icon
-                    @click="deleteEmployee('receptionist', r.id)"
-                  >
-                    <v-icon>mdi-close</v-icon>
-                  </v-btn>
+                  {{ r.first_name }} {{ r.last_name }}
                 </v-list-item>
               </v-list>
             </v-list-item>
@@ -119,7 +93,6 @@
     </v-tabs-items>
     <!--Dialog-->
     <v-dialog v-model="dialog">
-      <employee-selector :role="role" :action="addEmployees" />
     </v-dialog>
   </v-card>
 </template>
@@ -128,28 +101,14 @@
 //Controller Import
 import { getData } from "@/controllers/admin/establishments";
 
-//View Import
-import EmployeeSelector from "@/views/admin/EmployeeSelector";
-
 //Schema Imports
 import { EstablishmentDocument } from "@/models/establishment/schema";
 
 export default {
   name: "establishment-detail",
-  components: {
-    EmployeeSelector
-  },
   methods: {
     showDialog(role) {
       this.dialog = true;
-      this.role = role;
-    },
-    addEmployees(employees) {
-      this.dialog = false;
-      console.log(this.role, employees);
-    },
-    deleteEmployee(role, employee) {
-      console.log(role, employee);
     }
   },
   data() {

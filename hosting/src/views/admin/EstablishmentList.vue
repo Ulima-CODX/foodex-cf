@@ -15,7 +15,7 @@
         <v-icon slot="append" @click="search()">mdi-magnify</v-icon>
       </v-text-field>
       <!--Create-->
-      <v-btn icon>
+      <v-btn icon @click="dialog = true">
         <v-icon>mdi-plus-box</v-icon>
       </v-btn>
     </v-toolbar>
@@ -37,8 +37,10 @@
         <v-divider v-if="n + 1 < establishments.length" />
       </v-list-item-group>
     </v-list>
-    <!--Loading Animation-->
-    <v-skeleton-loader v-else type="list-item" class="mx-auto" />
+    <!--Dialog-->
+    <v-dialog v-model="dialog">
+      <establishment-new />
+    </v-dialog>
   </v-card>
 </template>
 
@@ -46,14 +48,22 @@
 //Controller Import
 import { goToDetails } from "@/controllers/admin/establishments";
 
+//View Import
+import EstablishmentNew from "@/views/admin/EstablishmentNew";
+
 //Schema Import
 import { EstablishmentCollection } from "@/models/establishment/schema";
 
 export default {
+  name: "establishment-list",
+  components: {
+    EstablishmentNew
+  },
   data() {
     return {
       goToDetails,
       searchedName: "",
+      dialog: false,
       establishments: {}
     };
   },
@@ -69,5 +79,3 @@ export default {
   }
 };
 </script>
-
-<style></style>
