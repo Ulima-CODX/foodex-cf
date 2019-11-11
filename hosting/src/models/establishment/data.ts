@@ -24,3 +24,8 @@ export type EstablishmentData = {
   reservation_limit: number;
   reservation_ids: string[];
 };
+
+export type EstablishmentEmployee = {
+  first_name: string;
+  last_name: string;
+};

@@ -9,8 +9,8 @@ import { UserDocument } from "@/models/user/schema";
 import { UserData } from "@/models/user/data";
 import { CountryData } from "@/models/country/data";
 
-//Profile Data
-export type ProfileData = null | {
+//User Profile Data
+export type UserProfile = null | {
   first_name: string;
   last_name: string;
   email: string;
@@ -24,7 +24,7 @@ export type ProfileData = null | {
 };
 
 //getData: Outputs the profile data for the currently logged-in user.
-export async function getData(): Promise<ProfileData> {
+export async function getData(): Promise<UserProfile> {
   const user_id: string = Store.state.user.id;
   if (user_id == "") return null;
   const userData: UserData = await new UserDocument(user_id).read();

@@ -76,7 +76,7 @@ export abstract class EmployeeCollection {
   };
   //Read method
   public static read = async (
-    establishment_name: string
+    establishment_name?: string
   ): Promise<{ id: string; data: EmployeeProfile }[]> => {
     let ref: FS_Collection = EmployeeCollection.ref;
     return ref.get().then(group => {

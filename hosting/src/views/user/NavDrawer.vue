@@ -1,7 +1,7 @@
 <template>
   <v-navigation-drawer permanent height="auto">
     <!--Profile Header-->
-    <v-list flat>
+    <v-list flat class="pa-0">
       <v-list-item to="/profile">
         <!--Avatar-->
         <v-list-item-avatar>
@@ -10,7 +10,8 @@
         <!--Profile Description-->
         <v-list-item-content v-if="user">
           <v-list-item-title
-            >{{ user.first_name }} {{ user.last_name }}</v-list-item-title
+            >{{ user.first_name }} <br />
+            {{ user.last_name }}</v-list-item-title
           >
           <v-list-item-subtitle>Logged In</v-list-item-subtitle>
         </v-list-item-content>
@@ -18,89 +19,15 @@
     </v-list>
     <v-divider />
     <!--Admin Links-->
-    <v-list dense v-if="roles.isAdmin">
-      <v-list-item
-        v-for="(link, id) in adminLinks"
-        :key="id"
-        :to="{ name: link.name }"
-      >
-        <!--Icon-->
-        <v-list-item-icon>
-          <v-icon>{{ link.icon }}</v-icon>
-        </v-list-item-icon>
-        <!--Label-->
-        <v-list-item-content>
-          <v-list-item-title>{{ link.label }}</v-list-item-title>
-        </v-list-item-content>
-      </v-list-item>
-    </v-list>
-    <v-divider v-if="roles.isAdmin" />
+    <nav-link-list :show="roles.isAdmin" :links="adminLinks" />
     <!--Manager Links-->
-    <v-list dense v-if="roles.isManager">
-      <v-list-item
-        v-for="(link, id) in managerLinks"
-        :key="id"
-        :to="{ name: link.name }"
-      >
-        <!--Icon-->
-        <v-list-item-icon>
-          <v-icon>{{ link.icon }}</v-icon>
-        </v-list-item-icon>
-        <!--Label-->
-        <v-list-item-content>
-          <v-list-item-title>{{ link.label }}</v-list-item-title>
-        </v-list-item-content>
-      </v-list-item>
-    </v-list>
-    <v-divider v-if="roles.isManager" />
+    <nav-link-list :show="roles.isManager" :links="managerLinks" />
     <!--Order Handler Links-->
-    <v-list dense v-if="roles.isOrderHandler">
-      <v-list-item
-        v-for="(link, id) in orderHandlerLinks"
-        :key="id"
-        :to="{ name: link.name }"
-      >
-        <!--Icon-->
-        <v-list-item-icon>
-          <v-icon>{{ link.icon }}</v-icon>
-        </v-list-item-icon>
-        <!--Label-->
-        <v-list-item-content>
-          <v-list-item-title>{{ link.label }}</v-list-item-title>
-        </v-list-item-content>
-      </v-list-item>
-    </v-list>
-    <v-divider v-if="roles.isOrderHandler" />
+    <nav-link-list :show="roles.isOrderHandler" :links="orderHandlerLinks" />
     <!--Receptionist Links-->
-    <v-list dense v-if="roles.isReceptionist">
-      <v-list-item
-        v-for="(link, id) in receptionistLinks"
-        :key="id"
-        :to="{ name: link.name }"
-      >
-        <!--Icon-->
-        <v-list-item-icon>
-          <v-icon>{{ link.icon }}</v-icon>
-        </v-list-item-icon>
-        <!--Label-->
-        <v-list-item-content>
-          <v-list-item-title>{{ link.label }}</v-list-item-title>
-        </v-list-item-content>
-      </v-list-item>
-    </v-list>
-    <v-divider v-if="roles.isReceptionist" />
-    <v-list dense>
-      <v-list-item @click="logout">
-        <!--Icon-->
-        <v-list-item-icon>
-          <v-icon>mdi-logout</v-icon>
-        </v-list-item-icon>
-        <!--Label-->
-        <v-list-item-content>
-          <v-list-item-title>Logout</v-list-item-title>
-        </v-list-item-content>
-      </v-list-item>
-    </v-list>
+    <nav-link-list :show="roles.isReceptionist" :links="receptionistLinks" />
+    <!--Logout Links-->
+    <nav-link-list :links="logoutLinks" :divider="false" />
   </v-navigation-drawer>
 </template>
 
@@ -110,11 +37,15 @@ import { mapGetters } from "vuex";
 import { logout } from "@/controllers/user/auth";
 import { getData } from "@/controllers/user/profile";
 
+import NavLinkList from "@/views/components/NavLinkList";
+
 export default {
+  components: {
+    NavLinkList
+  },
   data() {
     return {
       user: null,
-      logout,
       adminLinks: [
         {
           label: "Lista de Locales",
@@ -166,6 +97,13 @@ export default {
           label: "Pedidos",
           name: "receptionist_orders",
           icon: "mdi-view-list"
+        }
+      ],
+      logoutLinks: [
+        {
+          label: "Logout",
+          icon: "mdi-logout",
+          action: logout
         }
       ]
     };
