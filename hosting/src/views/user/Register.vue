@@ -67,7 +67,7 @@
 
 <script>
 //Controller Import
-import { register as UC_register } from "@/controllers/user/register";
+import { register } from "@/controllers/user/register";
 
 //Schema Import
 import { CountryCollection } from "@/models/country/schema";
