@@ -13,6 +13,17 @@ import { ClientDocument } from "@/models/client/schema";
 //Data Imports
 import { EmployeeRoles } from "@/models/employee/data";
 
+//Auth Status
+export enum AuthStatus {
+  waiting,
+  login_start,
+  login_ok,
+  login_fail,
+  logout_start,
+  logout_ok,
+  logout_fail
+}
+
 //Login function
 export function login(email: string, password: string): void {
   Store.commit("setAuthStatus", "login_start");
