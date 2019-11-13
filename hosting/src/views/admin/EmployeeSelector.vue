@@ -12,7 +12,7 @@
     </v-toolbar>
     <!--Employee List-->
     <v-list one-line>
-      <v-list-item-group v-for="(employee, n) in employees" :key="employee.id">
+      <v-list-item v-for="(employee, n) in employees" :key="employee.id">
         <v-list-item @click="toogleSelection(employee.id)">
           <v-list-item-content>
             <!--Employee Name-->
@@ -25,10 +25,11 @@
               employee.data.establishment_name
             }}</v-list-item-subtitle>
           </v-list-item-content>
+          <v-checkbox input-value="true"></v-checkbox>
         </v-list-item>
         <!--Divider-->
         <v-divider v-if="n + 1 < employees.length" />
-      </v-list-item-group>
+      </v-list-item>
     </v-list>
     <v-divider />
     <v-card-actions>
@@ -52,7 +53,8 @@ export default {
     return {
       employees: {},
       title: "Add Employees",
-      selection: []
+      selection: [],
+      checkbox1: true,
     };
   },
   methods: {
