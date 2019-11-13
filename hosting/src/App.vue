@@ -21,7 +21,6 @@ import Store from "@/plugins/vuex";
 //Controller Imports
 import { userController } from "@/controllers/user";
 Store.registerModule("userController", userController);
-console.log(Store.getters);
 
 //Component Imports
 import NavBar from "@/views/user/NavBar.vue";

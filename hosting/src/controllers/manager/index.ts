@@ -1,6 +1,6 @@
 //Plugin Imports
 import { Module } from "vuex";
-import Store, { RootState } from "@/plugins/vuex";
+import { RootState } from "@/plugins/vuex";
 
 //Page Export
 export enum ManagerPage {

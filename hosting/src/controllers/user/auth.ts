@@ -73,7 +73,7 @@ async function onLogout(): Promise<void> {
   Store.unregisterModule("orderHandlerController");
   Store.unregisterModule("receptionistController");
   Store.commit("userController/setUserRoles");
-  Store.commit("userController/setCurrentUser");
+  Store.commit("userController/setUserCurrent");
   Store.commit("userController/setAuthStatus", "logout_ok");
   safePush("login");
 }

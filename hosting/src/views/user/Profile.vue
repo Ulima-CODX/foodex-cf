@@ -18,21 +18,23 @@ import { getData } from "@/controllers/user/profile";
 export default {
   data() {
     return {
-      user: null
+      user: {
+        country: {}
+      }
     };
   },
   computed: {
     ...mapGetters({
-      authStatus: "userController/getAuthStatus"
+      user_id: "userController/getUserCurrent"
     })
   },
   watch: {
-    authStatus: function(authStatus) {
-      console.log(authStatus);
-      if (authStatus == AuthStatus.login_ok) {
-        this.user = getData();
-      }
+    user_id: async function(user_id) {
+      this.user = await getData(user_id);
     }
+  },
+  async mounted() {
+    this.user = await getData(this.user_id);
   }
 };
 </script>

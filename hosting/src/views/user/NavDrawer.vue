@@ -111,16 +111,16 @@ export default {
   computed: {
     ...mapGetters({
       roles: "userController/getUserRoles",
-      authStatus: "userController/getAuthStatus"
+      user_id: "userController/getUserCurrent"
     })
   },
   watch: {
-    authStatus: function(authStatus) {
-      console.log(authStatus);
-      if (authStatus == AuthStatus.login_ok) {
-        this.user = getData();
-      }
+    user_id: async function(user_id) {
+      this.user = await getData(user_id);
     }
+  },
+  async mounted() {
+    this.user = await getData(this.user_id);
   }
 };
 </script>
