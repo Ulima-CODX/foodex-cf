@@ -27,7 +27,7 @@
     <v-divider />
     <!--Login Button-->
     <v-card-actions>
-      <v-btn color="info" @click="login()">Login</v-btn>
+      <v-btn color="info" @click="login(email, password)">Login</v-btn>
     </v-card-actions>
     <!--Loading Animation-->
     <v-overlay v-if="authStatus == 'login_start'">
@@ -39,23 +39,19 @@
 <script>
 import { mapGetters } from "vuex";
 
-import { login as UC_Login } from "@/controllers/user/auth";
+import { login } from "@/controllers/user/auth";
 
 export default {
   data() {
     return {
+      login,
       email: "",
       password: "",
       showPassword: false
     };
   },
   computed: {
-    ...mapGetters({ authStatus: "getAuthStatus" })
-  },
-  methods: {
-    login() {
-      UC_Login(this.email, this.password);
-    }
+    ...mapGetters({ authStatus: "userController/getAuthStatus" })
   }
 };
 </script>

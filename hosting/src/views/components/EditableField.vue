@@ -3,7 +3,7 @@
     <v-text-field
       single-line
       dense
-      :value="(editing)? newValue: value"
+      :value="editing ? newValue : value"
       :readonly="!editing"
     >
       <template slot="append" v-if="editing">

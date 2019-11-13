@@ -49,9 +49,7 @@
       <v-tab-item value="employees">
         <v-card-text class="pa-0">
           <v-list dense>
-            <v-list-item
-              >Managers:
-            </v-list-item>
+            <v-list-item>Managers: </v-list-item>
             <v-list-item>
               <v-list dense class="pa-0">
                 <v-list-item v-for="m in data.employees.managers" :key="m.id">
@@ -60,9 +58,7 @@
               </v-list>
             </v-list-item>
             <v-divider />
-            <v-list-item
-              >Order Handlers:</v-list-item
-            >
+            <v-list-item>Order Handlers:</v-list-item>
             <v-list-item>
               <v-list dense class="pa-0">
                 <v-list-item
@@ -74,9 +70,7 @@
               </v-list>
             </v-list-item>
             <v-divider />
-            <v-list-item
-              >Receptionists:</v-list-item
-            >
+            <v-list-item>Receptionists:</v-list-item>
             <v-list-item>
               <v-list dense class="pa-0">
                 <v-list-item
@@ -92,8 +86,7 @@
       </v-tab-item>
     </v-tabs-items>
     <!--Dialog-->
-    <v-dialog v-model="dialog">
-    </v-dialog>
+    <v-dialog v-model="dialog"> </v-dialog>
   </v-card>
 </template>
 

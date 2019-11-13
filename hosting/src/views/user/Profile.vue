@@ -10,18 +10,31 @@
 </template>
 
 <script>
+import { mapGetters } from "vuex";
+
+import { AuthStatus } from "@/controllers/user/auth";
 import { getData } from "@/controllers/user/profile";
 
 export default {
   data() {
     return {
-      user: null
+      user: {
+        country: {}
+      }
     };
   },
+  computed: {
+    ...mapGetters({
+      user_id: "userController/getUserCurrent"
+    })
+  },
+  watch: {
+    user_id: async function(user_id) {
+      this.user = await getData(user_id);
+    }
+  },
   async mounted() {
-    this.user = await getData();
+    this.user = await getData(this.user_id);
   }
 };
 </script>
-
-<style></style>

@@ -39,7 +39,7 @@ export default {
     };
   },
   computed: {
-    ...mapGetters({ user_id: "getUserID" })
+    ...mapGetters({ user_id: "userController/getUserCurrent" })
   },
   watch: {
     $route(to, from) {

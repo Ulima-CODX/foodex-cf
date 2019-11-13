@@ -24,8 +24,7 @@ export type UserProfile = null | {
 };
 
 //getData: Outputs the profile data for the currently logged-in user.
-export async function getData(): Promise<UserProfile> {
-  const user_id: string = Store.state.user.id;
+export async function getData(user_id: string): Promise<UserProfile> {
   if (user_id == "") return null;
   const userData: UserData = await new UserDocument(user_id).read();
   const countryData: CountryData = await new CountryDocument(
