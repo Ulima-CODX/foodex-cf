@@ -1,6 +1,6 @@
 //Plugin Imports
 import { Module } from "vuex";
-import { RootState } from "@/plugins/vuex";
+import Store, { RootState } from "@/plugins/vuex";
 
 //Page Export
 export enum ReceptionistPage {
@@ -49,48 +49,54 @@ export const receptionistController: Module<
     }
   },
   mutations: {
-    setPage(state: any, page?: ReceptionistPage) {
+    setPage(state: ReceptionistControllerState, page?: ReceptionistPage) {
       if (page) state.page = page;
       else state.page = ReceptionistPage.none;
     },
-    setModal(state: any, modal?: ReceptionistModal) {
+    setModal(state: ReceptionistControllerState, modal?: ReceptionistModal) {
       if (modal) state.modal = modal;
       else state.modal = ReceptionistModal.none;
     },
-    setOrderList(state: any, order_ids?: string[]) {
+    setOrderList(state: ReceptionistControllerState, order_ids?: string[]) {
       if (order_ids) state.order.list = order_ids;
       else state.order.list = [];
     },
-    setOrderCurrent(state: any, order_id?: string) {
+    setOrderCurrent(state: ReceptionistControllerState, order_id?: string) {
       if (order_id) state.order.current = order_id;
       else state.order.current = "";
     },
-    setReservationList(state: any, reservation_ids?: string[]) {
+    setReservationList(
+      state: ReceptionistControllerState,
+      reservation_ids?: string[]
+    ) {
       if (reservation_ids) state.reservation.list = reservation_ids;
       else state.reservation.list = [];
     },
-    setReservationCurrent(state: any, reservation_id?: string) {
+    setReservationCurrent(
+      state: ReceptionistControllerState,
+      reservation_id?: string
+    ) {
       if (reservation_id) state.reservation.current = reservation_id;
       else state.reservation.current = "";
     }
   },
   getters: {
-    getPage(state: any) {
+    getPage(state: ReceptionistControllerState) {
       return state.page;
     },
-    getModal(state: any) {
+    getModal(state: ReceptionistControllerState) {
       return state.modal;
     },
-    getOrderList(state: any) {
+    getOrderList(state: ReceptionistControllerState) {
       return state.order.list;
     },
-    getOrderCurrent(state: any) {
+    getOrderCurrent(state: ReceptionistControllerState) {
       return state.order.current;
     },
-    getReseravationList(state: any) {
+    getReseravationList(state: ReceptionistControllerState) {
       return state.reservation.list;
     },
-    getReseravationCurrent(state: any) {
+    getReseravationCurrent(state: ReceptionistControllerState) {
       return state.reservation.current;
     }
   }

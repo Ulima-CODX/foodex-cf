@@ -1,6 +1,6 @@
 //Plugin Imports
 import { Module } from "vuex";
-import { RootState } from "@/plugins/vuex";
+import Store, { RootState } from "@/plugins/vuex";
 
 //Page Export
 export enum AdminPage {
@@ -47,41 +47,47 @@ export const adminController: Module<AdminControllerState, RootState> = {
     }
   },
   mutations: {
-    setPage(state: any, page?: AdminPage) {
+    setPage(state: AdminControllerState, page?: AdminPage) {
       if (page) state.page = page;
       else state.page = AdminPage.none;
     },
-    setModal(state: any, modal?: AdminModal) {
+    setModal(state: AdminControllerState, modal?: AdminModal) {
       if (modal) state.modal = modal;
       else state.modal = AdminModal.none;
     },
-    setEmployeeList(state: any, employee_ids?: string[]) {
+    setEmployeeList(state: AdminControllerState, employee_ids?: string[]) {
       if (employee_ids) state.employee.list = employee_ids;
       else state.employee.list = [];
     },
-    setEstablishmentList(state: any, establishment_ids?: string[]) {
+    setEstablishmentList(
+      state: AdminControllerState,
+      establishment_ids?: string[]
+    ) {
       if (establishment_ids) state.establishment.list = establishment_ids;
       else state.establishment.list = [];
     },
-    setEstablishmentCurrent(state: any, establishment_id?: string[]) {
+    setEstablishmentCurrent(
+      state: AdminControllerState,
+      establishment_id?: string
+    ) {
       if (establishment_id) state.establishment.current = establishment_id;
       else state.establishment.current = "";
     }
   },
   getters: {
-    getPage(state: any) {
+    getPage(state: AdminControllerState) {
       return state.page;
     },
-    getModal(state: any) {
+    getModal(state: AdminControllerState) {
       return state.modal;
     },
-    getEmployeeList(state: any) {
+    getEmployeeList(state: AdminControllerState) {
       return state.employee.list;
     },
-    getEstablishmentList(state: any) {
+    getEstablishmentList(state: AdminControllerState) {
       return state.establishment.list;
     },
-    getEstablishmentCurrent(state: any) {
+    getEstablishmentCurrent(state: AdminControllerState) {
       return state.establishment.current;
     }
   }

@@ -1,6 +1,6 @@
 //Plugin Imports
 import { Module } from "vuex";
-import { RootState } from "@/plugins/vuex";
+import Store, { RootState } from "@/plugins/vuex";
 
 //Page Export
 export enum ManagerPage {
@@ -45,41 +45,41 @@ export const managerController: Module<ManagerControllerState, RootState> = {
     }
   },
   mutations: {
-    setPage(state: any, page?: ManagerPage) {
+    setPage(state: ManagerControllerState, page?: ManagerPage) {
       if (page) state.page = page;
       else state.page = ManagerPage.none;
     },
-    setModal(state: any, modal?: ManagerModal) {
+    setModal(state: ManagerControllerState, modal?: ManagerModal) {
       if (modal) state.modal = modal;
       else state.modal = ManagerModal.none;
     },
-    setMenuCurrent(state: any, menu_id?: string) {
-      if (menu_id) state.menu = menu_id;
-      else state.menu = "";
+    setMenuCurrent(state: ManagerControllerState, menu_id?: string) {
+      if (menu_id) state.menu.current = menu_id;
+      else state.menu.current = "";
     },
-    setDishList(state: any, dish_ids?: string[]) {
+    setDishList(state: ManagerControllerState, dish_ids?: string[]) {
       if (dish_ids) state.dish.list = dish_ids;
       else state.dish.list = [];
     },
-    setDishCurrent(state: any, dish_id?: string) {
+    setDishCurrent(state: ManagerControllerState, dish_id?: string) {
       if (dish_id) state.dish.current = dish_id;
       else state.dish.current = "";
     }
   },
   getters: {
-    getPage(state: any) {
+    getPage(state: ManagerControllerState) {
       return state.page;
     },
-    getModal(state: any) {
+    getModal(state: ManagerControllerState) {
       return state.modal;
     },
-    getMenuCurrent(state: any) {
+    getMenuCurrent(state: ManagerControllerState) {
       return state.menu.current;
     },
-    getDishList(state: any) {
+    getDishList(state: ManagerControllerState) {
       return state.dish.list;
     },
-    getDishCurrent(state: any) {
+    getDishCurrent(state: ManagerControllerState) {
       return state.dish.current;
     }
   }

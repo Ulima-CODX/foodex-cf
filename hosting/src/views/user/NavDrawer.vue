@@ -34,7 +34,7 @@
 <script>
 import { mapGetters } from "vuex";
 
-import { logout } from "@/controllers/user/auth";
+import { logout, AuthStatus } from "@/controllers/user/auth";
 import { getData } from "@/controllers/user/profile";
 
 import NavLinkList from "@/views/components/NavLinkList";
@@ -110,13 +110,17 @@ export default {
   },
   computed: {
     ...mapGetters({
-      roles: "getUserRoles"
+      roles: "userController/getUserRoles",
+      authStatus: "userController/getAuthStatus"
     })
   },
-  async mounted() {
-    this.user = await getData();
+  watch: {
+    authStatus: function(authStatus) {
+      console.log(authStatus);
+      if (authStatus == AuthStatus.login_ok) {
+        this.user = getData();
+      }
+    }
   }
 };
 </script>
-
-<style></style>

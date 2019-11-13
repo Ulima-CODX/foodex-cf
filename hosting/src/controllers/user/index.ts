@@ -1,6 +1,6 @@
 //Plugin Imports
 import { Module } from "vuex";
-import { RootState } from "@/plugins/vuex";
+import Store, { RootState } from "@/plugins/vuex";
 
 //Controller Imports
 import { AuthStatus } from "./auth";
@@ -46,32 +46,32 @@ export const userController: Module<UserControllerState, RootState> = {
     }
   },
   mutations: {
-    setAuthStatus(state: any, authStatus: AuthStatus) {
+    setAuthStatus(state: UserControllerState, authStatus: AuthStatus) {
       state.authStatus = authStatus;
     },
-    setUserCurrent(state: any, user_id?: string) {
+    setUserCurrent(state: UserControllerState, user_id?: string) {
       if (user_id) state.user.current = user_id;
       else state.user.current = "";
     },
-    setUserRoles(state: any, roles?: UserRoles) {
+    setUserRoles(state: UserControllerState, roles?: UserRoles) {
       if (roles) state.user.roles = roles;
       else state.user.roles = init_roles;
     },
-    setPage(state: any, page: UserPage) {
+    setPage(state: UserControllerState, page: UserPage) {
       state.page = page;
     }
   },
   getters: {
-    getAuthStatus(state: any) {
-      return state.user.authStatus;
+    getAuthStatus(state: UserControllerState) {
+      return state.authStatus;
     },
-    getUserCurrent(state: any) {
+    getUserCurrent(state: UserControllerState) {
       return state.user.current;
     },
-    getUserRoles(state: any) {
+    getUserRoles(state: UserControllerState) {
       return state.user.roles;
     },
-    getPage(state: any) {
+    getPage(state: UserControllerState) {
       return state.page;
     }
   }

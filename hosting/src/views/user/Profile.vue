@@ -10,6 +10,9 @@
 </template>
 
 <script>
+import { mapGetters } from "vuex";
+
+import { AuthStatus } from "@/controllers/user/auth";
 import { getData } from "@/controllers/user/profile";
 
 export default {
@@ -18,10 +21,18 @@ export default {
       user: null
     };
   },
-  async mounted() {
-    this.user = await getData();
+  computed: {
+    ...mapGetters({
+      authStatus: "userController/getAuthStatus"
+    })
+  },
+  watch: {
+    authStatus: function(authStatus) {
+      console.log(authStatus);
+      if (authStatus == AuthStatus.login_ok) {
+        this.user = getData();
+      }
+    }
   }
 };
 </script>
-
-<style></style>

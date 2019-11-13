@@ -16,6 +16,12 @@
 //Vue & Plugin Imports
 import Vue from "vue";
 import { mapGetters } from "vuex";
+import Store from "@/plugins/vuex";
+
+//Controller Imports
+import { userController } from "@/controllers/user";
+Store.registerModule("userController", userController);
+console.log(Store.getters);
 
 //Component Imports
 import NavBar from "@/views/user/NavBar.vue";
@@ -24,7 +30,7 @@ import NavDrawer from "@/views/user/NavDrawer.vue";
 export default Vue.extend({
   name: "App",
   computed: {
-    ...mapGetters({ user_id: "getUserID" })
+    ...mapGetters({ user_id: "userController/getUserCurrent" })
   },
   components: {
     NavBar,
