@@ -13,7 +13,7 @@ import { OrderDocument } from "@/models/order/schema";
 import { EstablishmentData } from "@/models/establishment/data";
 import { OrderData } from "@/models/order/data";
 
-//goToList
+//goToListPage
 export async function goToListPage() {
   const establishment_id: string =
     Store.getters["userController/getUserEstablishment"];

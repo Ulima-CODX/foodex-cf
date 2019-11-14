@@ -41,19 +41,19 @@
     </v-list>
     <!--Dialog-->
     <v-dialog v-model="dialog">
-      <menu-new />
+      <dish-new />
     </v-dialog>
   </v-card>
 </template>
 
 <script>
 //NewDish Import
-import MenuNew from "@/views/manager/MenuNew";
+import DishNew from "@/views/manager/DishNew";
 
 export default {
   name: "carta-gestor",
   components: {
-    MenuNew
+    DishNew
   },
   data: () => ({
     selected: [],
@@ -71,7 +71,7 @@ export default {
       {
         title: "Lomo Saltado"
       }
-    ],  
+    ]
   })
 };
 </script>

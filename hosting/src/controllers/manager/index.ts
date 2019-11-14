@@ -2,6 +2,9 @@
 import { Module } from "vuex";
 import { RootState } from "@/plugins/vuex";
 
+//Data Import
+import { DishData } from "@/models/dish/data";
+
 //Page Export
 export enum ManagerPage {
   none,
@@ -25,7 +28,10 @@ export type ManagerControllerState = {
     current: string;
   };
   dish: {
-    list: string[];
+    list: {
+      id: string;
+      data: DishData;
+    }[];
     current: string;
   };
 };
@@ -57,8 +63,14 @@ export const managerController: Module<ManagerControllerState, RootState> = {
       if (menu_id) state.menu.current = menu_id;
       else state.menu.current = "";
     },
-    setDishList(state: ManagerControllerState, dish_ids?: string[]) {
-      if (dish_ids) state.dish.list = dish_ids;
+    setDishList(
+      state: ManagerControllerState,
+      dishes?: {
+        id: string;
+        data: DishData;
+      }[]
+    ) {
+      if (dishes) state.dish.list = dishes;
       else state.dish.list = [];
     },
     setDishCurrent(state: ManagerControllerState, dish_id?: string) {

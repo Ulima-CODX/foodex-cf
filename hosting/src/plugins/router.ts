@@ -47,7 +47,7 @@ const routes = [
   {
     path: "/manager/menu",
     name: "manager_menu",
-    component: () => import("@/views/manager/CartaGestor.vue")
+    component: () => import("@/views/manager/MenuDetail.vue")
   },
   {
     path: "/manager/tables",
