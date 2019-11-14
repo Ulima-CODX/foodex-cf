@@ -5,15 +5,15 @@ import { safePush } from "@/plugins/router";
 //Controller Imports
 import { ReceptionistPage, ReceptionistModal } from ".";
 
-//Schema Import
+//Schema Imports
 import { EstablishmentDocument } from "@/models/establishment/schema";
 import { ReservationDocument } from "@/models/reservation/schema";
 
-//Data Import
+//Data Imports
 import { EstablishmentData } from "@/models/establishment/data";
 import { ReservationData } from "@/models/reservation/data";
 
-//goToList
+//goToListPage
 export async function goToListPage() {
   const establishment_id: string =
     Store.getters["userController/getUserEstablishment"];
