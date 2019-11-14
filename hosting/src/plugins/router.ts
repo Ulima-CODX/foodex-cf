@@ -67,12 +67,12 @@ const routes = [
   {
     path: "/receptionist/reservations",
     name: "receptionist_reservations",
-    component: () => import("@/views/receptionist/Reservas.vue")
+    component: () => import("@/views/receptionist/ReservationList.vue")
   },
   {
     path: "/receptionist/orders",
     name: "receptionist_orders",
-    component: () => import("@/views/receptionist/Recepcionista.vue")
+    component: () => import("@/views/receptionist/OrderList.vue")
   }
 ];
 
