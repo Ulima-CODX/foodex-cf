@@ -74,7 +74,8 @@ export class EstablishmentDocument {
         }
       })
       .then(async () => {
-        const roles: EmployeeRoles = await employee.getRoles();
+        const roles: EmployeeRoles = (await employee.getEstablishmentRoles())
+          .roles;
         const hasRoles: boolean = Object.values(roles).reduce(
           (acc, val) => acc && val
         );

@@ -32,13 +32,19 @@
 </template>
 
 <script>
+//Plugin Import
 import { mapGetters } from "vuex";
 
+//Controller Imports
+import { goToListPage as goToOrderListPage } from "@/controllers/receptionist/orders";
+import { goToListPage as goToReservationListPage } from "@/controllers/receptionist/reservations";
 import { logout, AuthStatus } from "@/controllers/user/auth";
 import { getData } from "@/controllers/user/profile";
 
+//Component Import
 import NavLinkList from "@/views/components/NavLinkList";
 
+//Component Export
 export default {
   components: {
     NavLinkList
@@ -90,20 +96,20 @@ export default {
       receptionistLinks: [
         {
           label: "Reservas",
-          name: "receptionist_reservations",
+          action: goToReservationListPage,
           icon: "mdi-view-list"
         },
         {
           label: "Pedidos",
-          name: "receptionist_orders",
+          action: goToOrderListPage,
           icon: "mdi-view-list"
         }
       ],
       logoutLinks: [
         {
           label: "Logout",
-          icon: "mdi-logout",
-          action: logout
+          action: logout,
+          icon: "mdi-logout"
         }
       ]
     };

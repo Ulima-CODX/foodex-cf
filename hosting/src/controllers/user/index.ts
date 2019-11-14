@@ -23,6 +23,9 @@ export type UserControllerState = {
   user: {
     current: string;
     roles: UserRoles;
+    establishment: {
+      current: string;
+    };
   };
 };
 
@@ -42,7 +45,10 @@ export const userController: Module<UserControllerState, RootState> = {
     authStatus: AuthStatus.waiting,
     user: {
       current: "",
-      roles: init_roles
+      roles: init_roles,
+      establishment: {
+        current: ""
+      }
     }
   },
   mutations: {
@@ -57,6 +63,10 @@ export const userController: Module<UserControllerState, RootState> = {
       if (roles) state.user.roles = roles;
       else state.user.roles = init_roles;
     },
+    setUserEstablishment(state: UserControllerState, establishment_id: string) {
+      if (establishment_id) state.user.establishment.current = establishment_id;
+      else state.user.establishment.current = "";
+    },
     setPage(state: UserControllerState, page: UserPage) {
       state.page = page;
     }
@@ -70,6 +80,9 @@ export const userController: Module<UserControllerState, RootState> = {
     },
     getUserRoles(state: UserControllerState) {
       return state.user.roles;
+    },
+    getUserEstablishment(state: UserControllerState) {
+      return state.user.establishment.current;
     },
     getPage(state: UserControllerState) {
       return state.page;

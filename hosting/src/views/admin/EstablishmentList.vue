@@ -25,7 +25,7 @@
         v-for="(establishment, n) in establishments"
         :key="establishment.id"
       >
-        <v-list-item @click="goToDetails(establishment.id)">
+        <v-list-item @click="goToDetailPage(establishment.id)">
           <!--Establishment Name-->
           <v-list-item-title>{{ establishment.data.name }}</v-list-item-title>
           <!--Establishment Description-->
@@ -46,7 +46,7 @@
 
 <script>
 //Controller Import
-import { goToDetails } from "@/controllers/admin/establishments";
+import { goToDetailPage } from "@/controllers/admin/establishments";
 
 //View Import
 import EstablishmentNew from "@/views/admin/EstablishmentNew";
@@ -61,7 +61,7 @@ export default {
   },
   data() {
     return {
-      goToDetails,
+      goToDetailPage,
       searchedName: "",
       dialog: false,
       establishments: {}

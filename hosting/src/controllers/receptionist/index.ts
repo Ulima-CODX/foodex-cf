@@ -2,6 +2,10 @@
 import { Module } from "vuex";
 import { RootState } from "@/plugins/vuex";
 
+//Data Import
+import { OrderData } from "@/models/order/data";
+import { ReservationData } from "@/models/reservation/data";
+
 //Page Export
 export enum ReceptionistPage {
   none,
@@ -21,11 +25,17 @@ export type ReceptionistControllerState = {
   page: ReceptionistPage;
   modal: ReceptionistModal;
   order: {
-    list: string[];
+    list: {
+      id: string;
+      data: OrderData;
+    }[];
     current: string;
   };
   reservation: {
-    list: string[];
+    list: {
+      id: string;
+      data: ReservationData;
+    }[];
     current: string;
   };
 };
@@ -57,7 +67,13 @@ export const receptionistController: Module<
       if (modal) state.modal = modal;
       else state.modal = ReceptionistModal.none;
     },
-    setOrderList(state: ReceptionistControllerState, order_ids?: string[]) {
+    setOrderList(
+      state: ReceptionistControllerState,
+      order_ids?: {
+        id: string;
+        data: OrderData;
+      }[]
+    ) {
       if (order_ids) state.order.list = order_ids;
       else state.order.list = [];
     },
@@ -67,7 +83,10 @@ export const receptionistController: Module<
     },
     setReservationList(
       state: ReceptionistControllerState,
-      reservation_ids?: string[]
+      reservation_ids?: {
+        id: string;
+        data: ReservationData;
+      }[]
     ) {
       if (reservation_ids) state.reservation.list = reservation_ids;
       else state.reservation.list = [];
@@ -93,10 +112,10 @@ export const receptionistController: Module<
     getOrderCurrent(state: ReceptionistControllerState) {
       return state.order.current;
     },
-    getReseravationList(state: ReceptionistControllerState) {
+    getReservationList(state: ReceptionistControllerState) {
       return state.reservation.list;
     },
-    getReseravationCurrent(state: ReceptionistControllerState) {
+    getReservationCurrent(state: ReceptionistControllerState) {
       return state.reservation.current;
     }
   }

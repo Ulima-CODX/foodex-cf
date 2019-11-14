@@ -1,5 +1,9 @@
-//Controller Import
-import { safePush } from "@/controllers/user/navigation";
+//Plugin Import
+import Store from "@/plugins/vuex";
+import { safePush } from "@/plugins/router";
+
+//Controller Imports
+import { AdminPage, AdminModal } from ".";
 
 //Schema Imports
 import { CountryDocument } from "@/models/country/schema";
@@ -15,13 +19,6 @@ import {
   EstablishmentData,
   EstablishmentEmployee
 } from "@/models/establishment/data";
-
-//goToDetails
-export const goToDetails = (establishment_id: string) => {
-  safePush("admin_establishment_detail", {
-    id: establishment_id
-  });
-};
 
 //Establishment Profile Data
 export type EstablishmentProfile = null | {
@@ -45,10 +42,10 @@ export type EstablishmentProfile = null | {
 };
 
 //
-const getEmployeeDescriptions = async (
+async function getEmployeeDescriptions(
   employees: Record<string, string[]>,
   employee_type: "manager" | "order_handler" | "receptionist"
-): Promise<EstablishmentEmployee[]> => {
+): Promise<EstablishmentEmployee[]> {
   return await Promise.all(
     employees[`${employee_type}_ids`].map(async (id: string) => {
       const temp = await new UserDocument(id).read();
@@ -59,7 +56,7 @@ const getEmployeeDescriptions = async (
       };
     })
   );
-};
+}
 
 //getData: Outputs profile data for current selected establishment.
 export async function getData(
@@ -147,4 +144,40 @@ export function create(data: {
     data.address,
     country
   );
+}
+
+//goToList
+export function goToListPage() {
+  Store.commit("adminController/setPage", AdminPage.establishmentList);
+  safePush("admin_establishment_list");
+}
+
+//showNewModal
+export function showNewModal() {
+  Store.commit("adminController/setModal", AdminModal.establishmentNew);
+}
+
+//goToDetail
+export function goToDetailPage(establishment_id: string) {
+  Store.commit("adminController/setPage", AdminPage.establishmentDetail);
+  safePush("admin_establishment_detail", {
+    id: establishment_id
+  });
+}
+
+//showSelectorModal
+export function showSelectorModal(
+  role: "manager" | "order_handler" | "receptionist"
+) {
+  let modal: AdminModal = AdminModal.none;
+  if (role == "manager") modal = AdminModal.employeeSelector_manager;
+  if (role == "order_handler")
+    modal = AdminModal.employeeSelector_order_handler;
+  if (role == "receptionist") modal = AdminModal.employeeSelector_receptionist;
+  Store.commit("adminController/setModal", modal);
+}
+
+//hideModal
+export function hideModal() {
+  Store.commit("adminController/setModal");
 }

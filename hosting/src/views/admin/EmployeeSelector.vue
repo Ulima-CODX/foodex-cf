@@ -54,6 +54,7 @@ export default {
       employees: {},
       title: "Add Employees",
       selection: [],
+      checkbox1: true
     };
   },
   methods: {

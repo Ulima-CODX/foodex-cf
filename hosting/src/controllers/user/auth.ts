@@ -1,9 +1,9 @@
 //Plugin Imports
 import { auth, FS_User } from "@/plugins/firebase";
 import Store from "@/plugins/vuex";
+import { safePush } from "@/plugins/router";
 
 //Controller Import
-import { safePush } from "./navigation";
 import { adminController } from "../admin";
 import { managerController } from "../manager";
 import { orderHandlerController } from "../order_handler";
@@ -40,20 +40,27 @@ export function login(email: string, password: string): void {
 //Login callback
 async function onLogin(user_id: string): Promise<void> {
   Store.commit("userController/setUserCurrent", user_id);
+
   const isAdmin: boolean = await new AdminDocument(user_id).exists();
-  const employeeRoles: EmployeeRoles = await new EmployeeDocument(
-    user_id
-  ).getRoles();
-  const isClient: boolean = await new ClientDocument(user_id).exists();
-  const roles: UserRoles = { isAdmin, ...employeeRoles, isClient };
-  Store.commit("userController/setUserRoles", roles);
-  if (roles.isAdmin) Store.registerModule("adminController", adminController);
-  if (roles.isManager)
+  if (isAdmin) Store.registerModule("adminController", adminController);
+
+  const establishmentRoles: {
+    id: string;
+    roles: EmployeeRoles;
+  } = await new EmployeeDocument(user_id).getEstablishmentRoles();
+  if (establishmentRoles.roles.isManager)
     Store.registerModule("managerController", managerController);
-  if (roles.isOrderHandler)
+  if (establishmentRoles.roles.isOrderHandler)
     Store.registerModule("orderHandlerController", orderHandlerController);
-  if (roles.isReceptionist)
+  if (establishmentRoles.roles.isReceptionist)
     Store.registerModule("receptionistController", receptionistController);
+
+  const isClient: boolean = await new ClientDocument(user_id).exists();
+  const roles: UserRoles = { isAdmin, ...establishmentRoles.roles, isClient };
+
+  if (establishmentRoles.id)
+    Store.commit("userController/setUserEstablishment", establishmentRoles.id);
+  Store.commit("userController/setUserRoles", roles);
   Store.commit("userController/setAuthStatus", "login_ok");
   safePush("profile");
 }
