@@ -38,7 +38,7 @@ import { mapGetters } from "vuex";
 //Controller Imports
 import { logout, AuthStatus } from "@/controllers/user/auth";
 import { getData } from "@/controllers/user/profile";
-import {} from "@/controllers/manager/establishment";
+import { goToDetailPage as goToEstablishmentPage } from "@/controllers/manager/establishment";
 import { goToDetailPage as goToMenuPage } from "@/controllers/manager/menu";
 import { goToListPage as goToOrderListPage } from "@/controllers/receptionist/orders";
 import { goToListPage as goToReservationListPage } from "@/controllers/receptionist/reservations";
@@ -69,7 +69,7 @@ export default {
       managerLinks: [
         {
           label: "Local",
-          name: "manager_establishment",
+          action: goToEstablishmentPage,
           icon: "mdi-information"
         },
         {
