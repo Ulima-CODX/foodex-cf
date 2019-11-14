@@ -27,5 +27,8 @@
 <script>
 //Controller Import
 import { getData } from "@/controllers/manager/menu";
-export default {};
+export default {
+  name:"menu-detail",
+  
+};
 </script>
