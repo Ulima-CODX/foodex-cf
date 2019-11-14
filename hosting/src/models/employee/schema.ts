@@ -30,7 +30,10 @@ export class EmployeeDocument {
     this.ref
       .get()
       .then(async (res: FS_DocumentData) => <EmployeeData>res.data());
-  public getRoles = (): Promise<EmployeeRoles> =>
+  public getEstablishmentRoles = (): Promise<{
+    id: string;
+    roles: EmployeeRoles;
+  }> =>
     this.ref.get().then(async (res: FS_DocumentData) => {
       let roles: EmployeeRoles = {
         isManager: false,
@@ -38,7 +41,7 @@ export class EmployeeDocument {
         isReceptionist: false
       };
       const temp: EmployeeData = <EmployeeData>res.data();
-      if (!temp.establishment_id) return roles;
+      if (!temp.establishment_id) return { id: "", roles };
       const establishmentData: EstablishmentData = await new EstablishmentDocument(
         temp.establishment_id
       ).read();
@@ -51,7 +54,7 @@ export class EmployeeDocument {
       roles.isReceptionist = establishmentData.employees.receptionist_ids.includes(
         this.id
       );
-      return roles;
+      return { id: temp.establishment_id, roles: roles };
     });
   //Update methods
   public setEstablishment = async (

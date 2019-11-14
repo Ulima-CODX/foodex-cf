@@ -83,3 +83,21 @@ const router = new VueRouter({
 });
 
 export default router;
+
+import { Dictionary } from "vuex";
+
+//route
+export function route(): string {
+  return router.currentRoute.name ? router.currentRoute.name : "";
+}
+
+//safePush: pushes a route the browser is not currently into.
+export function safePush(
+  route_name: string,
+  params?: Dictionary<string>
+): void {
+  if (route() != route_name) {
+    if (!params) router.push({ name: route_name });
+    else router.push({ name: route_name, params });
+  }
+}

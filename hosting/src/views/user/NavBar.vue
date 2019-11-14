@@ -27,9 +27,9 @@
 </template>
 
 <script>
+//Plugin Imports
 import { mapGetters } from "vuex";
-
-import { route } from "@/controllers/user/navigation";
+import { route } from "@/plugins/router";
 
 export default {
   data() {

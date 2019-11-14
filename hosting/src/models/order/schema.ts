@@ -5,7 +5,8 @@ import {
   FS_Document,
   FS_DocumentData,
   Timestamp,
-  FieldValue
+  FieldValue,
+  FS_Query
 } from "@/plugins/firebase";
 
 //Schema Imports
@@ -89,7 +90,9 @@ export abstract class OrderCollection {
   public static readonly ref: FS_Collection = db.collection("orders");
   public static readonly id: string = OrderCollection.ref.id;
   //Create method
-  public create = async (client: ClientDocument): Promise<OrderDocument> => {
+  public static create = async (
+    client: ClientDocument
+  ): Promise<OrderDocument> => {
     const orderData: OrderData = {
       status: "pending",
       client_id: client.id,
