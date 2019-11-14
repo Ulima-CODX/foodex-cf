@@ -25,5 +25,7 @@
 </template>
 
 <script>
+//Controller Import
+import { getData } from "@/controllers/manager/menu";
 export default {};
 </script>

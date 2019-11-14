@@ -6,7 +6,7 @@
       <v-toolbar-title>Empleados</v-toolbar-title>
       <v-spacer />
       <!--Search-->
-      <v-text-field single-line hide-details placeholder="Nombre de Local">
+      <v-text-field single-line hide-details placeholder="Nombre de Empleado">
         <v-icon slot="append">mdi-magnify</v-icon>
       </v-text-field>
     </v-toolbar>
