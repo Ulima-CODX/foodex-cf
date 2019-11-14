@@ -36,10 +36,12 @@
 import { mapGetters } from "vuex";
 
 //Controller Imports
-import { goToListPage as goToOrderListPage } from "@/controllers/receptionist/orders";
-import { goToListPage as goToReservationListPage } from "@/controllers/receptionist/reservations";
 import { logout, AuthStatus } from "@/controllers/user/auth";
 import { getData } from "@/controllers/user/profile";
+import {} from "@/controllers/manager/establishment";
+import { goToDetailPage as goToMenuPage } from "@/controllers/manager/menu";
+import { goToListPage as goToOrderListPage } from "@/controllers/receptionist/orders";
+import { goToListPage as goToReservationListPage } from "@/controllers/receptionist/reservations";
 
 //Component Import
 import NavLinkList from "@/views/components/NavLinkList";
@@ -72,7 +74,7 @@ export default {
         },
         {
           label: "Menu",
-          name: "manager_menu",
+          action: goToMenuPage,
           icon: "mdi-silverware-fork-knife"
         },
         {

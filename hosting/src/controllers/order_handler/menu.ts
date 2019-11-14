@@ -1,6 +1,6 @@
 //Plugin Imports
 import Store from "@/plugins/vuex";
-import { safePush } from '@/plugins/router';
+import { safePush } from "@/plugins/router";
 
 //Controller Import
 import { OrderHandlerPage } from ".";
@@ -15,10 +15,9 @@ import { MenuData } from "@/models/menu/data";
 
 //goToMenuDetail
 export async function goToMenuDetail() {
-    const establishment_id: string =
+  const establishment_id: string =
     Store.getters["userController/getUserEstablishment"];
-    const establishment_data: EstablishmentData = await new EstablishmentDocument(
-        establishment_id
-    ).read();
-    
+  const establishment_data: EstablishmentData = await new EstablishmentDocument(
+    establishment_id
+  ).read();
 }
