@@ -1,7 +1,7 @@
 <template>
   <v-card class="ma-4 flex">
     <v-toolbar color="#E41E2B" dark>
-      <v-toolbar-title>Carta</v-toolbar-title>
+      <v-toolbar-title>Disponibilidad de Mesas</v-toolbar-title>
 
       <v-spacer></v-spacer>
 
