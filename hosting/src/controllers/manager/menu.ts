@@ -32,10 +32,12 @@ export async function goToDetailPage() {
     data: DishData;
   }[] = [];
   Promise.all(
-    menuData.dish_ids.map(async (dish_id: string) => ({
-      id: dish_id,
-      data: await new DishDocument(dish_id).read()
-    }))
+    menuData.dish_ids.map(async (dish_id: string) => {
+      dishList.push({
+        id: dish_id,
+        data: await new DishDocument(dish_id).read()
+      });
+    })
   ).then(() => {
     Store.commit("managerController/setDishList", dishList);
     Store.commit("managerController/setPage", ManagerPage.menuDetail_dishList);
