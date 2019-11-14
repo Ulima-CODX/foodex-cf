@@ -82,8 +82,7 @@
                   <v-btn
                     text
                     icon
-                    @click="deleteEmployee('order_handler', o.id)"
-                  >
+                    @click="deleteEmployee('order_handler', o.id)">
                     <v-icon>mdi-close</v-icon>
                   </v-btn>
                 </v-list-item>

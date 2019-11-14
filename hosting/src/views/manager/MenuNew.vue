@@ -41,15 +41,18 @@ import { MenuCollection, MenuDocument } from "@/models/menu/schema";
 import { DishCollection, DishDocument } from "@/models/dish/schema";
 
 export default {
-    data(){
-        return{
-            create,
-            form: {
-                name:"",
-                description:""
-            }
-        }
-    }
-    
-}
+  name: "menu-new",
+  props: {
+    action: Function
+  },
+  data(){
+      return{
+          create,
+          form: {
+            name:"",
+            description:""
+          }
+      }
+  },
+};
 </script>

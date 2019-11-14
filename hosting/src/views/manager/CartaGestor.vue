@@ -5,7 +5,7 @@
 
       <v-spacer></v-spacer>
 
-      <v-btn icon>
+      <v-btn icon @click="dialog = true">
         <v-icon>mdi-plus-box</v-icon>
       </v-btn>
 
@@ -35,18 +35,29 @@
               </v-list-item-content>
             </template>
           </v-list-item>
-
           <v-divider v-if="index + 1 < items.length" :key="index"></v-divider>
         </template>
       </v-list-item-group>
     </v-list>
+    <!--Dialog-->
+    <v-dialog v-model="dialog">
+      <menu-new />
+    </v-dialog>
   </v-card>
 </template>
 
 <script>
+//NewDish Import
+import MenuNew from "@/views/manager/MenuNew";
+
 export default {
+  name: "carta-gestor",
+  components: {
+    MenuNew
+  },
   data: () => ({
     selected: [],
+    dialog: false,
     items: [
       {
         title: "Lasagna"
@@ -60,7 +71,7 @@ export default {
       {
         title: "Lomo Saltado"
       }
-    ]
+    ],  
   })
 };
 </script>
