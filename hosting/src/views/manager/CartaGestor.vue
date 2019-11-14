@@ -21,7 +21,7 @@
     <v-list two-line>
       <v-list-item-group>
         <template v-for="(item, index) in items">
-          <v-list-item :key="item.title">
+          <v-list-item :key="item.title"><!--@click="=goToDetailPage()" poner dentro, adpatar-->
             <template>
               <v-list-item-content>
                 <v-list-item-title v-text="item.title"></v-list-item-title>
@@ -50,6 +50,9 @@
 //NewDish Import
 import DishNew from "@/views/manager/DishNew";
 
+//Controller Import
+import { goToDetailPage } from "@/controllers/manager/menu";
+
 export default {
   name: "carta-gestor",
   components: {
@@ -58,6 +61,7 @@ export default {
   data: () => ({
     selected: [],
     dialog: false,
+    goToDetailPage,
     items: [
       {
         title: "Lasagna"

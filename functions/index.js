@@ -1,6 +1,10 @@
 const functions = require('firebase-functions');
+const serviceAccount = require('./fs_adminsdk_key.json');
 const admin = require('firebase-admin');
-admin.initializeApp(functions.config().firebase);
+
+admin.initializeApp({
+    credential: admin.credential.cert(serviceAccount)
+});
 const db = admin.firestore();
 
 exports.timestamp = functions.https.onRequest(async (req, res)=>{
@@ -24,6 +28,7 @@ exports.client_profile = functions.https.onRequest(async (req, res)=>{
     switch(req.method){
         case 'GET': {
             const id = req.query.id;
+            console.log(id);
             const client_data = await db.collection('clients').doc(id).get()
                 .then((client)=>client.data()).catch((err)=>{
                     console.error(err); return {};
@@ -32,9 +37,9 @@ exports.client_profile = functions.https.onRequest(async (req, res)=>{
                 .then((user)=>user.data()).catch((err)=>{
                     console.error(err); return {};
                 });
-            return res.status(200).send(JSON.stringify({
-                ...client_data, ...user_data
-            }));
+            const result = {...client_data, ...user_data};
+            console.log(result);
+            return res.status(200).send(JSON.stringify(result));
         }
         default: {
             return res.status(405).send(JSON.stringify(
@@ -50,12 +55,12 @@ exports.establishments = functions.https.onRequest(async (req, res) => {
         case 'GET':{
             const id = req.query.id;
             let result = {};
-            if (id){
-                result = db.collection('establishment').doc(id).get()
+            if (id!==undefined){
+                result = await db.collection('establishment').doc(id).get()
                 .then(doc => ({ id, ...doc.data() }))
                 .catch(err => {console.error(err); return {}})
             } else {
-                result = db.collection('establishment').get()
+                result = await db.collection('establishment').get()
                 .then(group => {
                     let list = [];
                     group.forEach(doc => {
@@ -65,6 +70,7 @@ exports.establishments = functions.https.onRequest(async (req, res) => {
                 })
                 .catch(err => {console.error(err); return {}})
             }
+            console.log(result);
             return res.status(200).send(JSON.stringify(result));
         }
         default: {
