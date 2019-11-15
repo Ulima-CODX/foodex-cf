@@ -46,8 +46,13 @@ const routes = [
   },
   {
     path: "/manager/menu",
-    name: "manager_menu",
+    name: "manager_menu_detail",
     component: () => import("@/views/manager/MenuDetail.vue")
+  },
+  {
+    path: "/manager/menu/dishes",
+    name: "manager_dish_detail",
+    component: () => import("@/views/manager/DishDetail.vue")
   },
   {
     path: "/manager/tables",

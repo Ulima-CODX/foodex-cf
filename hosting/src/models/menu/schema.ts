@@ -37,7 +37,7 @@ export class MenuDocument {
       .then(() => dish.setMenu(this));
   public removeDish = async (dish: DishDocument): Promise<void> =>
     this.ref
-      .update({ dish_ids: FieldValue.arrayUnion(dish.id) })
+      .update({ dish_ids: FieldValue.arrayRemove(dish.id) })
       .then(() => dish.delete());
   //Delete method
   public delete = (): Promise<void> => this.ref.delete();

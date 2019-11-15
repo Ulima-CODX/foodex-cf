@@ -41,18 +41,18 @@ export async function goToDetailPage() {
   ).then(() => {
     Store.commit("managerController/setDishList", dishList);
     Store.commit("managerController/setPage", ManagerPage.menuDetail_dishList);
-    safePush("manager_menu");
+    safePush("manager_menu_detail");
   });
 }
 
 //showNewModal
 export function showNewModal() {
-  Store.commit("managerController/showModal", ManagerModal.dishNew);
+  Store.commit("managerController/setModal", ManagerModal.dishNew);
 }
 
 //hideModal
-export function hideModal() {
-  Store.commit("managerController/showModal");
+export function hideNewModal() {
+  Store.commit("managerController/setModal");
 }
 
 //addDish
