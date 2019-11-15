@@ -9,7 +9,5 @@ import { ManagerPage } from ".";
 export async function goToDetailPage(dish_id: string) {
   Store.commit("managerController/setDishCurrent", dish_id);
   Store.commit("managerController/setPage", ManagerPage.dishDetail);
-  safePush("manager_dish_detail", {
-    id: dish_id
-  });
+  safePush("manager_dish_detail");
 }
