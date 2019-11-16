@@ -2,6 +2,9 @@
 import { Module } from "vuex";
 import { RootState } from "@/plugins/vuex";
 
+//Data Import
+import { EmployeeProfile } from "@/models/employee/data";
+
 //Page Export
 export enum AdminPage {
   none,
@@ -24,7 +27,10 @@ export type AdminControllerState = {
   page: AdminPage;
   modal: AdminModal;
   employee: {
-    list: string[];
+    list: {
+      id: string;
+      data: EmployeeProfile;
+    }[];
   };
   establishment: {
     list: string[];
@@ -55,8 +61,14 @@ export const adminController: Module<AdminControllerState, RootState> = {
       if (modal) state.modal = modal;
       else state.modal = AdminModal.none;
     },
-    setEmployeeList(state: AdminControllerState, employee_ids?: string[]) {
-      if (employee_ids) state.employee.list = employee_ids;
+    setEmployeeList(
+      state: AdminControllerState,
+      employees?: {
+        id: string;
+        data: EmployeeProfile;
+      }[]
+    ) {
+      if (employees) state.employee.list = employees;
       else state.employee.list = [];
     },
     setEstablishmentList(
