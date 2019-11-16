@@ -8,7 +8,7 @@ import { ManagerPage, ManagerModal } from ".";
 //goToDetailPage
 export async function goToDetailPage() {
   Store.commit("managerController/setPage", ManagerPage.establishmentDetail);
-  safePush("manager_establishment");
+  safePush("manager_establishment_detail");
 }
 
 //showReservationModal

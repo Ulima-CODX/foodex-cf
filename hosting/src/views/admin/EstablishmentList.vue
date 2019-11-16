@@ -21,21 +21,20 @@
     </v-toolbar>
     <!--Establishment List-->
     <v-list two-line v-if="establishments">
-      <v-list-item-group
+      <v-list-item
         v-for="(establishment, n) in establishments"
         :key="establishment.id"
+        @click="goToDetailPage(establishment.id)"
       >
-        <v-list-item @click="goToDetailPage(establishment.id)">
-          <!--Establishment Name-->
-          <v-list-item-title>{{ establishment.data.name }}</v-list-item-title>
-          <!--Establishment Description-->
-          <v-list-item-subtitle>{{
-            establishment.data.description
-          }}</v-list-item-subtitle>
-        </v-list-item>
+        <!--Establishment Name-->
+        <v-list-item-title>{{ establishment.data.name }}</v-list-item-title>
+        <!--Establishment Description-->
+        <v-list-item-subtitle>{{
+          establishment.data.description
+        }}</v-list-item-subtitle>
         <!--Divider-->
         <v-divider v-if="n + 1 < establishments.length" />
-      </v-list-item-group>
+      </v-list-item>
     </v-list>
     <!--Dialog-->
     <v-dialog v-model="dialog">
@@ -46,7 +45,7 @@
 
 <script>
 //Controller Import
-import { goToDetailPage } from "@/controllers/admin/establishments";
+import { goToDetailPage } from "@/controllers/admin/establishment";
 
 //View Import
 import EstablishmentNew from "@/views/admin/EstablishmentNew";

@@ -1,6 +1,6 @@
 //Plugin Imports
 import Store from "@/plugins/vuex";
-import { safePush } from '@/plugins/router';
+import { safePush } from "@/plugins/router";
 
 //Controller Import
 import { ManagerPage } from ".";

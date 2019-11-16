@@ -41,7 +41,7 @@ const routes = [
   },
   {
     path: "/manager/establishment",
-    name: "manager_establishment",
+    name: "manager_establishment_detail",
     component: () => import("@/views/manager/Restaurante.vue")
   },
   {
@@ -61,22 +61,22 @@ const routes = [
   },
   {
     path: "/order_handler/menu",
-    name: "order_handler_menu",
+    name: "order_handler_menu_detail",
     component: () => import("@/views/order_handler/CartaEncargado.vue")
   },
   {
     path: "/order_handler/orders",
-    name: "order_handler_orders",
+    name: "order_handler_order_list",
     component: () => import("@/views/order_handler/PedidosEncargado.vue")
   },
   {
     path: "/receptionist/reservations",
-    name: "receptionist_reservations",
+    name: "receptionist_reservation_list",
     component: () => import("@/views/receptionist/ReservationList.vue")
   },
   {
     path: "/receptionist/orders",
-    name: "receptionist_orders",
+    name: "receptionist_order_list",
     component: () => import("@/views/receptionist/OrderList.vue")
   }
 ];

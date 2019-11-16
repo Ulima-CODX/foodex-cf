@@ -10,7 +10,7 @@ export enum ManagerPage {
   none,
   establishmentDetail,
   menuDetail_dishList,
-  dishDetail,
+  dishDetail
 }
 
 //Modal Export

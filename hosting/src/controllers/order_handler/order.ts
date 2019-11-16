@@ -3,7 +3,7 @@ import Store from "@/plugins/vuex";
 import { safePush } from "@/plugins/router";
 
 //Controller Imports
-import { ReceptionistPage, ReceptionistModal } from ".";
+import { OrderHandlerPage } from ".";
 
 //Schema Import
 import { EstablishmentDocument } from "@/models/establishment/schema";
@@ -32,20 +32,8 @@ export async function goToListPage() {
       });
     })
   ).then(() => {
-    Store.commit("receptionistController/setOrderList", orderList);
-    Store.commit("receptionistController/setPage", ReceptionistPage.orderList);
-    safePush("receptionist_order_list");
+    Store.commit("orderHandlerController/setOrderList", orderList);
+    Store.commit("orderHandlerController/setPage", OrderHandlerPage.orderList);
+    safePush("order_handler_order_list");
   });
-}
-
-//showDetailModal
-export function showDetailModal() {
-  Store.commit(
-    "receptionistController/setModal",
-    ReceptionistModal.orderDetail
-  );
-}
-//hideDetailModal
-export function hideDetailModal() {
-  Store.commit("receptionistController/setModal");
 }

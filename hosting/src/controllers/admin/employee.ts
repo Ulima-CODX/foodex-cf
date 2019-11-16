@@ -5,7 +5,7 @@ import { safePush } from "@/plugins/router";
 //Controller Imports
 import { AdminPage } from ".";
 
-//goToList
+//goToListPage
 export function goToListPage() {
   Store.commit("adminController/setPage", AdminPage.employeeList);
   safePush("admin_employee_list");

@@ -47,7 +47,7 @@
 
 <script>
 //Controller Import
-import { create } from "@/controllers/admin/establishments";
+import { create } from "@/controllers/admin/establishment";
 
 //Schema Import
 import { CountryCollection } from "@/models/country/schema";

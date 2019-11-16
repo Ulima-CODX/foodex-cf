@@ -42,7 +42,7 @@ import { goToDetailPage as goToDishList } from "@/controllers/manager/menu";
 
 //Schema Import
 import { DishDocument } from "../../models/dish/schema";
-import { MenuDocument } from '../../models/menu/schema';
+import { MenuDocument } from "../../models/menu/schema";
 
 //Component Eport
 export default {
@@ -50,10 +50,10 @@ export default {
     action: Function
   },
   methods: {
-    back(){
+    back() {
       goToDishList();
     },
-    remove(){
+    remove() {
       this.menu.removeDish(this.dish);
       goToDishList();
     }
@@ -70,12 +70,12 @@ export default {
       this.data = await this.dish.read();
     }
   },
-  data(){
+  data() {
     return {
       menu: null,
       dish: null,
       data: {}
-    }
+    };
   },
   async mounted() {
     this.menu = new MenuDocument(this.menu_id);

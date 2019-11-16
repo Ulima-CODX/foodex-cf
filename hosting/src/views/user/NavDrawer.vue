@@ -38,10 +38,14 @@ import { mapGetters } from "vuex";
 //Controller Imports
 import { logout, AuthStatus } from "@/controllers/user/auth";
 import { getData } from "@/controllers/user/profile";
-import { goToDetailPage as goToEstablishmentPage } from "@/controllers/manager/establishment";
-import { goToDetailPage as goToMenuPage } from "@/controllers/manager/menu";
-import { goToListPage as goToOrderListPage } from "@/controllers/receptionist/orders";
-import { goToListPage as goToReservationListPage } from "@/controllers/receptionist/reservations";
+import { goToListPage as adminGoToEstablishmentPage } from "@/controllers/admin/establishment";
+import { goToListPage as adminGoToEmployeePage } from "@/controllers/admin/employee";
+import { goToDetailPage as managerGoToEstablishmentPage } from "@/controllers/manager/establishment";
+import { goToDetailPage as managerGoToMenuPage } from "@/controllers/manager/menu";
+import { goToDetailPage as orderHandlerGoToMenuPage } from "@/controllers/order_handler/menu";
+import { goToListPage as orderHandlerGoToOrderPage } from "@/controllers/order_handler/order";
+import { goToListPage as receptionistGoToOrderPage } from "@/controllers/receptionist/orders";
+import { goToListPage as receptionistGoToReservationPage } from "@/controllers/receptionist/reservations";
 
 //Component Import
 import NavLinkList from "@/views/components/NavLinkList";
@@ -57,24 +61,24 @@ export default {
       adminLinks: [
         {
           label: "Lista de Locales",
-          name: "admin_establishment_list",
+          action: adminGoToEstablishmentPage,
           icon: "mdi-view-list"
         },
         {
           label: "Lista de Empleados",
-          name: "admin_employee_list",
+          action: adminGoToEmployeePage,
           icon: "mdi-view-list"
         }
       ],
       managerLinks: [
         {
           label: "Local",
-          action: goToEstablishmentPage,
+          action: managerGoToEstablishmentPage,
           icon: "mdi-information"
         },
         {
           label: "Menu",
-          action: goToMenuPage,
+          action: managerGoToMenuPage,
           icon: "mdi-silverware-fork-knife"
         },
         {
@@ -86,24 +90,24 @@ export default {
       orderHandlerLinks: [
         {
           label: "Menu",
-          name: "order_handler_menu",
+          action: orderHandlerGoToMenuPage,
           icon: "mdi-silverware-fork-knife"
         },
         {
           label: "Pedidos",
-          name: "order_handler_orders",
+          action: orderHandlerGoToOrderPage,
           icon: "mdi-view-list"
         }
       ],
       receptionistLinks: [
         {
           label: "Reservas",
-          action: goToReservationListPage,
+          action: receptionistGoToOrderPage,
           icon: "mdi-view-list"
         },
         {
           label: "Pedidos",
-          action: goToOrderListPage,
+          action: receptionistGoToReservationPage,
           icon: "mdi-view-list"
         }
       ],

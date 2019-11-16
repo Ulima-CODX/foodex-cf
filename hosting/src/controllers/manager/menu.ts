@@ -71,7 +71,7 @@ export async function addDish(data: {
   const dish: DishDocument = await DishCollection.create(
     data.name,
     data.description,
-    parseInt(data.price)
+    parseFloat(data.price)
   );
   menu.addDish(dish);
 }

@@ -146,7 +146,7 @@ export function create(data: {
   );
 }
 
-//goToList
+//goToListPage
 export function goToListPage() {
   Store.commit("adminController/setPage", AdminPage.establishmentList);
   safePush("admin_establishment_list");
@@ -157,8 +157,9 @@ export function showNewModal() {
   Store.commit("adminController/setModal", AdminModal.establishmentNew);
 }
 
-//goToDetail
+//goToDetailPage
 export function goToDetailPage(establishment_id: string) {
+  Store.commit("adminController/setEstablishmentCurrent", establishment_id);
   Store.commit("adminController/setPage", AdminPage.establishmentDetail);
   safePush("admin_establishment_detail", {
     id: establishment_id

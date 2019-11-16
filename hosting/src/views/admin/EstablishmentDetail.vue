@@ -125,8 +125,11 @@
 </template>
 
 <script>
+//Plugin Import
+import { mapGetters } from "vuex";
+
 //Controller Import
-import { getData } from "@/controllers/admin/establishments";
+import { getData } from "@/controllers/admin/establishment";
 
 //View Import
 import EmployeeSelector from "@/views/admin/EmployeeSelector";
@@ -146,10 +149,10 @@ export default {
     },
     addEmployees(employees) {
       this.dialog = false;
-      console.log(this.role, employees);
+      //console.log(this.role, employees);
     },
     deleteEmployee(role, employee) {
-      console.log(role, employee);
+      //console.log(role, employee);
     }
   },
   data() {
@@ -163,6 +166,11 @@ export default {
         employees: {}
       }
     };
+  },
+  computed: {
+    ...mapGetters({
+      establishment_id: "userController/getEstablishmentCurrent"
+    })
   },
   async created() {
     this.establishment = new EstablishmentDocument(this.$route.params.id);

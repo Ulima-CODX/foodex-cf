@@ -2,11 +2,14 @@
 import { Module } from "vuex";
 import { RootState } from "@/plugins/vuex";
 
+//Data Import
+import { DishData } from "@/models/dish/data";
+import { OrderData } from "@/models/order/data";
+
 //Page Export
 export enum OrderHandlerPage {
   none,
   menuDetail_dishList,
-  dishDetail,
   orderList
 }
 
@@ -17,8 +20,16 @@ export type OrderHandlerControllerState = {
     current: string;
   };
   dish: {
-    list: string[];
-    current: string;
+    list: {
+      id: string;
+      data: DishData;
+    }[];
+  };
+  order: {
+    list: {
+      id: string;
+      data: OrderData;
+    }[];
   };
 };
 
@@ -34,8 +45,10 @@ export const orderHandlerController: Module<
       current: ""
     },
     dish: {
-      list: [],
-      current: ""
+      list: []
+    },
+    order: {
+      list: []
     }
   },
   mutations: {
@@ -47,30 +60,36 @@ export const orderHandlerController: Module<
       if (menu_id) state.menu.current = menu_id;
       else state.menu.current = "";
     },
-    setDishList(state: OrderHandlerControllerState, dish_ids?: string[]) {
-      if (dish_ids) state.dish.list = dish_ids;
+    setDishList(
+      state: OrderHandlerControllerState,
+      dishes?: {
+        id: string;
+        data: DishData;
+      }[]
+    ) {
+      if (dishes) state.dish.list = dishes;
       else state.dish.list = [];
     },
-    setDishCurrent(state: OrderHandlerControllerState, dish_id?: string) {
-      if (dish_id) state.dish.current = dish_id;
-      else state.dish.current = "";
+    setOrderList(
+      state: OrderHandlerControllerState,
+      orders: {
+        id: string;
+        data: OrderData;
+      }[]
+    ) {
+      if (orders) state.order.list = orders;
+      else state.order.list = [];
     }
   },
   getters: {
     getPage(state: OrderHandlerControllerState) {
       return state.page;
     },
-    setMenuCurrent(state: OrderHandlerControllerState, menu_id?: string) {
-      if (menu_id) state.menu.current = menu_id;
-      else state.menu.current = "";
+    getMenuCurrent(state: OrderHandlerControllerState) {
+      return state.menu.current;
     },
-    setDishList(state: OrderHandlerControllerState, dish_ids?: string[]) {
-      if (dish_ids) state.dish.list = dish_ids;
-      else state.dish.list = [];
-    },
-    setDishCurrent(state: OrderHandlerControllerState, dish_id?: string) {
-      if (dish_id) state.dish.current = dish_id;
-      else state.dish.current = "";
+    getDishList(state: OrderHandlerControllerState) {
+      return state.dish.list;
     }
   }
 };

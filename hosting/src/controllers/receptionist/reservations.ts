@@ -37,7 +37,7 @@ export async function goToListPage() {
       "receptionistController/setPage",
       ReceptionistPage.reservationList
     );
-    safePush("receptionist_reservations");
+    safePush("receptionist_reservation_list");
   });
 }
 
