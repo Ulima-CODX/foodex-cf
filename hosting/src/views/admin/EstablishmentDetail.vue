@@ -137,6 +137,7 @@ import EmployeeSelector from "@/views/admin/EmployeeSelector";
 //Schema Imports
 import { EstablishmentDocument } from "@/models/establishment/schema";
 
+//Controller Export
 export default {
   name: "establishment-detail",
   components: {
@@ -169,11 +170,17 @@ export default {
   },
   computed: {
     ...mapGetters({
-      establishment_id: "userController/getEstablishmentCurrent"
+      establishment_id: "adminController/getEstablishmentCurrent"
     })
   },
+  watch: {
+    establishment_id: async function(establishment_id) {
+      this.establishment = new EstablishmentDocument(establishment_id);
+      this.data = await getData(this.establishment);
+    }
+  },
   async created() {
-    this.establishment = new EstablishmentDocument(this.$route.params.id);
+    this.establishment = new EstablishmentDocument(this.establishment_id);
     this.data = await getData(this.establishment);
   }
 };
