@@ -2,7 +2,14 @@
   <v-card class="ma-4 flex">
     <!--Toolbar-->
     <v-toolbar color="#E41E2B" dark flat>
+      <v-btn icon @click="back()">
+        <v-icon>mdi-arrow-left</v-icon>
+      </v-btn>
       <v-toolbar-title>{{ data.name }}</v-toolbar-title>
+      <v-spacer />
+      <v-btn icon @click="remove()">
+        <v-icon>mdi-delete</v-icon>
+      </v-btn>
       <template v-slot:extension>
         <v-tabs v-model="tab" background-color="#E41E2B" color="#FFFFFF" grow>
           <v-tab href="#details">Details</v-tab>
@@ -48,79 +55,32 @@
       <!--Establishment Employees-->
       <v-tab-item value="employees">
         <v-card-text class="pa-0">
-          <v-list dense>
-            <v-list-item
-              >Managers:<v-spacer />
-              <v-btn text icon @click="showDialog('manager')">
-                <v-icon>mdi-pencil</v-icon>
-              </v-btn>
-            </v-list-item>
-            <v-list-item>
-              <v-list dense class="pa-0">
-                <v-list-item v-for="m in data.employees.managers" :key="m.id">
-                  {{ m.first_name }} {{ m.last_name }}<v-spacer />
-                  <v-btn text icon @click="deleteEmployee('manager', m.id)">
-                    <v-icon>mdi-close</v-icon>
-                  </v-btn>
-                </v-list-item>
-              </v-list>
-            </v-list-item>
-            <v-divider />
-            <v-list-item
-              >Order Handlers:<v-spacer />
-              <v-btn text icon @click="showDialog('order_handler')">
-                <v-icon>mdi-pencil</v-icon>
-              </v-btn></v-list-item
-            >
-            <v-list-item>
-              <v-list dense class="pa-0">
-                <v-list-item
-                  v-for="o in data.employees.order_handlers"
-                  :key="o.id"
-                >
-                  {{ o.first_name }} {{ o.last_name }}<v-spacer />
-                  <v-btn
-                    text
-                    icon
-                    @click="deleteEmployee('order_handler', o.id)"
-                  >
-                    <v-icon>mdi-close</v-icon>
-                  </v-btn>
-                </v-list-item>
-              </v-list>
-            </v-list-item>
-            <v-divider />
-            <v-list-item
-              >Receptionists:<v-spacer />
-              <v-btn text icon @click="showDialog('receptionist')">
-                <v-icon>mdi-pencil</v-icon>
-              </v-btn></v-list-item
-            >
-            <v-list-item>
-              <v-list dense class="pa-0">
-                <v-list-item
-                  v-for="r in data.employees.receptionists"
-                  :key="r.id"
-                >
-                  {{ r.first_name }} {{ r.last_name }}<v-spacer />
-                  <v-btn
-                    text
-                    icon
-                    @click="deleteEmployee('receptionist', r.id)"
-                  >
-                    <v-icon>mdi-close</v-icon>
-                  </v-btn>
-                </v-list-item>
-              </v-list>
-            </v-list-item>
+          <v-list dense class="pa-0">
+            <establishment-employee-list
+              title="Managers"
+              role="manager"
+              :list="data.employees.managers"
+              :add="addEmployee"
+              :del="delEmployee"
+            />
+            <establishment-employee-list
+              title="Order Handlers"
+              role="order_handler"
+              :list="data.employees.order_handlers"
+              :add="addEmployee"
+              :del="delEmployee"
+            />
+            <establishment-employee-list
+              title="Recepcionists"
+              role="receptionist"
+              :list="data.employees.receptionists"
+              :add="addEmployee"
+              :del="delEmployee"
+            />
           </v-list>
         </v-card-text>
       </v-tab-item>
     </v-tabs-items>
-    <!--Dialog-->
-    <v-dialog v-model="dialog">
-      <employee-selector :role="role" :action="addEmployees" />
-    </v-dialog>
   </v-card>
 </template>
 
@@ -128,39 +88,26 @@
 //Plugin Import
 import { mapGetters } from "vuex";
 
-//Controller Import
+//Controller Imports
 import { getData } from "@/controllers/admin/establishment";
+import { goToListPage } from "@/controllers/admin/establishment";
 
 //View Import
-import EmployeeSelector from "@/views/admin/EmployeeSelector";
+import EstablishmentEmployeeList from "@/views/admin/EstablishmentEmployeeList";
 
 //Schema Imports
 import { EstablishmentDocument } from "@/models/establishment/schema";
+import { EmployeeDocument } from "@/models/employee/schema";
 
 //Controller Export
 export default {
   name: "establishment-detail",
   components: {
-    EmployeeSelector
-  },
-  methods: {
-    showDialog(role) {
-      this.dialog = true;
-      this.role = role;
-    },
-    addEmployees(employees) {
-      this.dialog = false;
-      //console.log(this.role, employees);
-    },
-    deleteEmployee(role, employee) {
-      //console.log(role, employee);
-    }
+    EstablishmentEmployeeList
   },
   data() {
     return {
       tab: null,
-      dialog: false,
-      role: "",
       establishment: null,
       data: {
         country: {},
@@ -172,6 +119,30 @@ export default {
     ...mapGetters({
       establishment_id: "adminController/getEstablishmentCurrent"
     })
+  },
+  methods: {
+    back: function() {
+      goToListPage();
+    },
+    addEmployee: function(role) {
+      return function(employee_ids) {
+        employee_ids.map(employee_id => {
+          this.establishment.assignEmployee(
+            new EmployeeDocument(employee_id),
+            role
+          );
+        });
+      };
+    },
+    delEmployee: function(role, employee_id) {
+      this.establishment.dismissEmployee(
+        new EmployeeDocument(employee_id),
+        role
+      );
+    },
+    remove: function() {
+      this.establishment.delete();
+    }
   },
   watch: {
     establishment_id: async function(establishment_id) {

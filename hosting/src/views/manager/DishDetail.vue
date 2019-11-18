@@ -6,6 +6,10 @@
         <v-icon>mdi-arrow-left</v-icon>
       </v-btn>
       <v-toolbar-title>{{ data.name }}</v-toolbar-title>
+      <v-spacer />
+      <v-btn icon @click="remove()">
+        <v-icon>mdi-delete</v-icon>
+      </v-btn>
     </v-toolbar>
     <!--Details-->
     <v-card-text class="pa-0">
@@ -24,12 +28,6 @@
         </v-list-item>
       </v-list>
     </v-card-text>
-    <!---->
-    <v-divider />
-    <v-card-actions>
-      <v-spacer />
-      <v-btn text color="warning" @click="remove()">Delete</v-btn>
-    </v-card-actions>
   </v-card>
 </template>
 
