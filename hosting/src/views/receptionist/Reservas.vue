@@ -46,6 +46,7 @@
           </v-list-item>
 
           <v-divider v-if="index + 1 < items.length" :key="index"></v-divider>
+        
         </template>
       </v-list-item-group>
     </v-list>
@@ -53,6 +54,10 @@
 </template>
 
 <script>
+//Plugin Import
+import { mapGetters } from "vuex";
+
+//Component Export
 export default {
   data: () => ({
     selected: [],
@@ -96,6 +101,11 @@ export default {
         icon: "mdi-logout"
       }
     ]
-  })
-};
+  }),
+  computed: {
+    ...mapGetters({
+        reservations: "receptionistController/getReservationList"
+      })
+    }
+  };
 </script>
