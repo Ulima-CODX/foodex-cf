@@ -6,7 +6,6 @@
       <template v-slot:extension>
         <v-tabs v-model="tab" background-color="#E41E2B" color="#FFFFFF" grow>
           <v-tab href="#details">Details</v-tab>
-          <v-tab href="#employees">Employees</v-tab>
         </v-tabs>
       </template>
     </v-toolbar>
@@ -16,71 +15,27 @@
       <v-tab-item value="details">
         <v-card-text class="pa-0">
           <v-list dense>
-            <v-list-item>Name: {{ data.name }}</v-list-item>
-            <v-list-item>Description: {{ data.description }}</v-list-item>
-            <v-list-item>Address: {{ data.address }}</v-list-item>
-            <v-list-item>Phone: {{ data.phone }}</v-list-item>
-            <v-list-item
-              >Country:
-              <img class="ml-2 mr-1" :src="data.country.flag_url" />
-              {{ data.country.name }}</v-list-item
-            >
-            <v-list-item>Working Hours:</v-list-item>
             <v-list-item>
-              <v-list dense class="pa-0">
-                <v-list-item v-for="(wh, i) in data.working_hours" :key="i">
-                  <v-list-item-content>
-                    <v-list-item-title>
-                      <span class="mr-1" v-for="day in wh.days" :key="day">{{
-                        day
-                      }}</span>
-                    </v-list-item-title>
-                    <v-list-item-subtitle
-                      >{{ wh.open }} - {{ wh.close }}</v-list-item-subtitle
-                    >
-                  </v-list-item-content>
-                </v-list-item>
-              </v-list>
+              <v-list-item-action>
+                <v-icon>mdi-map-marker</v-icon>
+              </v-list-item-action>         
+              <v-list-item-content>Address: {{ data.address }}</v-list-item-content>   
+              <v-spacer></v-spacer>
+                <v-btn icon>
+                  <v-icon>mdi-border-color</v-icon>
+                </v-btn>
             </v-list-item>
-          </v-list>
-        </v-card-text>
-      </v-tab-item>
-      <!--Establishment Employees-->
-      <v-tab-item value="employees">
-        <v-card-text class="pa-0">
-          <v-list dense>
-            <v-list-item>Managers: </v-list-item>
             <v-list-item>
-              <v-list dense class="pa-0">
-                <v-list-item v-for="m in data.employees.managers" :key="m.id">
-                  {{ m.first_name }} {{ m.last_name }}
-                </v-list-item>
-              </v-list>
+              <v-list-item-action>
+                <v-icon>mdi-phone</v-icon>
+              </v-list-item-action>            
+              <v-list-item-content>Phone: {{ data.phone }}</v-list-item-content>
+              <v-spacer></v-spacer>
+                <v-btn icon>
+                  <v-icon>mdi-border-color</v-icon>
+                </v-btn>
             </v-list-item>
-            <v-divider />
-            <v-list-item>Order Handlers:</v-list-item>
-            <v-list-item>
-              <v-list dense class="pa-0">
-                <v-list-item
-                  v-for="o in data.employees.order_handlers"
-                  :key="o.id"
-                >
-                  {{ o.first_name }} {{ o.last_name }}
-                </v-list-item>
-              </v-list>
-            </v-list-item>
-            <v-divider />
-            <v-list-item>Receptionists:</v-list-item>
-            <v-list-item>
-              <v-list dense class="pa-0">
-                <v-list-item
-                  v-for="r in data.employees.receptionists"
-                  :key="r.id"
-                >
-                  {{ r.first_name }} {{ r.last_name }}
-                </v-list-item>
-              </v-list>
-            </v-list-item>
+
           </v-list>
         </v-card-text>
       </v-tab-item>
