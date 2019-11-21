@@ -42,7 +42,7 @@ const routes = [
   {
     path: "/manager/establishment",
     name: "manager_establishment_detail",
-    component: () => import("@/views/manager/Restaurante.vue")
+    component: () => import("@/views/manager/EstablishmentDetail.vue")
   },
   {
     path: "/manager/menu",
