@@ -17,13 +17,33 @@
           <v-list dense>
             <v-list-item>
               <v-list-item-action>
+                <v-icon>mdi-silverware</v-icon>
+              </v-list-item-action>
+              <v-list-item-content>Name: {{ data.name }}</v-list-item-content>
+              <v-spacer></v-spacer>
+              <v-btn icon>
+                <v-icon>mdi-border-color</v-icon>
+              </v-btn>
+            </v-list-item>
+            <v-list-item>
+              <v-list-item-action>
+                <v-icon>mdi-information-variant</v-icon>
+              </v-list-item-action>
+              <v-list-item-content>Description: {{ data.description }}</v-list-item-content>
+              <v-spacer></v-spacer>
+              <v-btn icon>
+                <v-icon>mdi-border-color</v-icon>
+              </v-btn>
+            </v-list-item>
+            <v-list-item>
+              <v-list-item-action>
                 <v-icon>mdi-map-marker</v-icon>
               </v-list-item-action>
               <v-list-item-content
                 >Address: {{ data.address }}</v-list-item-content
               >
               <v-spacer></v-spacer>
-              <v-btn icon>
+              <v-btn icon @click="setAddress('Calle 1')">
                 <v-icon>mdi-border-color</v-icon>
               </v-btn>
             </v-list-item>
@@ -37,6 +57,41 @@
                 <v-icon>mdi-border-color</v-icon>
               </v-btn>
             </v-list-item>
+            <v-list-item>
+              <v-list-item-action>
+                <v-icon>mdi-flag</v-icon>
+              </v-list-item-action>
+              <v-list-item-content>Country: {{ data.country.name }}</v-list-item-content>
+              <v-spacer></v-spacer>
+              <v-btn icon>
+                <v-icon>mdi-border-color</v-icon>
+              </v-btn>
+            </v-list-item> 
+            <v-list-item>
+              <v-list-item-action>
+                <v-icon>mdi-briefcase</v-icon>
+              </v-list-item-action>
+              <v-list-item-content>Working Hours: <v-list-item>
+              <v-list dense class="pa-0">
+                <v-list-item v-for="(wh, i) in data.working_hours" :key="i">
+                  <v-list-item-content>
+                    <v-list-item-title>
+                      <span class="mr-1" v-for="day in wh.days" :key="day">{{
+                        day
+                      }}</span>
+                    </v-list-item-title>
+                    <v-list-item-subtitle
+                      >{{ wh.open }} - {{ wh.close }}</v-list-item-subtitle
+                    >
+                  </v-list-item-content>
+                </v-list-item>
+              </v-list>
+            </v-list-item></v-list-item-content>
+              <v-spacer></v-spacer>
+              <v-btn icon>
+                <v-icon>mdi-border-color</v-icon>
+              </v-btn>
+            </v-list-item> 
           </v-list>
         </v-card-text>
       </v-tab-item>
@@ -47,8 +102,11 @@
 </template>
 
 <script>
+//Plugin Import
+import { mapGetters } from "vuex";
+
 //Controller Import
-import { getData } from "@/controllers/admin/establishments";
+import { getData } from "@/controllers/manager/establishment";
 
 //Schema Imports
 import { EstablishmentDocument } from "@/models/establishment/schema";
@@ -56,8 +114,11 @@ import { EstablishmentDocument } from "@/models/establishment/schema";
 export default {
   name: "establishment-detail",
   methods: {
-    showDialog(role) {
+    showDialog: function(role) {
       this.dialog = true;
+    },
+    setAddress: function(address){
+      this.establishment.setAddress(address)
     }
   },
   data() {
@@ -72,9 +133,14 @@ export default {
       }
     };
   },
+  computed: {
+    ...mapGetters({
+      establishment_id: "userController/getUserEstablishment"
+    })
+  },
   async created() {
-    this.establishment = new EstablishmentDocument(this.$route.params.id);
-    this.data = await getData(this.establishment);
+    this.establishment = new EstablishmentDocument(this.establishment_id);
+    this.data = await getData();
   }
 };
 </script>

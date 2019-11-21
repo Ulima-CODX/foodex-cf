@@ -42,7 +42,7 @@ export type EstablishmentProfile = null | {
 };
 
 //
-async function getEmployeeDescriptions(
+export async function getEmployeeDescriptions(
   employees: Record<string, string[]>,
   employee_type: "manager" | "order_handler" | "receptionist"
 ): Promise<EstablishmentEmployee[]> {
