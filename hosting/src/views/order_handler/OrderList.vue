@@ -25,11 +25,19 @@
         <v-list-item :key="order.id">
           <template v-slot:default="{ active, toggle }">
             <v-list-item-content>
-              <v-list-item-title v-text="order.data.client_id" />
+              <v-list-item-title>
+                {{ order.data.client.firstName }}
+                {{ order.data.client.lastName }}
+              </v-list-item-title>
+              <v-list-item-subtitle class="text--primary">
+                {{ order.data.comment }}
+              </v-list-item-subtitle>
               <v-list-item-subtitle
+                v-for="dish in order.data.dishes"
+                :key="dish.id"
                 class="text--primary"
-                v-text="order.data.dish_ids"
-              />
+                >{{ dish.name }}
+              </v-list-item-subtitle>
             </v-list-item-content>
             <v-list-item-action>
               <v-list-item-action-text v-text="order.data.time" />

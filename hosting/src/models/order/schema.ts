@@ -5,8 +5,7 @@ import {
   FS_Document,
   FS_DocumentData,
   Timestamp,
-  FieldValue,
-  FS_Query
+  FieldValue
 } from "@/plugins/firebase";
 
 //Schema Imports
@@ -101,7 +100,7 @@ export abstract class OrderCollection {
       total: 0,
       discount: 0,
       total_to_pay: 0,
-      timestamp: Timestamp.now()
+      time: Timestamp.now()
     };
     return OrderCollection.ref
       .add(orderData)
