@@ -46,7 +46,6 @@
           </v-list-item>
 
           <v-divider v-if="index + 1 < items.length" :key="index"></v-divider>
-        
         </template>
       </v-list-item-group>
     </v-list>
@@ -104,8 +103,8 @@ export default {
   }),
   computed: {
     ...mapGetters({
-        reservations: "receptionistController/getReservationList"
-      })
-    }
-  };
+      reservations: "receptionistController/getReservationList"
+    })
+  }
+};
 </script>
