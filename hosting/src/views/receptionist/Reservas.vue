@@ -53,6 +53,10 @@
 </template>
 
 <script>
+//Plugin Import
+import { mapGetters } from "vuex";
+
+//Component Export
 export default {
   data: () => ({
     selected: [],
@@ -96,6 +100,11 @@ export default {
         icon: "mdi-logout"
       }
     ]
-  })
+  }),
+  computed: {
+    ...mapGetters({
+      reservations: "receptionistController/getReservationList"
+    })
+  }
 };
 </script>

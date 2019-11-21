@@ -101,12 +101,12 @@ export default {
       ],
       receptionistLinks: [
         {
-          label: "Reservas",
+          label: "Pedidos",
           action: receptionistGoToOrderPage,
           icon: "mdi-view-list"
         },
         {
-          label: "Pedidos",
+          label: "Reservas",
           action: receptionistGoToReservationPage,
           icon: "mdi-view-list"
         }
