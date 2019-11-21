@@ -62,12 +62,12 @@ const routes = [
   {
     path: "/order_handler/menu",
     name: "order_handler_menu_detail",
-    component: () => import("@/views/order_handler/CartaEncargado.vue")
+    component: () => import("@/views/order_handler/MenuDetail.vue")
   },
   {
     path: "/order_handler/orders",
     name: "order_handler_order_list",
-    component: () => import("@/views/order_handler/PedidosEncargado.vue")
+    component: () => import("@/views/order_handler/OrderList.vue")
   },
   {
     path: "/receptionist/reservations",

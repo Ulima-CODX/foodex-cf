@@ -90,6 +90,9 @@ export const orderHandlerController: Module<
     },
     getDishList(state: OrderHandlerControllerState) {
       return state.dish.list;
+    },
+    getOrderList(state: OrderHandlerControllerState) {
+      return state.order.list;
     }
   }
 };

@@ -12,3 +12,20 @@ export type OrderData = {
   total_to_pay: number;
   timestamp: Timestamp;
 };
+export type OrderDisplayData = {
+  status: string;
+  client: {
+    id: string;
+    firstName: string;
+    lastName: string;
+  };
+  dishes: {
+    id: string;
+    name: string;
+  }[];
+  comment: string;
+  total: number;
+  discount: number;
+  total_to_pay: number;
+  time: Date;
+};

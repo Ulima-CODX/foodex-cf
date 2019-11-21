@@ -44,6 +44,7 @@ import { goToDetailPage as goToDishDetail } from "@/controllers/manager/dish";
 
 //Component Import
 import DishNew from "@/views/manager/DishNew";
+
 //Component Export
 export default {
   components: {

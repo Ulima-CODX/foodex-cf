@@ -8,10 +8,14 @@ import { OrderHandlerPage } from ".";
 //Schema Import
 import { EstablishmentDocument } from "@/models/establishment/schema";
 import { OrderDocument } from "@/models/order/schema";
+import { UserDocument } from "@/models/user/schema";
+import { DishDocument } from "@/models/dish/schema";
 
 //Data Import
 import { EstablishmentData } from "@/models/establishment/data";
-import { OrderData } from "@/models/order/data";
+import { OrderDisplayData, OrderData } from "@/models/order/data";
+import { UserData } from "@/models/user/data";
+import { DishData } from "@/models/dish/data";
 
 //goToListPage
 export async function goToListPage() {
@@ -22,13 +26,43 @@ export async function goToListPage() {
   ).read();
   let orderList: {
     id: string;
-    data: OrderData;
+    data: OrderDisplayData;
   }[] = [];
   Promise.all(
     establishment_data.order_ids.map(async (order_id: string) => {
+      const orderData: OrderData = await new OrderDocument(order_id).read();
+      console.log(orderData);
+      const userData: UserData = await new UserDocument(
+        orderData.client_id
+      ).read();
+      let dishList: {
+        id: string;
+        name: string;
+      }[] = [];
+      Object.keys(orderData.dish_ids).map(async (dish_id: string) => {
+        const dishData: DishData = await new DishDocument(dish_id).read();
+        console.log(dish_id, dishData);
+        dishList.push({
+          id: dish_id,
+          name: dishData.name
+        });
+      });
       orderList.push({
         id: order_id,
-        data: await new OrderDocument(order_id).read()
+        data: {
+          status: orderData.status,
+          client: {
+            id: orderData.client_id,
+            firstName: userData.first_name,
+            lastName: userData.last_name
+          },
+          dishes: dishList,
+          comment: orderData.comment,
+          total: orderData.total,
+          discount: orderData.discount,
+          total_to_pay: orderData.total_to_pay,
+          time: orderData.timestamp.toDate()
+        }
       });
     })
   ).then(() => {
