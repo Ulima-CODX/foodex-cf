@@ -14,6 +14,7 @@
       multiple
       active-class="red-text">
         <v-list-item v-for="reservation in reservations" :key="reservation.id">
+          <template v-slot:default="{ active, toggle }">
           <v-list-item-content>
             <!--v-list-item-title v-text="`ID: ${reservation.id}`"/-->
             <v-list-item-title v-text="`Juanito Alcachofa`"/>
@@ -46,6 +47,7 @@
               <v-icon>mdi-checkbox-marked-circle</v-icon>
             </v-btn>
           </v-list-item-action>
+          </template>
         </v-list-item>
       </v-list-item-group>
   </v-card>
