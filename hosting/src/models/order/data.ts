@@ -10,7 +10,7 @@ export type OrderData = {
   total: number;
   discount: number;
   total_to_pay: number;
-  timestamp: Timestamp;
+  time: Timestamp;
 };
 export type OrderDisplayData = {
   status: string;
