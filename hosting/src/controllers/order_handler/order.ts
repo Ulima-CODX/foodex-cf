@@ -40,15 +40,10 @@ export async function goToListPage() {
         id: string;
         name: string;
       }[] = await Promise.all(
-        Object.keys(orderData.dish_ids).map(async (dish_id: string) => {
-          console.log('Dish id', dish_id);
-          const dishData: DishData = await new DishDocument(dish_id).read();
-          console.log('Dish data', dishData);
-          return {
-            id: dish_id,
-            name: dishData.name
-          };
-        })
+        Object.keys(orderData.dish_ids).map(async (dish_id: string) => ({
+          id: dish_id,
+          name: (await new DishDocument(dish_id).read()).name
+        }))
       );
       console.log("DishData", dishList);
       orderList.push({
