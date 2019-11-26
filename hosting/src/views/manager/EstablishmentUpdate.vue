@@ -2,7 +2,7 @@
   <v-card class="flex">
     <!--Toolbar-->
     <v-toolbar color="#E41E2B" dark flat>
-      <v-toolbar-title>Modify Establishment</v-toolbar-title>
+      <v-toolbar-title>Edit Establishment</v-toolbar-title>
     </v-toolbar>
     <!--Establishment Form-->
     <v-card-text>
@@ -36,6 +36,10 @@
       <v-btn
         color="info"
         @click="
+          setName(form.name);
+          setDescription(form.description);
+          setAddress(form.address);
+          setPhone(form.phone);  
           dialog = false;
         "
         >Modificar</v-btn
@@ -59,26 +63,28 @@ import { EstablishmentDocument } from "@/models/establishment/schema";
 export default {
   name: "establishment-update",
   methods: {
+    setName: function(name){
+        this.establishment.setName(name);
+    },
     setDescription: function(description){
         this.establishment.setDescription(description);
-    },
+    },     
     setAddress: function(address) {
         this.establishment.setAddress(address);
     },
-    setPhone:function(phone){
+    setPhone: function(phone){
         this.establishment.setPhone(phone);
     }
   },
   data() {
     return {
-      create,
       form: {
         name: "",
         description: "",
         address: "",
         phone: "",
         country_id: ""
-      },
+      },   
       countries: []
     };
   },
