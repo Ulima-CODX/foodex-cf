@@ -3,6 +3,10 @@
     <!--Toolbar-->
     <v-toolbar color="#E41E2B" dark flat>
       <v-toolbar-title>{{ data.name }}</v-toolbar-title>
+      <v-spacer></v-spacer>
+      <v-btn icon @click="dialog = true">
+        <v-icon>mdi-border-color</v-icon>
+      </v-btn>
       <template v-slot:extension>
         <v-tabs v-model="tab" background-color="#E41E2B" color="#FFFFFF" grow>
           <v-tab href="#details">Details</v-tab>
@@ -20,20 +24,12 @@
                 <v-icon>mdi-silverware</v-icon>
               </v-list-item-action>
               <v-list-item-content>Name: {{ data.name }}</v-list-item-content>
-              <v-spacer></v-spacer>
-              <v-btn icon>
-                <v-icon>mdi-border-color</v-icon>
-              </v-btn>
             </v-list-item>
             <v-list-item>
               <v-list-item-action>
                 <v-icon>mdi-information-variant</v-icon>
               </v-list-item-action>
               <v-list-item-content>Description: {{ data.description }}</v-list-item-content>
-              <v-spacer></v-spacer>
-              <v-btn icon>
-                <v-icon>mdi-border-color</v-icon>
-              </v-btn>
             </v-list-item>
             <v-list-item>
               <v-list-item-action>
@@ -52,20 +48,12 @@
                 <v-icon>mdi-phone</v-icon>
               </v-list-item-action>
               <v-list-item-content>Phone: {{ data.phone }}</v-list-item-content>
-              <v-spacer></v-spacer>
-              <v-btn icon>
-                <v-icon>mdi-border-color</v-icon>
-              </v-btn>
             </v-list-item>
             <v-list-item>
               <v-list-item-action>
                 <v-icon>mdi-flag</v-icon>
               </v-list-item-action>
               <v-list-item-content>Country: {{ data.country.name }}</v-list-item-content>
-              <v-spacer></v-spacer>
-              <v-btn icon>
-                <v-icon>mdi-border-color</v-icon>
-              </v-btn>
             </v-list-item> 
             <v-list-item>
               <v-list-item-action>
@@ -81,23 +69,21 @@
                       }}</span>
                     </v-list-item-title>
                     <v-list-item-subtitle
-                      >{{ wh.open }} - {{ wh.close }}</v-list-item-subtitle
+                      >{{ wh.open }}  {{ wh.close }}</v-list-item-subtitle
                     >
                   </v-list-item-content>
                 </v-list-item>
               </v-list>
             </v-list-item></v-list-item-content>
-              <v-spacer></v-spacer>
-              <v-btn icon>
-                <v-icon>mdi-border-color</v-icon>
-              </v-btn>
             </v-list-item> 
           </v-list>
         </v-card-text>
       </v-tab-item>
     </v-tabs-items>
     <!--Dialog-->
-    <v-dialog v-model="dialog"> </v-dialog>
+    <v-dialog v-model="dialog">
+      <establishment-update />
+    </v-dialog>
   </v-card>
 </template>
 
@@ -108,11 +94,17 @@ import { mapGetters } from "vuex";
 //Controller Import
 import { getData } from "@/controllers/manager/establishment";
 
+//View Import
+import EstablishmentUpdate from "@/views/manager/EstablishmentUpdate";
+
 //Schema Imports
 import { EstablishmentDocument } from "@/models/establishment/schema";
 
 export default {
   name: "establishment-detail",
+  components: {
+    EstablishmentUpdate
+  },
   methods: {
     showDialog: function(role) {
       this.dialog = true;
