@@ -39,7 +39,7 @@ export class EstablishmentDocument {
     this.ref.update({ name });
   public setDescription = async (description: string): Promise<void> =>
     this.ref.update({ description });
-  public setAddress = async (address:string): Promise<void> => 
+  public setAddress = async (address: string): Promise<void> =>
     this.ref.update({ address });
   public setPhone = async (phone: string): Promise<void> =>
     this.ref.update({ phone });

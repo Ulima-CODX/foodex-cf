@@ -109,8 +109,8 @@ export default {
     showDialog: function(role) {
       this.dialog = true;
     },
-    setAddress: function(address){
-      this.establishment.setAddress(address)
+    setAddress: function(address) {
+      this.establishment.setAddress(address);
     }
   },
   data() {

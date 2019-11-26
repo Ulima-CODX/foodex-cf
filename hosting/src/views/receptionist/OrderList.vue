@@ -3,7 +3,7 @@
     <!--Toolbar-->
     <v-toolbar color="#E41E2B" dark flat>
       <v-toolbar-title>Orders</v-toolbar-title>
-      <v-spacer/>
+      <v-spacer />
       <v-btn icon>
         <v-icon>mdi-checkbox-marked-circle</v-icon>
       </v-btn>
@@ -12,6 +12,7 @@
     <v-list two-line>
     <v-list-item-group>
       <v-list-item v-for="order in orders" :key="order.id">
+        <template v-slot:default="{ active, toggle }">
         <v-list-item-content>
           <!--v-list-item-title v-text="`ID: ${order.id}`"/-->
           <v-list-item-title v-text="`Juanito Alcachofa`"/>
@@ -50,6 +51,7 @@
           <v-icon>mdi-checkbox-marked-circle</v-icon>
         </v-btn>
       </v-list-item-action>
+      </template>
       </v-list-item>
     </v-list-item-group>
     </v-list>

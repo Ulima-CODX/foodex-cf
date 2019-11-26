@@ -31,25 +31,21 @@ export async function goToListPage() {
   Promise.all(
     establishment_data.order_ids.map(async (order_id: string) => {
       const orderData: OrderData = await new OrderDocument(order_id).read();
-      console.log('OrderData', orderData);
+      console.log("OrderData", orderData);
       const userData: UserData = await new UserDocument(
         orderData.client_id
       ).read();
-      console.log('UserData', userData)
+      console.log("UserData", userData);
       const dishList: {
         id: string;
         name: string;
       }[] = await Promise.all(
-        Object.keys(orderData.dish_ids).map(async (dish_id: string) => {
-          const dishData: DishData = await new DishDocument(dish_id).read();
-          console.log(dish_id, dishData);
-          return {
-            id: dish_id,
-            name: dishData.name
-          };
-        })
+        Object.keys(orderData.dish_ids).map(async (dish_id: string) => ({
+          id: dish_id,
+          name: (await new DishDocument(dish_id).read()).name
+        }))
       );
-      console.log('DishData', dishList);
+      console.log("DishData", dishList);
       orderList.push({
         id: order_id,
         data: {
@@ -64,7 +60,7 @@ export async function goToListPage() {
           total: orderData.total,
           discount: orderData.discount,
           total_to_pay: orderData.total_to_pay,
-          time: orderData.timestamp.toDate()
+          time: orderData.time.toDate()
         }
       });
     })
