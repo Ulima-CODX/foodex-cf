@@ -38,10 +38,6 @@
               <v-list-item-content
                 >Address: {{ data.address }}</v-list-item-content
               >
-              <v-spacer></v-spacer>
-              <v-btn icon @click="setAddress('Calle 1')">
-                <v-icon>mdi-border-color</v-icon>
-              </v-btn>
             </v-list-item>
             <v-list-item>
               <v-list-item-action>

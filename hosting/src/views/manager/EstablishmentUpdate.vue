@@ -36,7 +36,6 @@
       <v-btn
         color="info"
         @click="
-          create(form);
           dialog = false;
         "
         >Modificar</v-btn
@@ -49,7 +48,6 @@
 //Plugin Import
 import { mapGetters } from "vuex";
 //Controller Import
-import { create } from "@/controllers/admin/establishment";
 import { getData } from "@/controllers/manager/establishment";
 
 //Schema Import
@@ -57,8 +55,20 @@ import { CountryCollection } from "@/models/country/schema";
 import { EstablishmentCollection } from "@/models/establishment/schema";
 import { EstablishmentDocument } from "@/models/establishment/schema";
 
+
 export default {
   name: "establishment-update",
+  methods: {
+    setDescription: function(description){
+        this.establishment.setDescription(description);
+    },
+    setAddress: function(address) {
+        this.establishment.setAddress(address);
+    },
+    setPhone:function(phone){
+        this.establishment.setPhone(phone);
+    }
+  },
   data() {
     return {
       create,
