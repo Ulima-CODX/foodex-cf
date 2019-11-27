@@ -19,7 +19,7 @@ exports.getDishList = async function(req, res) {
 }
 
 exports.getDishSingle = async function(req, res) {
-    result = await collection.doc(req.query.id)
+    result = await collection.doc(req.query.id).get()
     .then(doc=>formatDoc(doc))
     .catch(err => {console.error(err); return {}});
     return res.status(200).send(JSON.stringify(result));
