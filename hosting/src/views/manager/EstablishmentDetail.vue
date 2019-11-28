@@ -29,7 +29,9 @@
               <v-list-item-action>
                 <v-icon>mdi-information-variant</v-icon>
               </v-list-item-action>
-              <v-list-item-content>Description: {{ data.description }}</v-list-item-content>
+              <v-list-item-content
+                >Description: {{ data.description }}</v-list-item-content
+              >
             </v-list-item>
             <v-list-item>
               <v-list-item-action>
@@ -49,29 +51,37 @@
               <v-list-item-action>
                 <v-icon>mdi-flag</v-icon>
               </v-list-item-action>
-              <v-list-item-content>Country: {{ data.country.name }}</v-list-item-content>
-            </v-list-item> 
+              <v-list-item-content
+                >Country: {{ data.country.name }}</v-list-item-content
+              >
+            </v-list-item>
             <v-list-item>
               <v-list-item-action>
                 <v-icon>mdi-briefcase</v-icon>
               </v-list-item-action>
-              <v-list-item-content>Working Hours: <v-list-item>
-              <v-list dense class="pa-0">
-                <v-list-item v-for="(wh, i) in data.working_hours" :key="i">
-                  <v-list-item-content>
-                    <v-list-item-title>
-                      <span class="mr-1" v-for="day in wh.days" :key="day">{{
-                        day
-                      }}</span>
-                    </v-list-item-title>
-                    <v-list-item-subtitle
-                      >{{ wh.open }}  {{ wh.close }}</v-list-item-subtitle
-                    >
-                  </v-list-item-content>
-                </v-list-item>
-              </v-list>
-            </v-list-item></v-list-item-content>
-            </v-list-item> 
+              <v-list-item-content
+                >Working Hours:
+                <v-list-item>
+                  <v-list dense class="pa-0">
+                    <v-list-item v-for="(wh, i) in data.working_hours" :key="i">
+                      <v-list-item-content>
+                        <v-list-item-title>
+                          <span
+                            class="mr-1"
+                            v-for="day in wh.days"
+                            :key="day"
+                            >{{ day }}</span
+                          >
+                        </v-list-item-title>
+                        <v-list-item-subtitle
+                          >{{ wh.open }} {{ wh.close }}</v-list-item-subtitle
+                        >
+                      </v-list-item-content>
+                    </v-list-item>
+                  </v-list>
+                </v-list-item></v-list-item-content
+              >
+            </v-list-item>
           </v-list>
         </v-card-text>
       </v-tab-item>

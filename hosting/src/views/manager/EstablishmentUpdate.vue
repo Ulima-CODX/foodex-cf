@@ -39,7 +39,7 @@
           setName(form.name);
           setDescription(form.description);
           setAddress(form.address);
-          setPhone(form.phone);  
+          setPhone(form.phone);
           dialog = false;
         "
         >Modificar</v-btn
@@ -59,21 +59,20 @@ import { CountryCollection } from "@/models/country/schema";
 import { EstablishmentCollection } from "@/models/establishment/schema";
 import { EstablishmentDocument } from "@/models/establishment/schema";
 
-
 export default {
   name: "establishment-update",
   methods: {
-    setName: function(name){
-        this.establishment.setName(name);
+    setName: function(name) {
+      this.establishment.setName(name);
     },
-    setDescription: function(description){
-        this.establishment.setDescription(description);
-    },     
+    setDescription: function(description) {
+      this.establishment.setDescription(description);
+    },
     setAddress: function(address) {
-        this.establishment.setAddress(address);
+      this.establishment.setAddress(address);
     },
-    setPhone: function(phone){
-        this.establishment.setPhone(phone);
+    setPhone: function(phone) {
+      this.establishment.setPhone(phone);
     }
   },
   data() {
@@ -84,7 +83,7 @@ export default {
         address: "",
         phone: "",
         country_id: ""
-      },   
+      },
       countries: []
     };
   },
