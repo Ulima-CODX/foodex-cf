@@ -23,17 +23,41 @@
       <v-tab-item value="details">
         <v-card-text class="pa-0">
           <v-list dense>
-            <v-list-item>Name: {{ data.name }}</v-list-item>
-            <v-list-item>Description: {{ data.description }}</v-list-item>
-            <v-list-item>Address: {{ data.address }}</v-list-item>
-            <v-list-item>Phone: {{ data.phone }}</v-list-item>
-            <v-list-item
-              >Country:
-              <img class="ml-2 mr-1" :src="data.country.flag_url" />
-              {{ data.country.name }}</v-list-item
-            >
-            <v-list-item>Working Hours:</v-list-item>
             <v-list-item>
+              <v-list-item-action>
+                <v-icon>mdi-silverware</v-icon>
+              </v-list-item-action> 
+              <v-list-item-content>Name: {{ data.name }}</v-list-item-content>
+            </v-list-item>
+            <v-list-item>
+              <v-list-item-action>
+                <v-icon>mdi-information-variant</v-icon>
+              </v-list-item-action>               
+              <v-list-item-content>Description: {{ data.description }}</v-list-item-content>
+            </v-list-item>
+            <v-list-item>
+              <v-list-item-action>
+                <v-icon>mdi-map-marker</v-icon>
+              </v-list-item-action>  
+              <v-list-item-content>Address: {{ data.address }}</v-list-item-content>
+            </v-list-item>
+            <v-list-item>
+              <v-list-item-action>
+                <v-icon>mdi-phone</v-icon>
+              </v-list-item-action> 
+              <v-list-item-content>Phone: {{ data.phone }}</v-list-item-content> 
+            </v-list-item>
+            <v-list-item>
+              <v-list-item-action>
+                <v-icon>mdi-flag</v-icon>
+              </v-list-item-action> 
+              <v-list-item-content> Country: {{ data.country.name }}</v-list-item-content>
+            </v-list-item>
+            <v-list-item>
+              <v-list-item-action>
+                <v-icon>mdi-briefcase</v-icon>
+              </v-list-item-action>
+              <v-list-item-content>Working Hours: <v-list-item>
               <v-list dense class="pa-0">
                 <v-list-item v-for="(wh, i) in data.working_hours" :key="i">
                   <v-list-item-content>
@@ -43,12 +67,13 @@
                       }}</span>
                     </v-list-item-title>
                     <v-list-item-subtitle
-                      >{{ wh.open }} - {{ wh.close }}</v-list-item-subtitle
+                      >{{ wh.open }}  {{ wh.close }}</v-list-item-subtitle
                     >
                   </v-list-item-content>
                 </v-list-item>
               </v-list>
-            </v-list-item>
+            </v-list-item></v-list-item-content>
+            </v-list-item> 
           </v-list>
         </v-card-text>
       </v-tab-item>
